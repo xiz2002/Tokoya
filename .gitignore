@@ -1,3 +1,25 @@
+# Common
+.DS_Store
+.metadata
+.recommenders
+RemoteSystemsTempfiles
+TestBed
+
+# EclipseProject
+#.classpath
+#.project
+#.settings
+target
+
+# Java Runtime Directory
+bin
+
+# Xcode Project
+*.xcodeproj
+
+# Python Project
+.pydevproject
+
 # Compiled class file
 *.class
 
@@ -11,14 +33,15 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+
+#*.jar
 *.war
 *.ear
-*.zip
-*.tar.gz
+#*.zip
+#*.tar.gz
 *.rar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-target/
+
