@@ -15,7 +15,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@include file="../sample/inc/head.jsp"  %>
 <body>
 
 	<div class="container">
@@ -34,12 +33,7 @@
 					<button type="submit" name="stylistinsert">追加</button>
 					<button type="submit" name="cansel">キャンセル</button>
 			<!-- /page content -->
-			<!-- footer -->
-			<%@include file="../sample/inc/foot.jsp"%>
-			<!-- /footer -->
 		</div>
 	</div>
-	
-	<%@include file="../sample/inc/scripts.jsp"%>
 </body>
 </html>

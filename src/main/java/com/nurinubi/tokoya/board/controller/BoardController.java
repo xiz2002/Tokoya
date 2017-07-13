@@ -1,4 +1,4 @@
-package com.nurinubi.tokoya.admin.web;
+package com.nurinubi.tokoya.board.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
-* @Class Name : AdminController.java.java
+* @Class Name : BoardController.java.java
 * @Description :  BoardController.java Class
 * @Modification Information
 * @ 
@@ -32,13 +32,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 */
 
 @Controller
-public class AdminController {
-	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+public class BoardController {
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
-	/** WriteService */
+	//お知らせのホーム画面
+	@RequestMapping(value = "/board", method = RequestMethod.GET)
+	public String board() throws Exception {
+		
+		return "/board/board";
+	}
 	
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String writeView(Locale locale, Model model) throws Exception {
+	//お知らせの作成画面
+	@RequestMapping(value = "/board/write", method = RequestMethod.GET)
+	public String write(Locale locale, Model model) throws Exception {
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -47,6 +53,12 @@ public class AdminController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "admin/home";
+		return "/board/write";
+	}
+	
+	@RequestMapping(value = "/board/view", method = RequestMethod.GET)
+	public String boardView(Locale locale, Model model) {
+		
+		return "/board/view";
 	}
 }

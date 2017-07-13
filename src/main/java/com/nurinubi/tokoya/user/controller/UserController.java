@@ -1,4 +1,4 @@
-package com.nurinubi.tokoya.user.web;
+package com.nurinubi.tokoya.user.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -36,10 +36,30 @@ public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	/** WriteService */
-	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "/user/home";
+	}
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String registerView() throws Exception {
+	public String register() throws Exception {
 		
 		return "user/register";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		logger.info("Welcome home! The client locale is {}.");
+		
+		//表示するページ設定
+		return "user/login";
 	}
 }
