@@ -22,9 +22,6 @@
 <title>予約情報の再確認</title>
 </head>
 <body>
-	<!-- top navigation -->
-	<%@include file="../home/inc/top.jsp"%>
-	<!-- /top navigation -->
 	<h1>予約確認</h1>
 	<div>
 		<table>

@@ -1,5 +1,5 @@
 <!-- 
- * @Class Name : reservationhistory.jsp
+ * @Class Name : stylistmanagement.jsp
  * @Description : 
  * @
  * @	修正日			修正者		修正内容
@@ -15,43 +15,40 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/stylist/stylistmanagement.jsp
 <!-- 
 < %@include file="../sample/inc/head.jsp"  %>
  -->
- <head></head>
+<head></head>
+=======
+>>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/admin/stylist/management.jsp
 <body>
 
 	<div class="container">
 		
-		<div class="reservationhistoryform">
-			<h2>予約リスト</h2>
-			<!-- 予約リスト -->
+		<div class="stylistmanagementform">
+			<h2>スタイリスト一覧</h2>
 			<table>
 				<!-- 表示項目 -->
 				<tr>
 					<th></th>
-					<th>予約時刻</th>
-      				<th>総額</th>
-      				<th>コース名</th>
+					<th>スタイリストID</th>
       				<th>スタイリスト名</th>
-      				<th>予約ステータス</th>
     			</tr>
     			<!-- 該当する値 -->
     			<tr>
     				<td>
     					<input type="checkbox" id="remember" value="remember"/>
     				</td>
-      				<td>xx</td>
-      				<td>price</td>
-      				<td>corsename</td>
+      				<td>stylistID</td>
       				<td>stylistname</td>
-      				<td>reservationstatus</td>
     			</tr>
 			</table>
 				<!-- 各種ボタン -->
-				<button type="submit" name="reservationcancel">予約キャンセル</button>
-				<button type="submit" name="cancel">戻る</button>
+					<button type="submit" name="stylistinsert">追加</button>
+					<button type="submit" name="stylistdelete">削除</button>
 			<!-- /page content -->
+<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/stylist/stylistmanagement.jsp
 			<!-- footer 
 			< %@include file="../sample/inc/foot.jsp"%>
 			 /footer -->
@@ -60,5 +57,9 @@
 	<!-- 
 	< %@include file="../sample/inc/scripts.jsp"%>
 	 -->
+=======
+		</div>
+	</div>
+>>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/admin/stylist/management.jsp
 </body>
 </html>

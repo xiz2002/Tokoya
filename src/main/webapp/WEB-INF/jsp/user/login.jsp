@@ -15,10 +15,13 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/login/login.jsp
 <!-- 
 < %@include file="../sample/head.jsp"  %>
  -->
 <head>ログイン</head>
+=======
+>>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/user/login.jsp
 <body>
 
 	<div class="container">
@@ -47,11 +50,16 @@
 				<button type="submit" name="cancel">キャンセル</button>
 			</form>
 			<!-- /page content -->
+<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/login/login.jsp
 			<!-- footer 
 			< %@include file="../sample/inc/foot.jsp"%>
 			 /footer -->
 		</div>
 	</div>
 	<!-- 	< %@include file="../sample/inc/scripts.jsp"%> -->
+=======
+		</div>
+	</div>
+>>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/user/login.jsp
 </body>
 </html>
