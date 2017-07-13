@@ -12,19 +12,16 @@
  *
  *  Copyright (C) by NuriNubi All right reserved.
  * -->
-<%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
-<head>
-	<title>Home</title>
-</head>
+<head></head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}.</P>
+    <ul>
+    <c:forEach var="item" items="${result}">
+        <li>${item.userId}</li>
+    </c:forEach>
+    </ul>
 </body>
 </html>
