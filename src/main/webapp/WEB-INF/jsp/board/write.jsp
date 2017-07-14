@@ -19,15 +19,15 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
-/* $(document).ready(function(){
+$(document).ready(function(){
 	$("#write").on("click", function(){
 		$("#frm").attr("action", "<c:url value='/board/insertWrite.do'/>");
 		$("#frm").submit();
 	});
 	$("#cancle").on("click", function(){
-		location.href("/home");
+		location.href("/admin/board");
 	});
-}); */
+});
 </script>
 </body>
 <!-- top navigation -->
@@ -38,7 +38,7 @@
 <!-- /side navigation -->
 
 <div id="div_write" style="float: left;">
-<form id="frm" action="/board/insertWrite.do">
+<form id="frm">
 	<table id="tb_write" style="border:1px solid;">
 		<tr>
 			<td><label>タイトル</label></td>
@@ -50,7 +50,7 @@
 		</tr>
 	</table>
 	<div class="button" style="margin-top: 5px">
-		<input type="submit" id="write" value="登録"> <input type="button" id="cancle" value="取り消し">
+		<input type="button" id="write" value="登録"> <input type="button" id="cancle" value="取り消し">
 	</div>
 	</form>
 </div>

@@ -42,7 +42,7 @@
 		</table>
 	</div>
 	<div>
-		<a href="/board/write">投稿</a>
+		<a href="/admin/board/write">投稿</a>
 	</div>
 </div>
 </body>

@@ -29,34 +29,25 @@
 	</div>
 	<div>
 		<select>
-			<option value="Stylist01">Stylist01</option>
-			<option value="Stylist01">Stylist01</option>
-			<option value="Stylist01">Stylist01</option>
+			<c:forEach var="item" items="${stylist}">
+				<option value="${item.sytlistname}">${item.sytlistname}</option>
+			</c:forEach>
 		</select>
 	</div>
 	<div>
-		<table style="border:1px solid;">
+		<table style="border: 1px solid;">
 			<tr>
 				<th>時間</th>
-				<th>予約状況</th>
-				<th>予約者</th>
-				<th>登録日</th>
+				<c:forEach var="item" items="${result}">
+				<th>${item.stylistname}</th>
+				</c:forEach>
 			</tr>
-			<tr>
-				<td>09:00</td>
-				<td>○</td>
-				<td>2017/07/12</td>
-				<td>user1</td>
-			</tr>
-			<%for(int i=10;i<25;i++){
-			%>
-			<tr>
-				<td><%=i%>:00</td>
-				<td>○</td>
-				<td>2017/07/12</td>
-				<td>user1</td>
-			</tr>
-			<%} %>
+			<c:forEach var="item" items="${result}">
+				<tr>
+					<td>${item.time}</td>
+					<td>${item.reservationstatus}</td>
+				</tr>
+			</c:forEach>
 		</table>
 	</div>
 </div>

@@ -48,7 +48,6 @@ public class BoardController {
 
 	@Autowired
 	private BoardRepository boardRepository;
-	private BoardApplication boardApplication;
 
 	// お知らせのホーム画面
 	@RequestMapping(value = "/admin/board", method = RequestMethod.GET)
@@ -59,10 +58,8 @@ public class BoardController {
 	}
 
 	// お知らせの作成画面
-	@RequestMapping(value = "/board/write", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/board/write", method = RequestMethod.GET)
 	public String formWrite(CommandMap cmdMap) throws Exception {
-
-		Date date = new Date();
 
 		return "/board/write";
 	}
@@ -76,7 +73,7 @@ public class BoardController {
 		Date date = new Date();
 		cmdMap.put("REGISTERDATE", date);
 		boardRepository.insertBoard(cmdMap.getMap());
-		mv.setViewName("redirect:/board/listBoard");
+		mv.setViewName("redirect:/admin/board");
 		return mv;
 	}
 

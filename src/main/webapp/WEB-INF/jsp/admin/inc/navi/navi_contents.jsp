@@ -4,7 +4,7 @@
 	<h3>Menu</h3>
 	<div>
 		<ul>
-			<li><a href="/board"><span>お知らせ </span></a>
+			<li><a href="/admin/board"><span>お知らせ </span></a>
 			<li><a href="#"><i class="fa fa-edit"></i> スタイリスト管理 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
