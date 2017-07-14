@@ -12,10 +12,17 @@ mappers 아래 mapper 부분은 실제 SQL 문을 작성할 xml 이 위치할 �
 		<package name="com.nurinubi.tokoya.sample.domain"/>
 		<!-- <package name="com.nurinubi.tokoya.reservation.domain"/> -->
 		<!-- <typeAlias alias="sampleVO" type="com.nurinubi.tokoya.sample.domain.SampleVO"/> -->
+		<package name="com.nurinubi.tokoya.admin.domain"/>
+		<package name="com.nurinubi.tokoya.user.domain"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/sample/sample_SQL.xml"/>
+
 		<!-- <mapper resource="mapper/reservation/reservation_SQL.xml"/> -->
+
+		<mapper resource="mapper/stylist/stylist_SQL.xml"/>
+		<mapper resource="mapper/user/user_SQL.xml"/>
+
 		<!-- <mapper resource="mapper/**/**_SQL.xml"/> -->
 	</mappers>
 </configuration>
