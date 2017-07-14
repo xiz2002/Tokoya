@@ -16,7 +16,19 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java"
 	errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+/* $(document).ready(function(){
+	$("#write").on("click", function(){
+		$("#frm").attr("action", "<c:url value='/board/insertWrite.do'/>");
+		$("#frm").submit();
+	});
+	$("#cancle").on("click", function(){
+		location.href("/home");
+	});
+}); */
+</script>
 </body>
 <!-- top navigation -->
 <%@include file="../admin/inc/top.jsp"%>
@@ -24,24 +36,23 @@
 <!-- side navigation -->
 <%@include file="../admin/inc/navi.jsp"%>
 <!-- /side navigation -->
+
 <div id="div_write" style="float: left;">
+<form id="frm" action="/board/insertWrite.do">
 	<table id="tb_write" style="border:1px solid;">
 		<tr>
 			<td><label>タイトル</label></td>
-			<td><input type="text" id="notice_title"></td>
+			<td><input type="text" id="title" name="NOTICETITLE"></td>
 		</tr>
 		<tr>
 			<td><label>内容</label></td>
-			<td><textarea rows="10" cols="50" id="notice_body"></textarea></td>
-		</tr>
-		<tr>
-			<td><label>登録日</label></td>
-			<td><label>${serverTime}</label></td>
+			<td><textarea rows="10" cols="50" id="body" name="NOTICEBODY"></textarea></td>
 		</tr>
 	</table>
 	<div class="button" style="margin-top: 5px">
-		<input type="button" value="登録"> <input type="button" value="取り消し">
+		<input type="submit" id="write" value="登録"> <input type="button" id="cancle" value="取り消し">
 	</div>
+	</form>
 </div>
 </body>
 </html>

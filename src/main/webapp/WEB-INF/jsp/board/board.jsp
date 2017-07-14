@@ -32,11 +32,13 @@
 				<th>Title</th>
 				<th>登録日</th>
 			</tr>
+			<c:forEach var="item" items="${result}">
 			<tr>
-				<td>1</td>
-				<td><a href="#">Test1</a></td>
-				<td>2017/07/12</td>
+			<td>${item.noticeId }</td>
+			<td>${item.noticeTitle }</td>
+			<td>${item.registerDate }</td>
 			</tr>
+			</c:forEach>
 		</table>
 	</div>
 	<div>

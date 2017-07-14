@@ -21,6 +21,7 @@
     <ul>
     <c:forEach var="item" items="${result}">
         <li>${item.userId}</li>
+              <li>${item.userName}</li>
     </c:forEach>
     </ul>
 </body>
