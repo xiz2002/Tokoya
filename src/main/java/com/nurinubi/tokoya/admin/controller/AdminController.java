@@ -45,11 +45,7 @@ public class AdminController {
 
 	/** WriteService */
 	@Autowired
-<<<<<<< HEAD
 	private AdminRepository adminRepository;
-=======
-	private AdminRepository AdminRepository;
->>>>>>> fe01d9d732c9bd127aada6e209fa50cedf823274
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView adminHome(Map<String, Object> cmdMap) throws Exception {
@@ -75,13 +71,10 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping(value = "/admin/stylist/management", method = RequestMethod.GET)
-<<<<<<< HEAD
-	public String management() {
-=======
 	public String management(Model model) {
 		logger.info("Stylistmanagement");
 		
-        model.addAttribute("result", AdminRepository.getStylistList());
+        model.addAttribute("result", adminRepository.getStylistList());
 		System.out.println(model);
 		
 		//表示するページ設定
@@ -106,7 +99,6 @@ public class AdminController {
 	@RequestMapping(value = "/addstylistform", method = RequestMethod.GET, params = "cansel")
 	public String stylistadd() {
 		logger.info("addStylist");
->>>>>>> fe01d9d732c9bd127aada6e209fa50cedf823274
 		
 		//表示するページ設定
 		return "/admin/stylist/management";

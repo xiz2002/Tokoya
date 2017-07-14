@@ -2,12 +2,8 @@ package com.nurinubi.tokoya.user;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.apache.ibatis.session.SqlSession;
 
-import com.nurinubi.tokoya.sample.domain.SampleVO;
-import com.nurinubi.tokoya.sample.repository.SampleRepository;
 import com.nurinubi.tokoya.user.domain.UserVO;
 import com.nurinubi.tokoya.user.repository.UserRepository;
 

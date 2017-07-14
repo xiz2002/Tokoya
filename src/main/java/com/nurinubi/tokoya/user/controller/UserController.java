@@ -60,7 +60,7 @@ public class UserController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register() throws Exception {
 		
-		return "user/register";
+		return "/user/register";
 	}
 	
 	/**

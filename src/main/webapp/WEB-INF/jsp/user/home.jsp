@@ -21,30 +21,10 @@
 	<title>Home</title>
 </head>
 <body>
-
 <div align="right">
             ようこそ ○○○ さん
-        </div>
-<button type="submit" name="login">ログイン</button>
-
-<h2>更新情報・お知らせ</h2>
-<hr/>
-<div>
-		<table style="border:1px solid;">
-			<tr>
-				<th>No</th>
-				<th>Title</th>
-				<th>登録日</th>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td><a href="#">Test1</a></td>
-				<td>2017/07/12</td>
-			</tr>
-		</table>
-	</div>
-
+<input type="button" name="login" value="ログイン">
+</div>
 
 </body>
-
 </html>
