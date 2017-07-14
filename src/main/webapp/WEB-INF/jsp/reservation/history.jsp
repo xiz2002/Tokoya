@@ -15,6 +15,13 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/reservation/reservationhistory.jsp
+<!-- 
+< %@include file="../sample/inc/head.jsp"  %>
+ -->
+ <head></head>
+=======
+>>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/reservation/history.jsp
 <body>
 
 	<div class="container">
@@ -48,7 +55,18 @@
 				<button type="submit" name="reservationcancel">予約キャンセル</button>
 				<button type="submit" name="cancel">戻る</button>
 			<!-- /page content -->
+<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/reservation/reservationhistory.jsp
+			<!-- footer 
+			< %@include file="../sample/inc/foot.jsp"%>
+			 /footer -->
 		</div>
 	</div>
+	<!-- 
+	< %@include file="../sample/inc/scripts.jsp"%>
+	 -->
+=======
+		</div>
+	</div>
+>>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/reservation/history.jsp
 </body>
 </html>

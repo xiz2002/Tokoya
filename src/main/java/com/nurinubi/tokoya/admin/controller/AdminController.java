@@ -20,6 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
 
+import com.nurinubi.tokoya.admin.repository.AdminRepository;
+import com.nurinubi.tokoya.sample.repository.SampleRepository;
+
 /**
 * @Class Name : AdminController.java.java
 * @Description :  BoardController.java Class
@@ -42,7 +45,11 @@ public class AdminController {
 
 	/** WriteService */
 	@Autowired
+<<<<<<< HEAD
 	private AdminRepository adminRepository;
+=======
+	private AdminRepository AdminRepository;
+>>>>>>> fe01d9d732c9bd127aada6e209fa50cedf823274
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView adminHome(Map<String, Object> cmdMap) throws Exception {
@@ -51,7 +58,10 @@ public class AdminController {
 		mv.addObject("result", result);
 		return mv;
 	}
-	
+	/**
+	 * スタイリスト追加画面：デフォルト
+	 * @return
+	 */
 	@RequestMapping(value = "/admin/stylist/add", method = RequestMethod.GET)
 	public String addStylist() {
 		
@@ -59,8 +69,44 @@ public class AdminController {
 		return "/admin/stylist/addStylist";
 	}
 	
+	/**
+	 * スタイリスト管理画面：デフォルト
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/admin/stylist/management", method = RequestMethod.GET)
+<<<<<<< HEAD
 	public String management() {
+=======
+	public String management(Model model) {
+		logger.info("Stylistmanagement");
+		
+        model.addAttribute("result", AdminRepository.getStylistList());
+		System.out.println(model);
+		
+		//表示するページ設定
+		return "/admin/stylist/management";
+	}
+	/**
+	 * スタイリスト管理画面：追加画面遷移
+	 * @return
+	 */
+	@RequestMapping(value = "/stylistinsert", method = RequestMethod.GET, params = "stylistinsert")
+	public String stylistinsert() {
+		logger.info("addStylist");
+		
+		//表示するページ設定
+		return "/admin/stylist/addStylist";
+	}
+	
+	/**
+	 * スタイリスト追加画面：管理画面遷移
+	 * @return
+	 */
+	@RequestMapping(value = "/addstylistform", method = RequestMethod.GET, params = "cansel")
+	public String stylistadd() {
+		logger.info("addStylist");
+>>>>>>> fe01d9d732c9bd127aada6e209fa50cedf823274
 		
 		//表示するページ設定
 		return "/admin/stylist/management";

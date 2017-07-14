@@ -15,21 +15,28 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/login/login.jsp
+<!-- 
+< %@include file="../sample/head.jsp"  %>
+ -->
+<head>ログイン</head>
+=======
+>>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/user/login.jsp
 <body>
 
 	<div class="container">
 		
 		<div class="loginform">
-			<form action="login" method="post">
+			<form action="login" method="GET">
 				<h2>ログイン</h2>
 				<!-- 入力内容 -->
 				<p>
 				  <span>ユーザーID</span>
-				  <input type="text" placeholder="Username">
+				  <input type="text" name="username" placeholder="Username">
 				</p>
 				<p>
 				  <span>パスワード</span>
-				  <input type="password" placeholder="Password">
+				  <input type="password" name="userpass" placeholder="Password">
 				</p>
 				<p>
 				<label for="remember">
@@ -43,7 +50,16 @@
 				<button type="submit" name="cancel">キャンセル</button>
 			</form>
 			<!-- /page content -->
+<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/login/login.jsp
+			<!-- footer 
+			< %@include file="../sample/inc/foot.jsp"%>
+			 /footer -->
 		</div>
 	</div>
+	<!-- 	< %@include file="../sample/inc/scripts.jsp"%> -->
+=======
+		</div>
+	</div>
+>>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/user/login.jsp
 </body>
 </html>
