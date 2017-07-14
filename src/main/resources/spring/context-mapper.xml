@@ -6,10 +6,9 @@
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
+
 		<!-- Mapper Files Control -->
 		<property name="configLocation" value="classpath:/mapper/mapper-config.xml"/>
-		<!-- Mapper File -->
-		<!-- <property name="mapperLocations" value="classpath:/mapper/**/*_SQL.xml"/> -->
 	</bean>
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
