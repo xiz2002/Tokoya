@@ -23,10 +23,10 @@
 =======
 >>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/admin/stylist/management.jsp
 <body>
-
 	<div class="container">
 		
 		<div class="stylistmanagementform">
+		<form action="stylistmanagement" method="GET">
 			<h2>スタイリスト一覧</h2>
 			<table>
 				<!-- 表示項目 -->
@@ -36,14 +36,13 @@
       				<th>スタイリスト名</th>
     			</tr>
     			<!-- 該当する値 -->
-    			<tr>
-    				<td>
-    					<input type="checkbox" id="remember" value="remember"/>
-    				</td>
-      				<td>stylistID</td>
-      				<td>stylistname</td>
-    			</tr>
-			</table>
+    			<tr><c:forEach var="item" items="${result}">
+    				<tr>
+    				<td><input type="checkbox" id="remember" value="remember"/></td>
+       				<td>${item.stylistId}</td>
+        			<td>${item.stylistName}</td></tr>
+    			</c:forEach></tr>
+    		</table>
 				<!-- 各種ボタン -->
 					<button type="submit" name="stylistinsert">追加</button>
 					<button type="submit" name="stylistdelete">削除</button>
@@ -52,6 +51,7 @@
 			<!-- footer 
 			< %@include file="../sample/inc/foot.jsp"%>
 			 /footer -->
+			 </form>
 		</div>
 	</div>
 	<!-- 

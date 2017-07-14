@@ -26,7 +26,8 @@
 
 	<div class="container">
 		
-		<div class="stylistmanagementform">
+		<div class="addstylistform">
+		<form action="addstylistform" method="GET">
 				<h2>スタイリスト追加</h2>
 				<p>
 				  <span>スタイリストID</span>
@@ -37,13 +38,14 @@
 				  <input type="text" placeholder="stylistname">
 				</p>
 				<!-- 各種ボタン -->
-					<button type="submit" name="stylistinsert">追加</button>
+					<button type="submit" name="stylistadd">追加</button>
 					<button type="submit" name="cansel">キャンセル</button>
 			<!-- /page content -->
 <<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/stylist/stylistinsert.jsp
 			<!-- footer 
 			< %@include file="../sample/inc/foot.jsp"%>
 			 /footer -->
+			 </form>
 		</div>
 	</div>
 	<!-- 

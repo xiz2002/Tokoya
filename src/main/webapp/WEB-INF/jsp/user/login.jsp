@@ -27,16 +27,16 @@
 	<div class="container">
 		
 		<div class="loginform">
-			<form action="login" method="post">
+			<form action="login" method="GET">
 				<h2>ログイン</h2>
 				<!-- 入力内容 -->
 				<p>
 				  <span>ユーザーID</span>
-				  <input type="text" placeholder="Username">
+				  <input type="text" name="username" placeholder="Username">
 				</p>
 				<p>
 				  <span>パスワード</span>
-				  <input type="password" placeholder="Password">
+				  <input type="password" name="userpass" placeholder="Password">
 				</p>
 				<p>
 				<label for="remember">
