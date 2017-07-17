@@ -1,5 +1,6 @@
 package com.nurinubi.tokoya.reservation;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,5 +65,10 @@ public class ReservationApplication implements ReservationRepository {
 	@Override
 	public List<Map<String, Object>> getReservationListByToday() throws Exception {
 		return this.sqlSession.selectList("getReservationListByToday");
+	}
+
+	@Override
+	public List<Map<String, Object>> getReservationByDate(Date date) throws Exception {
+		return this.sqlSession.selectList("getReservationByDate", date);
 	}
 }

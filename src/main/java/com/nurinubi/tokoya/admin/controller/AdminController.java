@@ -1,6 +1,7 @@
 package com.nurinubi.tokoya.admin.controller;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -47,7 +48,7 @@ import com.nurinubi.tokoya.sample.repository.SampleRepository;
 @Controller
 public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-
+	public String time[]= {"09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"};
 	/** WriteService */
 	@Autowired
 	private AdminRepository adminRepository;
@@ -67,19 +68,26 @@ public class AdminController {
 		List<Map<String, Object>> reservation = reservationRepository.getReservationListByToday();
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("stylist", adminRepository.getStylistList());
-		String time[]= {"09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"};
 		model.addAttribute("time", time);
 		System.out.println(model);
 		return "/admin/admin";
 	}
 	
 	
-	@RequestMapping(value = "/test", method = RequestMethod.POST)
-	@ResponseBody
-	public String test(@RequestBody String model) throws Exception {
+	@RequestMapping(value = "/searchReservation.do", method = RequestMethod.POST)
+	public ModelAndView serchReservation(@RequestParam String param) throws Exception {
 		System.out.println("------------------test----------------");
-		System.out.println(model);
-		return  "";
+		System.out.println(param);
+		ModelAndView mav = new ModelAndView(); 
+		Date date = new Date();
+		DateFormat frm = new SimpleDateFormat("yyyy/MM/dd");
+		date = frm.parse(param);
+		mav.addObject("reservation", reservationRepository.getReservationByDate(date));
+		mav.addObject("stylist", adminRepository.getStylistList());
+		mav.addObject("time", time);
+		mav.setViewName("jsonView");
+		System.out.println(mav);
+		return mav;
 	}
 	/**
 	 * スタイリスト追加画面：デフォルト

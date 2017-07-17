@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.nurinubi.tokoya.reservation.repository.ReservationRepository">
+<mapper	namespace="com.nurinubi.tokoya.reservation.repository.ReservationRepository">
 	<select id="getReservationListByToday" resultType="Map">
-   <![CDATA[  
+    <![CDATA[  
     SELECT 
     	a.RESERVATIONID, a.RESERVATIONDATE, a.RESERVATIONSTATUS, 
     	b.COURSETIME,  
@@ -17,6 +16,22 @@
     RESERVATIONDATE < DATE_FORMAT(Date_Add(NOW(), INTERVAL+1 DAY), '%Y%m%d') 
     ]]>
 	</select>
+	
+	<select id="getReservationByDate" resultType="Map">
+    <![CDATA[  
+    SELECT 
+    	a.RESERVATIONID, a.RESERVATIONDATE, a.RESERVATIONSTATUS, 
+    	b.COURSETIME,  
+    	c.STYLISTID, c.STYLISTNAME
+    FROM TRNRESERVATION a
+    	LEFT JOIN MSTCOURSE b ON b.COURSEID = a.COURSEID
+		LEFT JOIN MSTSTYLIST c ON a.STYLISTID = c.STYLISTID
+	WHERE a.RESERVATIONDATE > DATE_FORMAT(#{date}, '%Y%m%d') 
+    AND 
+    RESERVATIONDATE < DATE_FORMAT(Date_Add(#{date}, INTERVAL+1 DAY), '%Y%m%d') 
+    ]]>
+	</select>
+	
 	<resultMap id="courseList" type="java.util.HashMap">
 		<result javaType="java.lang.String" column="COURSEID" property="id" />
 		<result javaType="java.lang.String" column="COURSENAME"

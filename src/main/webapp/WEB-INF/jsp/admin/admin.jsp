@@ -19,9 +19,9 @@
 	errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<script src="<c:url value="/js/jquery-1.10.2.js"/>"></script>
-<script src="<c:url value="/js/jquery-ui-1.10.4.custom.js"/>"></script>
-<script src="<c:url value="/js/jquery.datetimepicker.full.min.js" />"></script>
+<script src="<c:url value="/js/jquery-1.10.2.js" />"></script>
+<script src="<c:url value="/js/jquery-ui-1.10.4.custom.js" />"></script>
+<script src="<c:url value="/js/jquery.datetimepicker.full.js" />"></script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <link rel="stylesheet"
@@ -42,6 +42,7 @@ var logic = function(d) {
 		});
 };
 $(function() {
+	$.datetimepicker.setLocale('ja');
 	$('#datetimepicker').datetimepicker({
 		inline : true,
 		value : t,
@@ -49,8 +50,6 @@ $(function() {
 		onShow : logic,
 		timepickerScrollbar : false,
 		timepicker : false,
-		minDate : '-1970/01/01', // Today is minimum date
-		maxDate : '+1970/02/01' // and NextMonth is maximum date calendar
 	});
 });
 $(function(){
@@ -59,11 +58,17 @@ $(function(){
 		$.ajax({
 			type:"POST",
 			dataType:"JSON",
-			data:{"model":date},
-			url:"/test",
-			success:function(test){
-				console.log("fd");
-				alert(test);
+			data:{param:date},
+			url:"<c:url value='/searchReservation.do'/>",
+			error: function(data) {
+				console.log(data);
+				console.log("Error : " + Fail);
+			},
+			success : function(data) {
+				console.log(data);
+				console.log(data.reservation);
+				$("#tb_rev").empty();
+				$("#div_rev").append('<table><tr><th><span>時間</span></th><c:forEach var="item" items="${stylist}"><th><span>${item.stylistName}</span></th></c:forEach><tr></table>');
 			}
 		});
 	});
@@ -94,7 +99,8 @@ table, th, td {
 			<input type="text" id="datetimepicker" />
 			<input type="button" id="search" value="Search">
 		</div>
-		<table>
+		<div id="div_rev">
+		<table id="tb_rev">
 			<tr>
 				<th><span>時間</span></th>
 				<c:forEach var="item" items="${stylist}">
@@ -107,7 +113,7 @@ table, th, td {
 						${item}
 					</td>
 					<c:forEach var="stList" items="${stylist}">
-					<c:forEach var="reList" items="${reservation }">
+					<c:forEach var="reList" items="${reservation}">
 					<c:if test="${stList.stylistName==reList.STYLISTNAME}">
 						<c:if test="${item==scTime}">
 						<td>
@@ -136,6 +142,7 @@ table, th, td {
 				</tr>
 			</c:forEach>
 		</table>
+		</div>
 	</div>
 </body>
 </html>
