@@ -6,4 +6,11 @@
     <select id="getStylistList" resultType="StylistVO">
         SELECT * FROM MSTSTYLIST
     </select>
+    
+    <!-- スタイリスト追加 -->
+    <insert id="addStylist" parameterType="String">
+        INSERT INTO MSTSTYLIST (STYLISTID, STYLISTNAME) 
+        VALUES (#{STYLISTID}, #{STYLISTNAME})
+    </insert>
+    
 </mapper>

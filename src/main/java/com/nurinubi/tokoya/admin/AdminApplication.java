@@ -22,9 +22,14 @@ public class AdminApplication implements AdminRepository {
 	
 	@Override
 	public List<StylistVO> getStylistList() {
-		 return this.sqlSession.selectList("getStylistList");
-	}
 
+		return this.sqlSession.selectList("getStylistList");
+
+	}
+	public void insertStylist(Map<String, Object> map) {
+		this.sqlSession.insert("addStylist", map);
+		}
+	
 	@Override
 	public List<Map<String, Object>> getReservationListByStylist(Map<String, Object> cmdMap) throws Exception {
 		return this.sqlSession.selectList("getReservationListByStylist", cmdMap);

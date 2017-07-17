@@ -3,6 +3,14 @@
 
 <mapper namespace="com.nurinubi.tokoya.user.repository.UserRepository">
 
+    <!-- 
+    <select id="findOne" resultType="UserVO" parameterType="String">
+    	SELECT * FROM MSTUSER WHERE USERID = #{userId} AND USERPASS=#{userPassword}
+    </select>-->
+    
+    <select id="login" parameterType="String">
+        SELECT * FROM MSTUSER WHERE USERID=#{USERID} AND USERPASS=#{USERPASS}
+    </select>
 	<select id="findOne" resultType="UserVO" parameterType="String">
 		SELECT * FROM MSTUSER WHERE USERID = #{userId} AND USERPASS=#{userPassword}
 	</select>
@@ -11,5 +19,6 @@
 		INSERT INTO MSTUSER VALUES
 		(#{USERID}, #{USERPASS}, #{USERNAME}, #{USERHURI}, #{USEREMAIL}, #{USERPHONE})
 	</insert>
+
 
 </mapper>

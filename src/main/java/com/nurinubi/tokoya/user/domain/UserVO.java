@@ -18,7 +18,7 @@ package com.nurinubi.tokoya.user.domain;
  * -->
  */
 
-public class UserVO {
+public class UserVO{
 	
 	private String userId;
 	private String userPass;
@@ -106,7 +106,7 @@ public class UserVO {
 		StringBuilder builder = new StringBuilder();
 		builder.append("SampleVO [userId=");
 		builder.append(userId);
-		builder.append(", userPassword=");
+		builder.append(", userPass=");
 		builder.append(userPass);
 		builder.append(", userName=");
 		builder.append(userName);
