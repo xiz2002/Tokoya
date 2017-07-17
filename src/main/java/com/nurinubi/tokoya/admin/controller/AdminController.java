@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
 import com.nurinubi.tokoya.common.CommandMap;
 import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
@@ -80,7 +79,7 @@ public class AdminController {
 	public String test(@RequestBody String model) throws Exception {
 		System.out.println("------------------test----------------");
 		System.out.println(model);
-		return 
+		return  "";
 	}
 	/**
 	 * スタイリスト追加画面：デフォルト

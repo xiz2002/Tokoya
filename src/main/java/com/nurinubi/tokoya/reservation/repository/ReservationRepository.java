@@ -27,10 +27,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ReservationRepository {
 	
-	List<ReservationVO> getUserList();
 	List<Map<String, Object>> getReservationListByToday() throws Exception;
 	List<HashMap<String, Object>> getCourseList();
-	
 	List<HashMap<String, Object>> getStaffList(Map<String, Object> commandMap);
 	
 }
