@@ -1,6 +1,7 @@
 package com.nurinubi.tokoya.user;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -16,11 +17,6 @@ public class UserApplication implements UserRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Override
-	public List<UserVO> getUserList() {
-		return this.sqlSession.selectList("getUserList");
-	}
-	
 	@Autowired
 	private SqlSession userlogin;
 
@@ -28,4 +24,16 @@ public class UserApplication implements UserRepository {
 	public List<UserVO> findOne(String username, String userpass) {
 		return this.userlogin.selectOne(username, userpass);
 	}
+
+	@Override
+	public void insertUser(Map<String, Object> map) throws Exception {
+		map.get("email1");
+		this.sqlSession.insert("addUser", map);
+	}
+
+	@Override
+	public void login(Map<String, Object> map) throws Exception {
+		this.sqlSession.insert("login", map);
+	}
+	
 }

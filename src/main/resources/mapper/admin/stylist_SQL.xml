@@ -3,7 +3,14 @@
 
 <mapper namespace="com.nurinubi.tokoya.admin.repository.AdminRepository">
 	<!-- スタイリスト一覧 -->
-    <select id="getStylistList" resultType="AdminVO">
+    <select id="getStylistList" resultType="StylistVO">
         SELECT * FROM MSTSTYLIST
     </select>
+    
+    <!-- スタイリスト追加 -->
+    <insert id="addStylist" parameterType="String">
+        INSERT INTO MSTSTYLIST (STYLISTID, STYLISTNAME) 
+        VALUES (#{STYLISTID}, #{STYLISTNAME})
+    </insert>
+    
 </mapper>

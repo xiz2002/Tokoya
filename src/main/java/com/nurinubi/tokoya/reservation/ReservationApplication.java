@@ -1,10 +1,12 @@
 package com.nurinubi.tokoya.reservation;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,5 +92,14 @@ public class ReservationApplication implements ReservationRepository {
 		int rtn = this.sqlSession.insert("setReserveInfo", rDomain);
 		logger.info("======================================setReserveApplicationEnd=====================================");
 		return rtn;
+	
+	@Override
+	public List<Map<String, Object>> getReservationListByToday() throws Exception {
+		return this.sqlSession.selectList("getReservationListByToday");
+	}
+
+	@Override
+	public List<Map<String, Object>> getReservationByDate(Date date) throws Exception {
+		return this.sqlSession.selectList("getReservationByDate", date);
 	}
 }

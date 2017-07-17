@@ -1,7 +1,5 @@
 package com.nurinubi.tokoya.admin.domain;
 
-import java.util.Date;
-
 /**
 <!--
  * 
@@ -34,8 +32,7 @@ import java.util.Date;
 
 public class StylistVO {
 	
-
-	//スタイリスト
+//スタイリスト
 private String stylistId;
 private String stylistName;
 

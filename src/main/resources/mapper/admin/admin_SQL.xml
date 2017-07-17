@@ -3,6 +3,5 @@
 
 <mapper namespace="com.nurinubi.tokoya.admin.repository.AdminRepository">
     <select id="getReservationListByStylist" parameterType="hashmap" resultType="hashmap">
-        SELECT * FROM MSTADMIN
     </select>
 </mapper>

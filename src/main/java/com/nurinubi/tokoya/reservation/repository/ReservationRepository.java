@@ -1,5 +1,6 @@
 package com.nurinubi.tokoya.reservation.repository;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,8 +30,9 @@ import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 @Mapper
 public interface ReservationRepository {
 	
+	List<Map<String, Object>> getReservationListByToday() throws Exception;
+	List<Map<String, Object>> getReservationByDate(Date date) throws Exception;
 	List<HashMap<String, Object>> getCourseList();
-	
 	List<HashMap<String, Object>> getStaffList(Map<String, Object> commandMap);
 	
 	ReservationVO getCheckInfo(ReservationVO rDomain);

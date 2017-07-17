@@ -12,49 +12,62 @@
  *
  *  Copyright (C) by NuriNubi All right reserved.
  * -->
-<%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
+<%@ page contentType="text/html; charset=UTF-8" language="java"
+	errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<<<<<<< HEAD
 
 <head>ログイン</head>
 
+=======
+<script src="<c:url value="/js/jquery-1.10.2.js"/>"></script>
+<script src="<c:url value="/js/jquery-ui-1.10.4.custom.js"/>"></script>
+<!-- 
+< %@include file="../sample/head.jsp"  %>
+ -->
+<head>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#register").on("click", function() {
+			location.assign("/register");
+		});
+		$("#cancle").on("click", function() {
+			location.assign("/home");
+		});
+		$("#login").on("click", function() {
+				$("#logfrm").attr("action", "<c:url value='/login.do'/>");
+				$("#logfrm").submit();
+		});
+	});
+</script>
+</head>
+>>>>>>> 89d6afe3c97dc3b93271e3976a45dfb8fa58d3a9
 <body>
-
+	<h2>ログイン</h2>
 	<div class="container">
-		
 		<div class="loginform">
-			<form action="login" method="GET">
+			<form id="logfrm" method="POST">
 				<h2>ログイン</h2>
 				<!-- 入力内容 -->
 				<p>
 				  <span>ユーザーID</span>
-				  <input type="text" name="username" placeholder="Username">
+				  <input type="text" name="userid" placeholder="Userid">
+  			</p>
+				<p>
+					<span>パスワード</span> <input type="password" name="userpass"
+						placeholder="Password">
 				</p>
 				<p>
-				  <span>パスワード</span>
-				  <input type="password" name="userpass" placeholder="Password">
-				</p>
-				<p>
-				<label for="remember">
-				  <input type="checkbox" id="remember" value="remember" />
-				  <span>ログイン情報保持</span>
-				</label>
+					<label for="remember"> <input type="checkbox" id="remember"
+						value="remember" /> <span>ログイン情報保持</span>
+					</label>
 				</p>
 				<!-- 各種ボタン -->
-				<button type="submit" name="login">ログイン</button>
-				<button type="submit" name="newmenber">新規登録</button>
-				<button type="submit" name="cancel">キャンセル</button>
+				<input type="submit" id="login" value="ログイン">
+				<button type="button" id="register" name="newmenber">新規登録</button>
+				<button type="button" id="cancle" name="cancel">キャンセル</button>
 			</form>
-			<!-- /page content -->
-<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/login/login.jsp
-			<!-- footer 
-			< %@include file="../sample/inc/foot.jsp"%>
-			 /footer -->
 		</div>
 	</div>
-	<!-- 	< %@include file="../sample/inc/scripts.jsp"%> -->
-=======
-		</div>
-	</div>
->>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/user/login.jsp
 </body>
 </html>
