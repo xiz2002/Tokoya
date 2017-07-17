@@ -10,7 +10,6 @@ import com.nurinubi.tokoya.board.repository.BoardRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 
 @Repository
 public class BoardApplication implements BoardRepository {

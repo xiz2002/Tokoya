@@ -14,26 +14,43 @@
  * -->
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#write").on("click", function(){
+		$("#styfrm").attr("action", "<c:url value='/admin/stylist/insertWrite.do'/>");
+		$("#styfrm").submit();
+	});
+	$("#cancle").on("click", function(){
+		$("#styfrm").attr("action", "<c:url value='/admin/stylist/management'/>");
+		$("#styfrm").submit();
+	});
+});
+</script>
+
 <!-- 
 < %@include file="../sample/inc/head.jsp"  % > 
 -->
 <head></head>
-<body>
 
+<body>
 	<div class="container">
-		
 		<div class="addstylistform">
-		<form action="addstylistform" method="GET">
+		<form id="styfrm">
 				<h2>スタイリスト追加</h2>
 				<p>
 				  <span>スタイリストID</span>
-				  <input type="text" placeholder="stylistID">
+				  <input type="text" id="title" name="STYLISTID" placeholder="STYLISTID">
 				</p>
 				<p>
 				  <span>スタイリスト名</span>
-				  <input type="text" placeholder="stylistname">
+				  <input type="text" id="body" name="STYLISTNAME" placeholder="STYLISTNAME">
 				</p>
 				<!-- 各種ボタン -->
+
 					<button type="submit" name="stylistadd">追加</button>
 					<button type="submit" name="cansel">キャンセル</button>
 			<!-- /page content -->

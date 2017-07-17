@@ -36,13 +36,13 @@
 	<h2>ログイン</h2>
 	<div class="container">
 		<div class="loginform">
-			<form action="login" method="GET">
+			<form id="logfrm" action="${url}" method="POST">
 				<h2>ログイン</h2>
 				<!-- 入力内容 -->
 				<p>
-					<span>ユーザーID</span> <input type="text" name="username"
-						placeholder="Username">
-				</p>
+				  <span>ユーザーID</span>
+				  <input type="text" name="userid" placeholder="Userid">
+  			</p>
 				<p>
 					<span>パスワード</span> <input type="password" name="userpass"
 						placeholder="Password">
@@ -53,16 +53,11 @@
 					</label>
 				</p>
 				<!-- 各種ボタン -->
-				<button type="submit" name="login">ログイン</button>
-				<button type="button" name="newmenber" id="register">新規登録</button>
-				<button type="submit" name="cancel" id="cancle">キャンセル</button>
+				<input type="button" id="login" value="ログイン">
+				<button type="submit" name="newmenber">新規登録</button>
+				<button type="submit" name="cancel">キャンセル</button>
 			</form>
-			<!-- /page content -->
-			<!-- footer 
-			< %@include file="../sample/inc/foot.jsp"%>
-			 /footer -->
 		</div>
 	</div>
-	<!-- 	< %@include file="../sample/inc/scripts.jsp"%> -->
 </body>
 </html>

@@ -1,33 +1,21 @@
 package com.nurinubi.tokoya.board.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.nurinubi.tokoya.board.BoardApplication;
 import com.nurinubi.tokoya.board.repository.BoardRepository;
 import com.nurinubi.tokoya.common.CommandMap;
-import com.nurinubi.tokoya.board.domain.BoardVO;
-import com.nurinubi.tokoya.sample.repository.SampleRepository;
 
 /**
  * @Class Name : BoardController.java.java
