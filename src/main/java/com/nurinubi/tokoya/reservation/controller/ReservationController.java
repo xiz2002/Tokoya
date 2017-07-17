@@ -53,8 +53,7 @@ public class ReservationController {
 	
 	/** 予約画面 */
 	@RequestMapping(value = "/reservation/date", method = RequestMethod.POST)
-//	public ModelAndView date(@RequestParam("cid") String cid, Model model) throws Exception {
-	public ModelAndView adte(@ModelAttribute("ReservationVO") ReservationVO rDomain) throws Exception {
+	public ModelAndView date(@ModelAttribute("ReservationVO") ReservationVO rDomain) throws Exception {
 		logger.info("======================================dateControllerStart===================================");
 		logger.info("cid : " + rDomain);
 		ModelAndView mav = new ModelAndView();
@@ -96,7 +95,6 @@ public class ReservationController {
 	
 	/** 予約確定 */
 	@RequestMapping(value = "/reservation/checkout", method = RequestMethod.POST)
-	//public ModelAndView checkout(@RequestParam Map<String, Object> commandMap) throws Exception {
 	public ModelAndView checkout(@ModelAttribute("ReservationVO") ReservationVO rDomain) throws Exception {
 		logger.info("======================================checkoutControllerStart===================================");
 		logger.info(rDomain.toString());
