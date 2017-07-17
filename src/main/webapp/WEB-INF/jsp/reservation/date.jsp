@@ -17,70 +17,174 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>"/>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-	<script src="<c:url value="/js/jquery.datetimepicker.full.min.js" />"></script>
-
-	<script>
+<meta charset="utf-8">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<title></title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>" />
+<link rel="stylesheet" href="<c:url value="/css/jquery-ui-1.10.4.custom.css"/>" />
+<style>
+	#feedback { font-size: 1.4em; }
+	#selectable .ui-selecting { background: #FECA40; }
+	#selectable .ui-selected { background: #F39814; color: white; }
+	#selectable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+	#selectable li { margin: 3px; padding: 0.4em; font-size: 1.0em; height: 18px; }
+</style>
+<script src="<c:url value="/js/jquery-1.10.2.js" />"></script>
+<script src="<c:url value="/js/jquery-ui-1.10.4.custom.js" />"></script>
+<script src="<c:url value="/js/jquery.datetimepicker.full.js" />"></script>
+<script type="text/javascript">
 		//Date&Time Picker
-		var d = new Date();
-		var t = d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate();
-		var logic = function( d ){
-			if (d && d.getDay() == 6){
-				this.setOptions({
-					minTime:'11:00'
-				});
-			}else
-				this.setOptions({
-					minTime:'12:00'
-				});
-		};
+		Number.prototype.padLeft = function(base,chr){
+		    var  len = (String(base || 10).length - String(this).length)+1;
+		    return len > 0? new Array(len).join(chr || '0')+this : this;
+			// usage
+			//=> 3..padLeft() => '03'
+			//=> 3..padLeft(100,'-') => '--3' 
+		}
+		
+		var d = new Date(),
+		dformat = [(d.getFullYear()).padLeft(),(d.getMonth()+1).padLeft(),d.getDate()].join('/'),
+		tformat = [(d.getHours()+1).padLeft(),d.getMinutes().padLeft(),d.getSeconds().padLeft()].join(':');
+		
 		$(document).ready(function() {
-			$('#datetimepicker').datetimepicker({
-				inline: true,
-				value: t,
-				onChangeDateTime:logic,
-				onShow:logic,
-				allowTimes: ['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'],
-				timepickerScrollbar:false,
-				minDate:'-1970/01/01', // Today is minimum date
-				maxDate:'+1970/02/01' // and NextMonth is maximum date calendar
-			});			
+			$.datetimepicker.setLocale('ja');
+			$('#DatePicker').datetimepicker({
+				value: dformat,
+				minDate: '-1970/01/01', // Today is minimum date
+				maxDate: '+1970/02/01', // and NextMonth is maximum date calendar
+				format:'Ymd',
+				timepicker:false,
+				inline: true
+			});
+
+			$("#TimePicker").datetimepicker({
+				format:'H',
+				value: tformat,
+				allowTimes:['09:00','10:00','11:00','12:00','13:00','14:00','15:00','016:00','17:00'],
+				datepicker:false,
+				timepickerScrollbar: false,
+				inline: true
+			});
+		
+			$("#ajaxtest").click(function() {
+				var dDate = parseInt($("#DatePicker").val());
+				var dTime = parseInt($("#TimePicker").val());
+				var getStaff;	
+				console.log(dTime);
+				if (dTime < 17 && dTime > 9) {
+					$.ajax({
+						type:"POST",
+						url:"<c:url value='/reservation/getStaffList'/>",
+						data : { date : dDate, time : dTime },
+						dataType : "json",
+						error: function(data) {
+							console.log(data);
+							console.log("Error : " + Fail);
+						},
+						success : function(data) {
+							var data = JSON.stringify(data);
+							var obj = JSON.parse(data);
+							var str = '';
+							console.log(obj.list.length);
+							
+							console.log(obj.list[1].name);
+							for(var i in obj.list){
+								str += '<li class="ui-widget-content"　value=' + obj.list[i].id + '>'+ obj.list[i].name + '</li>';
+							 }//*/
+							$('#selectable').html(str);
+						}
+					});
+				} else {
+					alert("예약 시간이 아닙니다.");
+				}
+			});
 		});
-	</script>
+		m_staff='';
+		// Selectable 
+		$( function() {
+			$( "#selectable" )
+			.selectable()
+			.on("selectablestop", function() {
+				var staff=[];
+				$('#selectable .ui-selected').each(function() {
+					staff.push( $(this).html() );
+				});
+			m_staff = staff;
+			console.log( staff );
+		    });
+		});
+		
+		//checkout
+		function checkout() {
+			alert(m_staff);
+			if($("#DatePicker").val() == "" || typeof DatePicker == "undefined") {
+				alert("日を選択してください。");
+				return;
+			}
+			if($("#TimePicker").val() == "" || typeof TimePicker == "undefined") {
+				alert("時間を選んでください。");
+				return;
+			}
+			if(m_staff == "" || m_staff == "undefined") {
+				alert("スタッフを選択してください。");
+				return;
+			}
+			$("#frm").attr("action", "<c:url value='/reservation/checkout'/>");
+			$("#frm").attr("target","_self");
+			$("#frm").submit();
+		}
+</script>
 </head>
 <body>
 	<div class="container">
-		<div class="reservationhistoryform">
+		<div class="reservationDate">
 			<h2>日付を呼びスタッフ選択</h2>
-			<!-- 選択テーブル -->
-			<table>
-				<!-- 表示項目 -->
-				<tr>
-					<th></th>
-					<th>DateTime</th>
-					<th></th>
-					<th>Staff</th>
-					<th></th>
-				</tr>
-				<!-- 該当する値 -->
-				<tr>
-					<td></td>
-					<td>
-					<!-- Date & Time -->
-						<input type="text" id="datetimepicker"/></td>
-					<td></td>
-					<!-- 各種ボタン -->
-					<td><input type="button" id="checkout" value="checkout" /></td>
-					<td></td>
-				</tr>
-			</table>
-			<!-- /page content -->
+			<form action="checkout.jsp" id="frm" name="frm" method="post">
+				<!-- 選択テーブル -->
+				<table>
+					<!-- 表示項目 -->
+					<tr>
+						<th>#</th>
+						<th>Date</th>
+						<th>Time</th>
+						<th>Staff</th>
+						<th>Button</th>
+					</tr>
+					<!-- 該当する値 -->
+					<tr>
+						<!-- # -->
+						<td>
+						<c:out value="items="${cid}"/>
+						</td>
+						<!-- Date -->
+						<td>
+							<div id="DatePicker"></div>
+						</td>
+						<!-- Time -->
+						<td>
+							<div id="TimePicker"></div>
+						</td>
+						<!-- Staff -->
+						<td>
+							<ol id="selectable"></ol>
+						</td>
+						<!-- 各種ボタン -->
+						<td>
+							<input type="button" name="bntChkOut" id="btnChkOut" value="CheckOut" onclick="checkout()" /><br>
+							<input type="reset" id="cancel" value="Cancel" />
+						</td>
+					</tr>
+					<tr>
+						<!-- # -->
+						<td colspan="5">
+							<input type="button" name="ajaxtest" id="ajaxtest" value="ajax_test" />
+						</td>
+					</tr>
+				</table>
+				
+				<!-- /page content -->
+			</form>
 		</div>
 	</div>
 </body>
