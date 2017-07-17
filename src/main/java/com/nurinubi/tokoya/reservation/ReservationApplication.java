@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.nurinubi.tokoya.reservation.controller.ReservationController;
+import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +44,10 @@ public class ReservationApplication implements ReservationRepository {
 	
 	@Override
 	public List<HashMap<String, Object>> getCourseList() {
-		logger.info("======================================getStaffListApplicationStart===================================");
+		logger.info("======================================getCourseListApplicationStart===================================");
 		List<HashMap<String, Object>> list = this.sqlSession.selectList("getCourseList");
 		logger.info(list.toString());
-		logger.info("======================================getStaffListApplicationEnd=====================================");
+		logger.info("======================================getCourseListApplicationEnd=====================================");
 		return list;
 	}
 
@@ -60,6 +60,37 @@ public class ReservationApplication implements ReservationRepository {
 		logger.info(list.toString());
 		logger.info("======================================getStaffListApplicationEnd=====================================");
 		return list;
+	}
+
+	@Override
+	public ReservationVO getCheckInfo(ReservationVO rDomain) {
+		logger.info("======================================getCheckInfoApplicationStart===================================");
+		ReservationVO rtn = this.sqlSession.selectOne("getCheckInfo", rDomain);
+		rtn.setReservationDate(rDomain.getReservationDate());
+		rtn.setReservationTime(rDomain.getReservationTime());
+		/** 임시 */
+		rtn.setUserId("User2");
+		rtn.setUserName("aaaaa");
+		/** */
+		logger.info(rtn.toString());
+		logger.info("======================================getCheckInfoApplicationEnd=====================================");
+		return rtn;
+	}
+
+	@Override
+	public int setReserve(ReservationVO rDomain) {
+		logger.info("======================================setReserveApplicationStart===================================");
+		rDomain.setReservationDateTime(rDomain.getReservationDate()+""+rDomain.getReservationTime()+"0000");
+		rDomain.setReservationStatus("1");
+//		Map<String, Integer> r = this.sqlSession.selectOne("getReservCount");
+		Integer i = sqlSession.selectOne("getReservCount");
+		i = new Integer(i.intValue() + 1);
+		String s = ""+i;
+		rDomain.setReservationId(s);
+		logger.info(rDomain.toString());
+		int rtn = this.sqlSession.insert("setReserveInfo", rDomain);
+		logger.info("======================================setReserveApplicationEnd=====================================");
+		return rtn;
 	}
 	
 	@Override

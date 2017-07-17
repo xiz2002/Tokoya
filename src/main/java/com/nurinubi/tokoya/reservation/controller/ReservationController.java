@@ -1,16 +1,17 @@
 package com.nurinubi.tokoya.reservation.controller;
 
-import java.util.Locale;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,15 +53,12 @@ public class ReservationController {
 	
 	/** 予約画面 */
 	@RequestMapping(value = "/reservation/date", method = RequestMethod.POST)
-//	public ModelAndView date(HttpServletRequest request, Model model) throws Exception {
-	public ModelAndView date(@RequestParam("cid") String cid, Model model) throws Exception {
+	public ModelAndView date(@ModelAttribute("ReservationVO") ReservationVO rDomain) throws Exception {
 		logger.info("======================================dateControllerStart===================================");
-		logger.info("cid : " + cid);
-		
+		logger.info("cid : " + rDomain);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("reservation/date");
-		mav.addObject("cid", cid.toString());
-		
+		mav.addObject("result",rDomain);
 		logger.info("======================================dateControllerEnd=====================================");
 		return mav; 
 	}
@@ -68,8 +66,11 @@ public class ReservationController {
 	/** Jsonで要請した情報を検索 */
 	@RequestMapping(value = "/reservation/getStaffList", method = RequestMethod.POST)
 	public ModelAndView getStaffList(@RequestParam Map<String, Object> commandMap) throws Exception {	
+		logger.info("======================================getStaffListControllerStart===================================");
 		ModelAndView mav = new ModelAndView(); 
 		mav.addObject("list", ReservationRepository.getStaffList(commandMap));
+		mav.setViewName("jsonView");
+		logger.info("======================================getStaffListControllerEnd=====================================");
 //		List<String> list = new ArrayList<String>();
 //		list.add("OBJECT");
 //		Map<String, String> map = new HashMap<String, String>();
@@ -77,15 +78,34 @@ public class ReservationController {
 //		mv.addObject("obj1", list); 
 //		mv.addObject("obj2", map);
 //		Keypoint ! setViewName에 들어갈 String 파라미터는 JsonView bean 설정해줬던 id와 같아야 한다.
-		mav.setViewName("jsonView");
 		return mav;
 	}
 	
-	@RequestMapping(value = "/reservation/check", method = RequestMethod.GET)
-	public String check(Locale locale, Model model) throws Exception {
-		return "/reservation/check";
+	/** 確認画面 */
+	@RequestMapping(value = "/reservation/check", method = RequestMethod.POST)
+	public ModelAndView check(@ModelAttribute("ReservationVO") ReservationVO rDomain) throws Exception {
+		logger.info("======================================checkControllerStart===================================");
+		logger.info(rDomain.toString());
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result", ReservationRepository.getCheckInfo(rDomain));
+		mav.setViewName("reservation/check");
+		logger.info("======================================checkControllerEnd=====================================");
+		return mav;
 	}
 	
+	/** 予約確定 */
+	@RequestMapping(value = "/reservation/checkout", method = RequestMethod.POST)
+	public ModelAndView checkout(@ModelAttribute("ReservationVO") ReservationVO rDomain) throws Exception {
+		logger.info("======================================checkoutControllerStart===================================");
+		logger.info(rDomain.toString());
+		ModelAndView mav = new ModelAndView(); 
+		mav.addObject("rtn", ReservationRepository.setReserve(rDomain));
+		mav.setViewName("jsonView");
+		logger.info("======================================checkoutControllerEnd=====================================");
+		return mav;
+	}
+	
+	/** */
 	@RequestMapping(value = "/reservation/history", method = RequestMethod.GET)
 	public String history() {
 		logger.info("Welcome home! The client locale is {}.");

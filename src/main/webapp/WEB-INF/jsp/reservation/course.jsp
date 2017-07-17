@@ -45,13 +45,14 @@
 		.on("selectablestop", function() {
 			var course="";
 			$('#selectable .ui-selected').each(function() {
-				course = $(this).html();
+				course = $(this).attr('value');
 			});
-			document.getElementById("cid").value = course.trim();
+			document.getElementById("courseId").value = course.trim();
 		//Debug
 		console.log( course );
 	    });
 	});
+	
 	// non-selectable
 	$( function() {
 		$( "#sortable" ).sortable({
@@ -71,7 +72,6 @@
 		$("#frm").submit()
 	};
 
-		/* $("#frm").attr("target", "_self"); */
 </script>
 </head>
 <body>
@@ -79,7 +79,7 @@
 		<div class="reservationDate">
 			<h2>コース選択</h2>
 			<form id="frm" name="frm" method="post">
-				<input type="hidden" name="cid" id="cid"></input>
+				<input type="hidden" name="courseId" id="courseId"></input>
 				<!-- 選択 -->
 				<table>
 					<tr>

@@ -15,6 +15,11 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java"
 	errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<<<<<<< HEAD
+
+<head>ログイン</head>
+
+=======
 <script src="<c:url value="/js/jquery-1.10.2.js"/>"></script>
 <script src="<c:url value="/js/jquery-ui-1.10.4.custom.js"/>"></script>
 <!-- 
@@ -36,6 +41,7 @@
 	});
 </script>
 </head>
+>>>>>>> 89d6afe3c97dc3b93271e3976a45dfb8fa58d3a9
 <body>
 	<h2>ログイン</h2>
 	<div class="container">

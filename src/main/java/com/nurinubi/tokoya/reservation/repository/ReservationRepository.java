@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.nurinubi.tokoya.reservation.domain.ReservationVO;
+
 /**
 <!--
  * 
@@ -29,8 +31,15 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ReservationRepository {
 	
 	List<Map<String, Object>> getReservationListByToday() throws Exception;
+	
 	List<Map<String, Object>> getReservationByDate(Date date) throws Exception;
+	
 	List<HashMap<String, Object>> getCourseList();
+	
 	List<HashMap<String, Object>> getStaffList(Map<String, Object> commandMap);
+	
+	ReservationVO getCheckInfo(ReservationVO rDomain);
+
+	int setReserve(ReservationVO rDomain);
 	
 }
