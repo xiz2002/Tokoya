@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.nurinubi.tokoya.reservation.domain.ReservationVO;
+
 /**
 <!--
  * 
@@ -30,5 +32,9 @@ public interface ReservationRepository {
 	List<HashMap<String, Object>> getCourseList();
 	
 	List<HashMap<String, Object>> getStaffList(Map<String, Object> commandMap);
+	
+	ReservationVO getCheckInfo(ReservationVO rDomain);
+
+	int setReserve(ReservationVO rDomain);
 	
 }

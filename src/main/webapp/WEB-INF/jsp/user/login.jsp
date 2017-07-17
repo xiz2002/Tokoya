@@ -15,13 +15,8 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/login/login.jsp
-<!-- 
-< %@include file="../sample/head.jsp"  %>
- -->
 <head>ログイン</head>
-=======
->>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/user/login.jsp
+
 <body>
 
 	<div class="container">
