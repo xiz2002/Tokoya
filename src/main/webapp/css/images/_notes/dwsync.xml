@@ -1,31 +1,59 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <dwsync>
-<file name="ui-bg_diagonals-thick_90_eeeeee_40x40.png" server="61.100.9.186" local="129729799491738281" remote="129808230600000000" />
-<file name="ui-bg_flat_15_cd0a0a_40x100.png" server="61.100.9.186" local="129729799492392578" remote="129808230600000000" />
-<file name="ui-bg_glass_100_e4f1fb_1x400.png" server="61.100.9.186" local="129729799492167968" remote="129808230600000000" />
-<file name="ui-bg_glass_50_3baae3_1x400.png" server="61.100.9.186" local="129729799492763671" remote="129808230600000000" />
-<file name="ui-bg_glass_80_d7ebf9_1x400.png" server="61.100.9.186" local="129729799491572265" remote="129808230600000000" />
-<file name="ui-bg_highlight-hard_100_f2f5f7_1x100.png" server="61.100.9.186" local="129729799492099609" remote="129808230600000000" />
-<file name="ui-bg_highlight-hard_70_000000_1x100.png" server="61.100.9.186" local="129729799493222656" remote="129808230600000000" />
-<file name="ui-bg_highlight-soft_100_deedf7_1x100.png" server="61.100.9.186" local="129729799491279296" remote="129808230600000000" />
-<file name="ui-bg_highlight-soft_25_ffef8f_1x100.png" server="61.100.9.186" local="129729799492480468" remote="129808230600000000" />
-<file name="ui-icons_2694e8_256x240.png" server="61.100.9.186" local="129729799492802734" remote="129808230600000000" />
-<file name="ui-icons_2e83ff_256x240.png" server="61.100.9.186" local="129729799491269531" remote="129808230600000000" />
-<file name="ui-icons_3d80b3_256x240.png" server="61.100.9.186" local="129729799491875000" remote="129808230600000000" />
-<file name="ui-icons_72a7cf_256x240.png" server="61.100.9.186" local="129729799493085937" remote="129808230600000000" />
-<file name="ui-icons_ffffff_256x240.png" server="61.100.9.186" local="129729799493945312" remote="129808230600000000" />
-<file name="ui-bg_diagonals-thick_90_eeeeee_40x40.png" server="isanclinic.cafe24.com//" local="129817783421386718" remote="129822642000000000" />
-<file name="ui-bg_flat_15_cd0a0a_40x100.png" server="isanclinic.cafe24.com//" local="129817783418945312" remote="129822642000000000" />
-<file name="ui-bg_glass_100_e4f1fb_1x400.png" server="isanclinic.cafe24.com//" local="129817783429667968" remote="129822642000000000" />
-<file name="ui-bg_glass_50_3baae3_1x400.png" server="isanclinic.cafe24.com//" local="129817783376757812" remote="129822642000000000" />
-<file name="ui-bg_glass_80_d7ebf9_1x400.png" server="isanclinic.cafe24.com//" local="129817783374414062" remote="129822642000000000" />
-<file name="ui-bg_highlight-hard_100_f2f5f7_1x100.png" server="isanclinic.cafe24.com//" local="129817783370976562" remote="129822642000000000" />
-<file name="ui-bg_highlight-hard_70_000000_1x100.png" server="isanclinic.cafe24.com//" local="129817783368535156" remote="129822642000000000" />
-<file name="ui-bg_highlight-soft_100_deedf7_1x100.png" server="isanclinic.cafe24.com//" local="129817783416523437" remote="129822642000000000" />
-<file name="ui-bg_highlight-soft_25_ffef8f_1x100.png" server="isanclinic.cafe24.com//" local="129817783363691406" remote="129822642000000000" />
-<file name="ui-icons_2694e8_256x240.png" server="isanclinic.cafe24.com//" local="129817783360097656" remote="129822642000000000" />
-<file name="ui-icons_2e83ff_256x240.png" server="isanclinic.cafe24.com//" local="129817783365957031" remote="129822642000000000" />
-<file name="ui-icons_3d80b3_256x240.png" server="isanclinic.cafe24.com//" local="129817783313291015" remote="129822642000000000" />
-<file name="ui-icons_72a7cf_256x240.png" server="isanclinic.cafe24.com//" local="129817783310869140" remote="129822642000000000" />
-<file name="ui-icons_ffffff_256x240.png" server="isanclinic.cafe24.com//" local="129817783308437500" remote="129822642000000000" />
+	<file name="ui-bg_diagonals-thick_90_eeeeee_40x40.png" server="61.100.9.186"
+		local="129729799491738281" remote="129808230600000000" />
+	<file name="ui-bg_flat_15_cd0a0a_40x100.png" server="61.100.9.186"
+		local="129729799492392578" remote="129808230600000000" />
+	<file name="ui-bg_glass_100_e4f1fb_1x400.png" server="61.100.9.186"
+		local="129729799492167968" remote="129808230600000000" />
+	<file name="ui-bg_glass_50_3baae3_1x400.png" server="61.100.9.186"
+		local="129729799492763671" remote="129808230600000000" />
+	<file name="ui-bg_glass_80_d7ebf9_1x400.png" server="61.100.9.186"
+		local="129729799491572265" remote="129808230600000000" />
+	<file name="ui-bg_highlight-hard_100_f2f5f7_1x100.png" server="61.100.9.186"
+		local="129729799492099609" remote="129808230600000000" />
+	<file name="ui-bg_highlight-hard_70_000000_1x100.png" server="61.100.9.186"
+		local="129729799493222656" remote="129808230600000000" />
+	<file name="ui-bg_highlight-soft_100_deedf7_1x100.png" server="61.100.9.186"
+		local="129729799491279296" remote="129808230600000000" />
+	<file name="ui-bg_highlight-soft_25_ffef8f_1x100.png" server="61.100.9.186"
+		local="129729799492480468" remote="129808230600000000" />
+	<file name="ui-icons_2694e8_256x240.png" server="61.100.9.186"
+		local="129729799492802734" remote="129808230600000000" />
+	<file name="ui-icons_2e83ff_256x240.png" server="61.100.9.186"
+		local="129729799491269531" remote="129808230600000000" />
+	<file name="ui-icons_3d80b3_256x240.png" server="61.100.9.186"
+		local="129729799491875000" remote="129808230600000000" />
+	<file name="ui-icons_72a7cf_256x240.png" server="61.100.9.186"
+		local="129729799493085937" remote="129808230600000000" />
+	<file name="ui-icons_ffffff_256x240.png" server="61.100.9.186"
+		local="129729799493945312" remote="129808230600000000" />
+	<file name="ui-bg_diagonals-thick_90_eeeeee_40x40.png" server="isanclinic.cafe24.com//"
+		local="129817783421386718" remote="129822642000000000" />
+	<file name="ui-bg_flat_15_cd0a0a_40x100.png" server="isanclinic.cafe24.com//"
+		local="129817783418945312" remote="129822642000000000" />
+	<file name="ui-bg_glass_100_e4f1fb_1x400.png" server="isanclinic.cafe24.com//"
+		local="129817783429667968" remote="129822642000000000" />
+	<file name="ui-bg_glass_50_3baae3_1x400.png" server="isanclinic.cafe24.com//"
+		local="129817783376757812" remote="129822642000000000" />
+	<file name="ui-bg_glass_80_d7ebf9_1x400.png" server="isanclinic.cafe24.com//"
+		local="129817783374414062" remote="129822642000000000" />
+	<file name="ui-bg_highlight-hard_100_f2f5f7_1x100.png" server="isanclinic.cafe24.com//"
+		local="129817783370976562" remote="129822642000000000" />
+	<file name="ui-bg_highlight-hard_70_000000_1x100.png" server="isanclinic.cafe24.com//"
+		local="129817783368535156" remote="129822642000000000" />
+	<file name="ui-bg_highlight-soft_100_deedf7_1x100.png" server="isanclinic.cafe24.com//"
+		local="129817783416523437" remote="129822642000000000" />
+	<file name="ui-bg_highlight-soft_25_ffef8f_1x100.png" server="isanclinic.cafe24.com//"
+		local="129817783363691406" remote="129822642000000000" />
+	<file name="ui-icons_2694e8_256x240.png" server="isanclinic.cafe24.com//"
+		local="129817783360097656" remote="129822642000000000" />
+	<file name="ui-icons_2e83ff_256x240.png" server="isanclinic.cafe24.com//"
+		local="129817783365957031" remote="129822642000000000" />
+	<file name="ui-icons_3d80b3_256x240.png" server="isanclinic.cafe24.com//"
+		local="129817783313291015" remote="129822642000000000" />
+	<file name="ui-icons_72a7cf_256x240.png" server="isanclinic.cafe24.com//"
+		local="129817783310869140" remote="129822642000000000" />
+	<file name="ui-icons_ffffff_256x240.png" server="isanclinic.cafe24.com//"
+		local="129817783308437500" remote="129822642000000000" />
 </dwsync>
