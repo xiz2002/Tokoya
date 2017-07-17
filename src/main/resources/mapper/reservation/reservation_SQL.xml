@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.nurinubi.tokoya.reservation.repository.ReservationRepository">
-
-    <select id="getStaffList" resultType="">
-        SELECT * 
-        FROM MSTSTYLIST
-        WHERE (
-            STYLISTID NOT IN (
-                SELECT STYLISTID
-                FROM TRNSTYLISTSCHEDULE
-                WHERE OFFDATE = #{Date} 20170718
-                )
-            )
-        AND (
-            STYLISTID NOT IN (
-                SELECT STYLISTID
-                FROM TRNRESERVATION
-                WHERE RESERVATIONDATE = #{DateTime} 20170718140000 
-            )
-        );
-    </select>
-
+<mapper	namespace="com.nurinubi.tokoya.reservation.repository.ReservationRepository">
+	<select id="getReservationListByToday" resultType="Map">
+   <![CDATA[  
+    SELECT 
+    	a.RESERVATIONID, a.RESERVATIONDATE, a.RESERVATIONSTATUS, 
+    	b.COURSETIME,  
+    	c.STYLISTID, c.STYLISTNAME
+    FROM TRNRESERVATION a
+    	LEFT JOIN MSTCOURSE b ON b.COURSEID = a.COURSEID
+		LEFT JOIN MSTSTYLIST c ON a.STYLISTID = c.STYLISTID
+	WHERE a.RESERVATIONDATE > DATE_FORMAT(NOW(), '%Y%m%d') 
+    AND 
+    RESERVATIONDATE < DATE_FORMAT(Date_Add(NOW(), INTERVAL+1 DAY), '%Y%m%d') 
+    ]]>
+	</select>
 </mapper>

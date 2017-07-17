@@ -1,9 +1,10 @@
 package com.nurinubi.tokoya.reservation;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-
 import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
 
@@ -37,5 +38,10 @@ public class ReservationApplication implements ReservationRepository {
 	@Override
 	public List<ReservationVO> getUserList() {
 		return this.sqlSession.selectList("getUserList");
+	}
+	
+	@Override
+	public List<Map<String, Object>> getReservationListByToday() throws Exception {
+		return this.sqlSession.selectList("getReservationListByToday");
 	}
 }

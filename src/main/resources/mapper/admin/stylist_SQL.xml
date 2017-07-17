@@ -3,7 +3,7 @@
 
 <mapper namespace="com.nurinubi.tokoya.admin.repository.AdminRepository">
 	<!-- スタイリスト一覧 -->
-    <select id="getStylistList" resultType="AdminVO">
+    <select id="getStylistList" resultType="StylistVO">
         SELECT * FROM MSTSTYLIST
     </select>
 </mapper>

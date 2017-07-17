@@ -21,7 +21,7 @@ package com.nurinubi.tokoya.user.domain;
 public class UserVO {
 	
 	private String userId;
-	private String userPassword;
+	private String userPass;
 	private String userName;
 	private String userHuri;
 	private String userEmail;
@@ -41,14 +41,14 @@ public class UserVO {
 	/**
 	 * @return the userPassword
 	 */
-	public String getUserPassword() {
-		return userPassword;
+	public String getUserPass() {
+		return userPass;
 	}
 	/**
 	 * @param userPassword the userPassword to set
 	 */
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+	public void setUserPass(String userPass) {
+		this.userPass = userPass;
 	}
 	/**
 	 * @return the userName
@@ -107,7 +107,7 @@ public class UserVO {
 		builder.append("SampleVO [userId=");
 		builder.append(userId);
 		builder.append(", userPassword=");
-		builder.append(userPassword);
+		builder.append(userPass);
 		builder.append(", userName=");
 		builder.append(userName);
 		builder.append(", userHuri=");

@@ -14,14 +14,10 @@
  * -->
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/stylist/stylistinsert.jsp
 <!-- 
 < %@include file="../sample/inc/head.jsp"  % > 
 -->
 <head></head>
-=======
-
->>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/admin/stylist/addStylist.jsp
 <body>
 
 	<div class="container">
@@ -41,7 +37,6 @@
 					<button type="submit" name="stylistadd">追加</button>
 					<button type="submit" name="cansel">キャンセル</button>
 			<!-- /page content -->
-<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/stylist/stylistinsert.jsp
 			<!-- footer 
 			< %@include file="../sample/inc/foot.jsp"%>
 			 /footer -->
@@ -51,9 +46,7 @@
 	<!-- 
 	< %@include file="../sample/inc/scripts.jsp"%>
 	 -->
-=======
 		</div>
 	</div>
->>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/admin/stylist/addStylist.jsp
 </body>
 </html>

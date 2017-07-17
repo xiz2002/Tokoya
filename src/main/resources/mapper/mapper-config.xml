@@ -10,14 +10,14 @@
 		<package name="com.nurinubi.tokoya.board.domain" />
 		<package name="com.nurinubi.tokoya.admin.domain" />
 		<package name="com.nurinubi.tokoya.user.domain" />
+		<package name="com.nurinubi.tokoya.reservation.domain" />
 	</typeAliases>
 	<mappers>
-		<!-- <mapper resource="mapper/**/**_SQL.xml" /> -->
 		<mapper resource="mapper/sample/sample_SQL.xml" />
 		<mapper resource="mapper/board/board_SQL.xml" />
 		<mapper resource="mapper/admin/admin_SQL.xml" />
 		<mapper resource="mapper/admin/stylist_SQL.xml"/>
-		<mapper resource="mapper/sample/sample_SQL.xml"/>
 		<mapper resource="mapper/user/user_SQL.xml"/>
+		<mapper resource="mapper/reservation/reservation_SQL.xml"/>
 	</mappers>
 </configuration>
