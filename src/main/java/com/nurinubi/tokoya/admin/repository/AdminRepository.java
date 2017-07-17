@@ -19,6 +19,4 @@ public interface AdminRepository {
 	//スタイリスト追加処理
 	void insertStylist(Map<String, Object> map) throws Exception;
 
-	List<StylistVO> getStylistList();
-
 }

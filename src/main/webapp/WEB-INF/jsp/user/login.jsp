@@ -29,6 +29,10 @@
 		$("#cancle").on("click", function() {
 			location.assign("/home");
 		});
+		$("#login").on("click", function() {
+				$("#logfrm").attr("action", "<c:url value='/login.do'/>");
+				$("#logfrm").submit();
+		});
 	});
 </script>
 </head>
@@ -36,7 +40,7 @@
 	<h2>ログイン</h2>
 	<div class="container">
 		<div class="loginform">
-			<form id="logfrm" action="${url}" method="POST">
+			<form id="logfrm" method="POST">
 				<h2>ログイン</h2>
 				<!-- 入力内容 -->
 				<p>
@@ -53,9 +57,9 @@
 					</label>
 				</p>
 				<!-- 各種ボタン -->
-				<input type="button" id="login" value="ログイン">
-				<button type="submit" name="newmenber">新規登録</button>
-				<button type="submit" name="cancel">キャンセル</button>
+				<input type="submit" id="login" value="ログイン">
+				<button type="button" id="register" name="newmenber">新規登録</button>
+				<button type="button" id="cancle" name="cancel">キャンセル</button>
 			</form>
 		</div>
 	</div>
