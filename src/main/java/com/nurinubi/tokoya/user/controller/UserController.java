@@ -10,12 +10,16 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.nurinubi.tokoya.admin.repository.AdminRepository;
+import com.nurinubi.tokoya.common.CommandMap;
 import com.nurinubi.tokoya.sample.repository.SampleRepository;
 import com.nurinubi.tokoya.user.domain.UserVO;
 import com.nurinubi.tokoya.user.repository.UserRepository;
@@ -41,7 +45,9 @@ public class UserController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
-
+	/** WriteService */
+	@Autowired
+	private UserRepository userRepository;
 	
 	/** WriteService */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -78,44 +84,34 @@ public class UserController {
 	}
 	
 	/**
-	 * ログイン
-	 * @param username
-	 * @param userpass
+	 * 
+	 * @param cmdMap
 	 * @param model
-	 * @return　
+	 * @return 
+	 * @throws Exception
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.GET, params = "login")
-	public String Loginaction(){
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	public ModelAndView Loginaction(CommandMap cmdMap, Model model) throws Exception {
 		logger.info("Loginaction");
-        
-		//List<UserVO> find = UserRepository.findOne(username, userpass);
-        /*@RequestParam("username") String username,
-							  @RequestParam("userpass") String userpass, Model model
-         */
-		//System.out.println(model);
-		return "user/login";
-		/*
-		if(){
-		
-			//管理者ページ
-			return "admin/admin";
-		
-		}else if(){
-			
-			//ユーザーページ
-			return "user/home";
-		}else{
-			
-			//ログインページ
-			return "user/login";
-		}*/
+		ModelAndView mv = new ModelAndView("/login");
+		userRepository.login(cmdMap.getMap());
+		String id = (String) cmdMap.get("userid");
+		String pass = (String) cmdMap.get("userpass");
+		System.out.println(id);
+		System.out.println(pass);
+	    if(pass.equals("1234") && id.equals("1234")){
+	    	mv.setViewName("redirect:/admin");
+	    }else{
+	    	mv.setViewName("redirect:/home");
+	    }
+		return mv;
 	}
 	
 	/**
 	 * キャンセル
 	 * @return　ホーム画面遷移
 	 */
-	@RequestMapping(value = "/login2", method = RequestMethod.GET, params = "cancel")
+	@RequestMapping(value = "/login", method = RequestMethod.POST, params = "cancel")
 	public String Canselaction(){
 		logger.info("Canselaction");
 		return "user/home";
@@ -125,7 +121,7 @@ public class UserController {
 	 * 新規登録
 	 * @return　新規登録画面遷移
 	 */
-	@RequestMapping(value = "/login2", method = RequestMethod.GET, params = "newmenber")
+	@RequestMapping(value = "/login", method = RequestMethod.POST, params = "newmenber")
 	public String Newmenberaction(){
 		logger.info("Newmenberaction");
 		return "user/register";

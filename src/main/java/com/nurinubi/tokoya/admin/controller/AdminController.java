@@ -1,13 +1,7 @@
 package com.nurinubi.tokoya.admin.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-
-import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
-
-import com.nurinubi.tokoya.admin.repository.AdminRepository;
-import com.nurinubi.tokoya.sample.repository.SampleRepository;
+import com.nurinubi.tokoya.common.CommandMap;
 
 /**
 * @Class Name : AdminController.java.java
@@ -102,5 +93,16 @@ public class AdminController {
 		
 		//表示するページ設定
 		return "/admin/stylist/management";
+	}
+	
+	// スタイリストの追加処理
+	@RequestMapping(value = "/admin/stylist/insertWrite.do", method = RequestMethod.GET)
+	public ModelAndView insertWrite(CommandMap cmdMap)
+			throws Exception {
+		logger.info("スタイリストの追加処理");
+		ModelAndView mv = new ModelAndView("/admin");
+		adminRepository.insertStylist(cmdMap.getMap());
+		mv.setViewName("redirect:/admin/stylist/management");
+		return mv;
 	}
 }

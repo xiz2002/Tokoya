@@ -18,10 +18,12 @@ package com.nurinubi.tokoya.user.domain;
  * -->
  */
 
-public class UserVO {
+public class UserVO{
 	
 	private String userId;
+	
 	private String userPassword;
+	
 	private String userName;
 	private String userHuri;
 	private String userEmail;

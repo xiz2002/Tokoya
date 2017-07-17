@@ -14,25 +14,28 @@
  * -->
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/login/login.jsp
-<!-- 
-< %@include file="../sample/head.jsp"  %>
- -->
-<head>ログイン</head>
-=======
->>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/user/login.jsp
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#login").on("click", function(){
+		$("#logfrm").attr("action", "<c:url value='/login.do'/>");
+		$("#logfrm").submit();
+	});
+});
+</script>
 <body>
-
 	<div class="container">
-		
 		<div class="loginform">
-			<form action="login" method="GET">
+			<form id="logfrm" action="${url}" method="POST">
 				<h2>ログイン</h2>
 				<!-- 入力内容 -->
 				<p>
 				  <span>ユーザーID</span>
-				  <input type="text" name="username" placeholder="Username">
+				  <input type="text" name="userid" placeholder="Userid">
 				</p>
 				<p>
 				  <span>パスワード</span>
@@ -45,21 +48,11 @@
 				</label>
 				</p>
 				<!-- 各種ボタン -->
-				<button type="submit" name="login">ログイン</button>
+				<input type="button" id="login" value="ログイン">
 				<button type="submit" name="newmenber">新規登録</button>
 				<button type="submit" name="cancel">キャンセル</button>
 			</form>
-			<!-- /page content -->
-<<<<<<< HEAD:src/main/webapp/WEB-INF/jsp/login/login.jsp
-			<!-- footer 
-			< %@include file="../sample/inc/foot.jsp"%>
-			 /footer -->
 		</div>
 	</div>
-	<!-- 	< %@include file="../sample/inc/scripts.jsp"%> -->
-=======
-		</div>
-	</div>
->>>>>>> upstream/master:src/main/webapp/WEB-INF/jsp/user/login.jsp
 </body>
 </html>

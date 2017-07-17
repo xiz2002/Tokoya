@@ -11,13 +11,12 @@
 * @version 0.1
 *
 *  Copyright (C) by NuriNubi All right reserved.
-*
 -->
-<%@ page contentType="text/html; charset=UTF-8" language="java"
-	errorPage=""%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#write").on("click", function(){
