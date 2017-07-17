@@ -16,7 +16,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<script src="<c:url value="/js/jquery-1.10.2.js"/>"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#write").on("click", function(){
@@ -24,20 +24,12 @@ $(document).ready(function(){
 		$("#frm").submit();
 	});
 	$("#cancle").on("click", function(){
-		location.href("/admin/board");
+		location.href("/admin");
 	});
 });
 </script>
-</body>
-<!-- top navigation -->
-<%@include file="../admin/inc/top.jsp"%>
-<!-- /top navigation -->
-<!-- side navigation -->
-<%@include file="../admin/inc/navi.jsp"%>
-<!-- /side navigation -->
-
 <div id="div_write" style="float: left;">
-<form id="frm">
+<form id="frm" method="GET">
 	<table id="tb_write" style="border:1px solid;">
 		<tr>
 			<td><label>タイトル</label></td>
@@ -53,5 +45,3 @@ $(document).ready(function(){
 	</div>
 	</form>
 </div>
-</body>
-</html>

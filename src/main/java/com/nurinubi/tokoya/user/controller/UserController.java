@@ -7,7 +7,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
 import com.nurinubi.tokoya.common.CommandMap;
 import com.nurinubi.tokoya.sample.repository.SampleRepository;
 import com.nurinubi.tokoya.user.domain.UserVO;
 import com.nurinubi.tokoya.user.repository.UserRepository;
+import com.nurinubi.tokoya.board.controller.BoardController;
+import com.nurinubi.tokoya.board.repository.BoardRepository;
+import com.nurinubi.tokoya.common.CommandMap;
 
 /**
 * @Class Name : AdminController.java.java
@@ -49,36 +50,32 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private BoardRepository boardRepository;
+	
 	/** WriteService */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
+	public String home(Model model) {
+		model.addAttribute("result", boardRepository.getBoardList());
 		return "/user/home";
 	}
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register() throws Exception {
-		
+	public String registerForm() throws Exception {
 		return "/user/register";
 	}
-	
+	@RequestMapping(value = "/register.do", method = RequestMethod.POST)
+	public String register(CommandMap cmdMap) throws Exception {
+		logger.info("会員登録処理");
+		userRepository.insertUser(cmdMap.getMap());
+		return "redirect:/home";
+	}
 	/**
 	 * ログイン画面初期
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
-		
-		//
 		logger.info("login");
-		
 		//表示するページ設定
 		return "user/login";
 	}

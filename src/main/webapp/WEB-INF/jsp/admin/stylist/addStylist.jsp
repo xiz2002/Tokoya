@@ -14,6 +14,7 @@
  * -->
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -29,6 +30,12 @@ $(document).ready(function(){
 	});
 });
 </script>
+
+<!-- 
+< %@include file="../sample/inc/head.jsp"  % > 
+-->
+<head></head>
+
 <body>
 	<div class="container">
 		<div class="addstylistform">
@@ -43,9 +50,19 @@ $(document).ready(function(){
 				  <input type="text" id="body" name="STYLISTNAME" placeholder="STYLISTNAME">
 				</p>
 				<!-- 各種ボタン -->
-					<input type="button" id="write" value="登録">
-					<input type="button" id="cancle" value="キャンセル">
+
+					<button type="submit" name="stylistadd">追加</button>
+					<button type="submit" name="cansel">キャンセル</button>
+			<!-- /page content -->
+			<!-- footer 
+			< %@include file="../sample/inc/foot.jsp"%>
+			 /footer -->
 			 </form>
+		</div>
+	</div>
+	<!-- 
+	< %@include file="../sample/inc/scripts.jsp"%>
+	 -->
 		</div>
 	</div>
 </body>

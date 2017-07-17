@@ -31,4 +31,11 @@ public class UserApplication implements UserRepository {
 	public void login(Map<String, Object> map) throws Exception {
 		this.sqlSession.insert("login", map);
 	}
+
+	@Override
+	public void insertUser(Map<String, Object> map) throws Exception {
+		map.get("email1");
+		this.sqlSession.insert("addUser", map);
+	}
+	
 }

@@ -11,6 +11,14 @@ import com.nurinubi.tokoya.user.domain.UserVO;
 public interface UserRepository {
 	List<Map<String, Object>> getReservationListByStylist(Map<String, Object> cmdMap) throws Exception;
 	
+
 	//ログイン
 	void login(Map<String, Object> map) throws Exception;
+
+	List<UserVO> getUserList();
+	
+	List<UserVO> findOne(String username, String userpass);
+	
+	void insertUser(Map<String, Object> map) throws Exception;
+
 }

@@ -1,8 +1,11 @@
 package com.nurinubi.tokoya.board.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.nurinubi.tokoya.board.repository.BoardRepository;
 import com.nurinubi.tokoya.common.CommandMap;
 
@@ -36,7 +38,7 @@ public class BoardController {
 	@Autowired
 	private BoardRepository boardRepository;
 
-	// お知らせのホーム画面
+	// お知らせのホーム画面(ユーザー)
 	@RequestMapping(value = "/admin/board", method = RequestMethod.GET)
 	public String listBoard(Model model) throws Exception {
 		logger.info("お知らせのホーム画面(ユーザー)");
@@ -47,21 +49,18 @@ public class BoardController {
 	// お知らせの作成画面
 	@RequestMapping(value = "/admin/board/write", method = RequestMethod.GET)
 	public String formWrite(CommandMap cmdMap) throws Exception {
-
 		return "/board/write";
 	}
 
 	// お知らせの作成処理
-	@RequestMapping(value = "/board/insertWrite.do", method = RequestMethod.GET)
-	public ModelAndView insertWrite(CommandMap cmdMap)
+	@RequestMapping(value = "/board/insertWrite.do", method = RequestMethod.POST)
+	public String insertWrite(CommandMap cmdMap)
 			throws Exception {
 		logger.info("お知らせの作成処理");
-		ModelAndView mv = new ModelAndView("/home");
 		Date date = new Date();
 		cmdMap.put("REGISTERDATE", date);
 		boardRepository.insertBoard(cmdMap.getMap());
-		mv.setViewName("redirect:/admin/board");
-		return mv;
+		return "redirect:/admin";
 	}
 
 	@RequestMapping(value = "/board/view", method = RequestMethod.GET)
