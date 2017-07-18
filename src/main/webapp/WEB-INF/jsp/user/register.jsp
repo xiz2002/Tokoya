@@ -51,27 +51,35 @@
 
 		return true;
 	}
-	function checkId(){
-		var id=$("#id_check").val();
+	function checkId() {
+		var id = $("#id_check").val();
 		$.ajax({
-			type:"POST",
-			dataType:"JSON",
-			data:{id:id},
-			url:"<c:url value='/checkId.do'/>",
-			error: function(data) {
+			type : "POST",
+			dataType : "JSON",
+			data : {
+				id : id
+			},
+			url : "<c:url value='/checkId.do'/>",
+			error : function(data) {
 				console.log(data);
 				console.log("Error : " + Fail);
 			},
 			success : function(data) {
-				if(data=="true"){
+				var data = JSON.stringify(data);
+				var obj = JSON.parse(data);
+				if (obj.result == "true") {
 					alert("このIDが使えます。");
-				}else{
+				}
+				if (obj.result == "false") {
+					alert("このIDが使えます。");
+				}
+				{
 					alert("このIDはもう存在しています。他のIDを入力してください。");
 					$("#userId").val("");
 				}
 			}
-			});
-		}
+		});
+	}
 </script>
 <body>
 	<div>
@@ -80,20 +88,21 @@
 				<tr>
 					<td><span>氏名</span></td>
 					<td><input type="text" placeholder="姓" class="userName"
-						id="last_name"><input type="text" placeholder="名" class="userName"
-						id="first_name"></td>
+						id="last_name"><input type="text" placeholder="名"
+						class="userName" id="first_name"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td><span>氏名(フリガナ)</span></td>
 					<td><input type="text" placeholder="姓" class="userName"
-						id="huri_last_name"><input type="text" placeholder="名" class="userName"
-						id="huri_first_name"></td>
+						id="huri_last_name"><input type="text" placeholder="名"
+						class="userName" id="huri_first_name"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td><span>ユーザID</span></td>
-					<td><input type="text" name="USERID" id="userId"><input type="button" value="check" id="id_check" /></td>
+					<td><input type="text" name="USERID" id="userId"><input
+						type="button" value="check" id="id_check" /></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -119,10 +128,10 @@
 						type="text" id="phone3" max="4" /></td>
 				</tr>
 			</table>
-			<input type="hidden" id="name" name="USERNAME" /> 
-			<input type="hidden" id="huri" name="USERHURI" /> 
-			<input type="hidden" id="email" name="USEREMAIL" /> 
-			<input type="hidden" id="phone"	name="USERPHONE" />
+			<input type="hidden" id="name" name="USERNAME" /> <input
+				type="hidden" id="huri" name="USERHURI" /> <input type="hidden"
+				id="email" name="USEREMAIL" /> <input type="hidden" id="phone"
+				name="USERPHONE" />
 		</form>
 		<div class="div_button">
 			<input type="button" value="登録" id="register"> <input

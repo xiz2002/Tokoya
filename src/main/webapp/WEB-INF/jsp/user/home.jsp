@@ -27,7 +27,7 @@ float:left;
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#reservationHistory").on("click", function() {
-		location.assign("/reservation/history");
+		location.assign("/reservation/userHistory");
 	});
 	$("#reservation").on("click", function() {
 		location.assign("/reservation/course");
