@@ -63,27 +63,6 @@
 		FROM
 		MSTCOURSE
 	</select>
-
-	<select id="getStaffList" parameterType="Map" resultMap="staffList">
-		SELECT
-		STYLISTID,
-		STYLISTNAME
-		FROM MSTSTYLIST
-		WHERE (
-		STYLISTID NOT IN (
-		SELECT STYLISTID
-		FROM TRNSTYLISTSCHEDULE
-		WHERE OFFDATE = #{date}
-		)
-		) AND (
-		STYLISTID NOT IN (
-		SELECT STYLISTID
-		FROM TRNRESERVATION
-		WHERE RESERVATIONDATE = #{time}
-		)
-		);
-	</select>
-	
 	
     <select id="getStaffList" parameterType="Map" resultMap="staffList">
         SELECT 
