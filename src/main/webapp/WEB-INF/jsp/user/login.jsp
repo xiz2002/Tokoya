@@ -45,10 +45,10 @@
 				<!-- 入力内容 -->
 				<p>
 				  <span>ユーザーID</span>
-				  <input type="text" name="userid" placeholder="Userid">
+				  <input type="text" name="USERID" placeholder="Userid">
   			</p>
 				<p>
-					<span>パスワード</span> <input type="password" name="userpass"
+					<span>パスワード</span> <input type="password" name="USERPASS"
 						placeholder="Password">
 				</p>
 				<p>
@@ -58,8 +58,8 @@
 				</p>
 				<!-- 各種ボタン -->
 				<input type="submit" id="login" value="ログイン">
-				<button type="button" id="register" name="newmenber">新規登録</button>
-				<button type="button" id="cancle" name="cancel">キャンセル</button>
+				<button type="button" id="register">新規登録</button>
+				<button type="button" id="cancle">キャンセル</button>
 			</form>
 		</div>
 	</div>
