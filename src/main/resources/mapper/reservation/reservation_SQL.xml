@@ -2,44 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper	namespace="com.nurinubi.tokoya.reservation.repository.ReservationRepository">
-	<select id="getReservationListByToday" resultType="Map">
-    <![CDATA[  
-    SELECT 
-    	a.RESERVATIONID, a.RESERVATIONDATE, a.RESERVATIONSTATUS, 
-    	b.COURSETIME,  
-    	c.STYLISTID, c.STYLISTNAME
-    FROM TRNRESERVATION a
-    	LEFT JOIN MSTCOURSE b ON b.COURSEID = a.COURSEID
-		LEFT JOIN MSTSTYLIST c ON a.STYLISTID = c.STYLISTID
-	WHERE a.RESERVATIONDATE > DATE_FORMAT(NOW(), '%Y%m%d') 
-    AND 
-    RESERVATIONDATE < DATE_FORMAT(Date_Add(NOW(), INTERVAL+1 DAY), '%Y%m%d') 
-    ]]>
-	</select>
-	
-	<select id="getReservationByDate" resultType="Map">
-    <![CDATA[  
-    SELECT 
-    	a.RESERVATIONID, a.RESERVATIONDATE, a.RESERVATIONSTATUS, 
-    	b.COURSETIME,  
-    	c.STYLISTID, c.STYLISTNAME
-    FROM TRNRESERVATION a
-    	LEFT JOIN MSTCOURSE b ON b.COURSEID = a.COURSEID
-		LEFT JOIN MSTSTYLIST c ON a.STYLISTID = c.STYLISTID
-	WHERE a.RESERVATIONDATE > DATE_FORMAT(#{date}, '%Y%m%d') 
-    AND 
-    RESERVATIONDATE < DATE_FORMAT(Date_Add(#{date}, INTERVAL+1 DAY), '%Y%m%d') 
-    ]]>
-	</select>
 	
 	<resultMap id="courseList" type="java.util.HashMap">
 		<result javaType="java.lang.String" column="COURSEID" property="id" />
-		<result javaType="java.lang.String" column="COURSENAME"
-			property="name" />
-		<result javaType="java.lang.String" column="COURSEPRICE"
-			property="price" />
-		<result javaType="java.lang.String" column="COURSETIME"
-			property="time" />
+		<result javaType="java.lang.String" column="COURSENAME" property="name" />
+		<result javaType="java.lang.String" column="COURSEPRICE"	property="price" />
+		<result javaType="java.lang.String" column="COURSETIME" property="time" />
 	</resultMap>
 	
     <resultMap id="staffList" type="java.util.HashMap">
@@ -54,14 +22,53 @@
 		<result javaType="java.lang.String" column="STYLISTNAME" property="stylistName" />
 	</resultMap> 
 	
+	<select id="getReservationListByToday" resultType="Map">
+    <![CDATA[  
+	SELECT 
+		a.RESERVATIONID, a.RESERVATIONDATE, a.RESERVATIONSTATUS, 
+		b.COURSETIME,  
+		c.STYLISTID, c.STYLISTNAME
+	FROM 
+		TRNRESERVATION a
+    	LEFT JOIN 
+		MSTCOURSE b ON b.COURSEID = a.COURSEID
+			LEFT JOIN 
+				MSTSTYLIST c ON a.STYLISTID = c.STYLISTID
+	WHERE 
+		a.RESERVATIONDATE > DATE_FORMAT(NOW(), '%Y%m%d') 
+    AND
+		RESERVATIONDATE < DATE_FORMAT(Date_Add(NOW(), INTERVAL+1 DAY), '%Y%m%d') 
+    ]]>
+	</select>
+	
+	<select id="getReservationByDate" resultType="Map">
+    <![CDATA[  
+    SELECT 
+    		a.RESERVATIONID, a.RESERVATIONDATE, a.RESERVATIONSTATUS, 
+    		b.COURSETIME,  
+    		c.STYLISTID, c.STYLISTNAME
+    FROM 
+		TRNRESERVATION a
+    	LEFT JOIN 
+    		MSTCOURSE b ON b.COURSEID = a.COURSEID
+	LEFT JOIN 
+		MSTSTYLIST c ON a.STYLISTID = c.STYLISTID
+	WHERE 
+		a.RESERVATIONDATE > DATE_FORMAT(#{date}, '%Y%m%d') 
+	AND 
+		RESERVATIONDATE < DATE_FORMAT(Date_Add(#{date}, INTERVAL+1 DAY), '%Y%m%d') 
+    ]]>
+	</select>
+	
+	
 	<select id="getCourseList" resultMap="courseList">
 		SELECT
-		COURSEID,
-		COURSENAME,
-		COURSEPRICE,
-		COURSETIME
+			COURSEID,
+			COURSENAME,
+			COURSEPRICE,
+			COURSETIME
 		FROM
-		MSTCOURSE
+			MSTCOURSE
 	</select>
 	
     <select id="getStaffList" parameterType="Map" resultMap="staffList">
@@ -85,19 +92,6 @@
     </select>
     
     <select id="getCheckInfo" parameterType="ReservationVO" resultType="ReservationVO">
-<!--
- 		SELECT 
-			a.COURSENAME as COURSENAME, 
-			a.COURSEPRICE as COURSEPRICE,
-			a.COURSETIME as COURSETIME, 
-			b.STYLISTNAME as STYLISTNAME
-		FROM
-			MSTCOURSE a,
-			MSTSTYLIST b
-		WHERE 1=1 
-			AND a.COURSEID = #{courseId}
-			AND	b.STYLISTID = #{stylistId}
--->
 		SELECT 
 			A.COURSEID AS COURSEID,
 			A.COURSENAME AS COURSENAME, 
@@ -128,13 +122,14 @@
 	</select> 
     
 	<insert id="setReserveInfo" parameterType="ReservationVO">
-		INSERT INTO 	TRNRESERVATION (
-			RESERVATIONID, 
-			RESERVATIONDATE, 
-			RESERVATIONSTATUS, 
-			COURSEID, 
-			USERID, 
-			STYLISTID
+		INSERT INTO 	
+			TRNRESERVATION (
+				RESERVATIONID, 
+				RESERVATIONDATE, 
+				RESERVATIONSTATUS, 
+				COURSEID, 
+				USERID, 
+				STYLISTID
 			) 
 		VALUES (
 			#{reservationId},
@@ -145,4 +140,28 @@
 			#{stylistId}
 		);
 	</insert>
+	
+	<select id="getReserveHistory" parameterType="ReservationVO" resultType="ReservationVO">
+	<![CDATA[
+		SELECT 
+			a.RESERVATIONID as RESERVATIONID,
+			SUBSTR(a.RESERVATIONDATE,1,16 ) as RESERVATIONDATE,
+			a.RESERVATIONSTATUS as RESERVATIONSTATUS,
+			b.COURSENAME as COURSENAME,
+			b.COURSEPRICE as COURSEPRICE,
+			c.USERID as USERID,
+			c.USERNAME as USERNAME,
+			d.STYLISTNAME as STYLISTNAME
+		FROM 
+			TRNRESERVATION a
+			LEFT JOIN 
+		    	MSTCOURSE b ON b.COURSEID = a.COURSEID
+			LEFT JOIN
+			MSTUSER c ON c.USERID = a.USERID
+			LEFT JOIN
+			MSTSTYLIST d ON d.STYLISTID = a.STYLISTID
+		WHERE
+			a.USERID = #{userId}
+	]]>
+	</select>
 </mapper>

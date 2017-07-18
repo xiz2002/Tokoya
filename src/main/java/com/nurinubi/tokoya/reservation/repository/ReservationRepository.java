@@ -42,4 +42,6 @@ public interface ReservationRepository {
 
 	int setReserve(ReservationVO rDomain);
 	
+	List<ReservationVO> getReserveHistory(ReservationVO rDomain);
+	
 }

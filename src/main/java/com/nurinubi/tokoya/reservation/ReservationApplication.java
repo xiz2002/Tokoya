@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nurinubi.tokoya.reservation.controller.ReservationController;
 import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
 
@@ -25,7 +24,7 @@ import org.springframework.stereotype.Repository;
  * @		修正日			修正者			修正内容
  * @ 	---------		---------		-------------------------------
  * @ 	2017. 7. 14.		李　多　浩			最初作成
- * 		2017. 7. 16.		李　多　浩			getStaffList追加
+ * 		2017. 7. 16.		李　多　浩			getStaffListなどを追加
  * @author 李　多　浩
  * @since 2017
  * @version 0.1
@@ -37,7 +36,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ReservationApplication implements ReservationRepository {
 
-	private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ReservationApplication.class);
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -69,6 +68,8 @@ public class ReservationApplication implements ReservationRepository {
 		rtn.setReservationDate(rDomain.getReservationDate());
 		rtn.setReservationTime(rDomain.getReservationTime());
 		/** 임시 */
+		//rtn.setUserId(rDomain.getUserId());
+		//rtn.setUserId(rDomain.getUserName());
 		rtn.setUserId("User2");
 		rtn.setUserName("aaaaa");
 		/** */
@@ -82,12 +83,10 @@ public class ReservationApplication implements ReservationRepository {
 		logger.info("======================================setReserveApplicationStart===================================");
 		rDomain.setReservationDateTime(rDomain.getReservationDate()+""+rDomain.getReservationTime()+"0000");
 		rDomain.setReservationStatus("1");
-//		Map<String, Integer> r = this.sqlSession.selectOne("getReservCount");
 		Integer i = sqlSession.selectOne("getReservCount");
 		i = new Integer(i.intValue() + 1);
 		String s = ""+i;
 		rDomain.setReservationId(s);
-		logger.info(rDomain.toString());
 		int rtn = this.sqlSession.insert("setReserveInfo", rDomain);
 		logger.info("======================================setReserveApplicationEnd=====================================");
 		return rtn;
@@ -95,11 +94,26 @@ public class ReservationApplication implements ReservationRepository {
 	
 	@Override
 	public List<Map<String, Object>> getReservationListByToday() throws Exception {
+		logger.info("======================================getReservationListByTodayStart===============================");
+		logger.info("======================================getReservationListByTodayEnd=================================");
 		return this.sqlSession.selectList("getReservationListByToday");
 	}
 
 	@Override
 	public List<Map<String, Object>> getReservationByDate(Date date) throws Exception {
+		logger.info("======================================getReservationByDateStart====================================");
+		logger.info("======================================getReservationByDateEnd======================================");
 		return this.sqlSession.selectList("getReservationByDate", date);
+	}
+
+	@Override
+	public List<ReservationVO> getReserveHistory(ReservationVO rDomain) {
+		logger.info("======================================getReserveHistoryStart=======================================");
+		/** 임시 */
+		rDomain.setUserId("User2");
+		/** */
+		logger.info(rDomain.toString());
+		logger.info("======================================getReserveHistoryEnd=========================================");
+		return this.sqlSession.selectList("getReserveHistory", rDomain);
 	}
 }
