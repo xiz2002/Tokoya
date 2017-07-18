@@ -157,6 +157,7 @@
 						<!-- # -->
 						<td>
 							<input type="hidden" name="courseId" id="courseId" value="${result.courseId}"/>
+							<!-- <input type="hidden" name="userId" id="userId" value="${result.courseId}"/> -->
 							<input type="hidden" name="stylistId" id="stylistId" value=""/>
 						</td>
 						<!-- Date -->

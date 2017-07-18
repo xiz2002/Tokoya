@@ -80,6 +80,7 @@
 			<h2>コース選択</h2>
 			<form id="frm" name="frm" method="post">
 				<input type="hidden" name="courseId" id="courseId"></input>
+				<!--<input type="hidden" name="userId" id="userId">${uInfo.userId}<input>-->
 				<!-- 選択 -->
 				<table>
 					<tr>
