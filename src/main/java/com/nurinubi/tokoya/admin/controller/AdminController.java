@@ -2,9 +2,7 @@ package com.nurinubi.tokoya.admin.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -12,17 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
 import com.nurinubi.tokoya.common.CommandMap;
 import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
-import com.nurinubi.tokoya.admin.repository.AdminRepository;
-import com.nurinubi.tokoya.sample.repository.SampleRepository;
 
 /**
 * @Class Name : AdminController.java.java
@@ -58,7 +52,7 @@ public class AdminController {
 		mv.addObject("result", result);
 		return mv;
 	}*/
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin", method = {RequestMethod.POST, RequestMethod.GET})
 	public String adminHome(Model model) throws Exception {
 		List<Map<String, Object>> reservation = reservationRepository.getReservationListByToday();
 		model.addAttribute("reservation", reservation);
@@ -67,7 +61,6 @@ public class AdminController {
 		System.out.println(model);
 		return "/admin/admin";
 	}
-	
 	
 	@RequestMapping(value = "/searchReservation.do", method = RequestMethod.POST)
 	public ModelAndView serchReservation(@RequestParam String param) throws Exception {
@@ -88,7 +81,7 @@ public class AdminController {
 	 * スタイリスト追加画面：デフォルト
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/stylist/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/stylist/add", method = RequestMethod.POST)
 	public String addStylist() {
 		
 		//表示するページ設定
@@ -112,7 +105,7 @@ public class AdminController {
 	 * スタイリスト管理画面：追加画面遷移
 	 * @return
 	 */
-	@RequestMapping(value = "/stylistinsert", method = RequestMethod.GET, params = "stylistinsert")
+	@RequestMapping(value = "/stylistinsert", method = RequestMethod.POST, params = "stylistinsert")
 	public String stylistinsert() {
 		logger.info("addStylist");
 		
@@ -124,7 +117,7 @@ public class AdminController {
 	 * スタイリスト追加画面：管理画面遷移
 	 * @return
 	 */
-	@RequestMapping(value = "/addstylistform", method = RequestMethod.GET, params = "cansel")
+	@RequestMapping(value = "/addstylistform", method = RequestMethod.POST, params = "cansel")
 	public String stylistadd() {
 		logger.info("addStylist");
 		
@@ -133,7 +126,7 @@ public class AdminController {
 	}
 	
 	// スタイリストの追加処理
-	@RequestMapping(value = "/admin/stylist/insertWrite.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/stylist/insertWrite.do", method = RequestMethod.POST)
 	public ModelAndView insertWrite(CommandMap cmdMap)
 			throws Exception {
 		logger.info("スタイリストの追加処理");

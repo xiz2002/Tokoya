@@ -2,7 +2,7 @@
  * @Class Name : reservationhistory.jsp
  * @Description : 
  * @
- * @	修正日			修正者		修正内容
+ * @			修正日			修正者		修正内容
  * @ 	---------		---------		-------------------------------
  * @ 	2017.07.12		山木雄矢		最初作成
  * 
@@ -14,15 +14,17 @@
  * -->
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<<<<<<< HEAD
+<head></head>
+=======
 
 <!-- 
 < %@include file="../sample/inc/head.jsp"  %>
  -->
  <head></head>
+>>>>>>> 89d6afe3c97dc3b93271e3976a45dfb8fa58d3a9
 <body>
-
 	<div class="container">
-		
 		<div class="reservationhistoryform">
 			<h2>予約リスト</h2>
 			<!-- 予約リスト -->
@@ -35,23 +37,27 @@
       				<th>コース名</th>
       				<th>スタイリスト名</th>
       				<th>予約ステータス</th>
-    			</tr>
-    			<!-- 該当する値 -->
-    			<tr>
-    				<td>
-    					<input type="checkbox" id="remember" value="remember"/>
-    				</td>
+	    			</tr>
+	    			<!-- 該当する値 -->
+	    			<tr>
+	    				<td>
+	    					<input type="checkbox" id="remember" value="remember"/>
+	    				</td>
       				<td>xx</td>
       				<td>price</td>
       				<td>corsename</td>
       				<td>stylistname</td>
       				<td>reservationstatus</td>
-    			</tr>
+    				</tr>
 			</table>
-				<!-- 各種ボタン -->
-				<button type="submit" name="reservationcancel">予約キャンセル</button>
-				<button type="submit" name="cancel">戻る</button>
+			<!-- 各種ボタン -->
+			<button type="submit" name="reservationcancel">予約キャンセル</button>
+			<button type="submit" name="cancel">戻る</button>
 			<!-- /page content -->
+<<<<<<< HEAD
+			<!-- footer -->
+			<!-- /footer -->
+=======
 			<!-- footer 
 			< %@include file="../sample/inc/foot.jsp"%>
 			 /footer -->
@@ -60,6 +66,7 @@
 	<!-- 
 	< %@include file="../sample/inc/scripts.jsp"%>
 	 -->
+>>>>>>> 89d6afe3c97dc3b93271e3976a45dfb8fa58d3a9
 		</div>
 	</div>
 </body>

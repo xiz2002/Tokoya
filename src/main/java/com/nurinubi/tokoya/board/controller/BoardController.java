@@ -1,9 +1,5 @@
 package com.nurinubi.tokoya.board.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
 import org.slf4j.Logger;
@@ -13,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 import com.nurinubi.tokoya.board.repository.BoardRepository;
 import com.nurinubi.tokoya.common.CommandMap;
 
@@ -43,6 +38,7 @@ public class BoardController {
 	public String listBoard(Model model) throws Exception {
 		logger.info("お知らせのホーム画面(ユーザー)");
 		model.addAttribute("result", boardRepository.getBoardList());
+		model.addAttribute("total", boardRepository.getBoardList().size());
 		return "/board/board";
 	}
 

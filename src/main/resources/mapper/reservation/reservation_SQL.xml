@@ -41,14 +41,19 @@
 		<result javaType="java.lang.String" column="COURSETIME"
 			property="time" />
 	</resultMap>
-
-	<resultMap id="staffList" type="java.util.HashMap">
-		<result javaType="java.lang.String" column="STYLISTID"
-			property="id" />
-		<result javaType="java.lang.String" column="STYLISTNAME"
-			property="name" />
+	
+    <resultMap id="staffList" type="java.util.HashMap">
+        <result javaType="java.lang.String" column="STYLISTID" property="id"/>
+        <result javaType="java.lang.String" column="STYLISTNAME" property="name"/>
 	</resultMap>
-
+	
+	<resultMap id="checkInfo" type="java.util.HashMap">
+		<result javaType="java.lang.String" column="COURSENAME" property="courseName" />
+		<result javaType="java.lang.String" column="COURSEPRICE" property="coursePrice" />
+		<result javaType="java.lang.String" column="COURSETIME" property="courseTime" />
+		<result javaType="java.lang.String" column="STYLISTNAME" property="stylistName" />
+	</resultMap> 
+	
 	<select id="getCourseList" resultMap="courseList">
 		SELECT
 		COURSEID,
@@ -78,4 +83,87 @@
 		)
 		);
 	</select>
+	
+	
+    <select id="getStaffList" parameterType="Map" resultMap="staffList">
+        SELECT 
+			STYLISTID,
+			STYLISTNAME
+        FROM MSTSTYLIST
+        WHERE (
+            STYLISTID NOT IN (
+                SELECT STYLISTID
+                FROM TRNSTYLISTSCHEDULE
+                WHERE OFFDATE = #{date}
+            )
+        ) AND (
+            STYLISTID NOT IN (
+                SELECT STYLISTID
+                FROM TRNRESERVATION
+                WHERE RESERVATIONDATE = #{time} 
+            )
+        );
+    </select>
+    
+    <select id="getCheckInfo" parameterType="ReservationVO" resultType="ReservationVO">
+<!--
+ 		SELECT 
+			a.COURSENAME as COURSENAME, 
+			a.COURSEPRICE as COURSEPRICE,
+			a.COURSETIME as COURSETIME, 
+			b.STYLISTNAME as STYLISTNAME
+		FROM
+			MSTCOURSE a,
+			MSTSTYLIST b
+		WHERE 1=1 
+			AND a.COURSEID = #{courseId}
+			AND	b.STYLISTID = #{stylistId}
+-->
+		SELECT 
+			A.COURSEID AS COURSEID,
+			A.COURSENAME AS COURSENAME, 
+			A.COURSEPRICE AS COURSEPRICE,
+			A.COURSETIME AS COURSETIME,
+			B.STYLISTID AS STYLISTID, 
+			B.STYLISTNAME AS STYLISTNAME
+		FROM (
+			SELECT 
+				COURSEID, 
+				COURSENAME, 
+				COURSEPRICE, 
+				COURSETIME
+			FROM 
+				MSTCOURSE
+			WHERE COURSEID = #{courseId}
+		) A, (
+			SELECT 
+				STYLISTID, 
+				STYLISTNAME
+			FROM 
+				MSTSTYLIST
+			WHERE STYLISTID = #{stylistId} ) B
+    </select>
+    
+	<select id="getReservCount" resultType="java.lang.Integer">
+		SELECT MAX(RESERVATIONID) AS CNT FROM TRNRESERVATION;
+	</select> 
+    
+	<insert id="setReserveInfo" parameterType="ReservationVO">
+		INSERT INTO 	TRNRESERVATION (
+			RESERVATIONID, 
+			RESERVATIONDATE, 
+			RESERVATIONSTATUS, 
+			COURSEID, 
+			USERID, 
+			STYLISTID
+			) 
+		VALUES (
+			#{reservationId},
+			#{reservationDateTime},
+			#{reservationStatus},
+			#{courseId},
+			#{userId},
+			#{stylistId}
+		);
+	</insert>
 </mapper>

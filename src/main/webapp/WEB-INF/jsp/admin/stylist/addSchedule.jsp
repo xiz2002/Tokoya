@@ -1,44 +1,36 @@
 <!-- 
- * @Class Name : stylistmanagement.jsp
+ * @Class Name : stylistVacanceAdd.jsp
  * @Description : 
  * @
- * @	修正日			修正者		修正内容
+ * @	修正日				修正者			修正内容
  * @ 	---------		---------		-------------------------------
- * @ 	2017.07.12		山木雄矢		最初作成
+ * @ 	2017.07.17		Lee				最初作成
  * 
- * @author 山木雄矢
- * @since 2017.07.12
+ * @author Lee
+ * @since 2017
  * @version 0.1
  *
  *  Copyright (C) by NuriNubi All right reserved.
  * -->
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<!DOCTYPE>
+<html>
+<head>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	$("#write").on("click", function(){
-		$("#styfrm").attr("action", "<c:url value='/admin/stylist/insertWrite.do'/>");
-		$("#styfrm").submit();
-	});
-	$("#cancle").on("click", function(){
-		$("#styfrm").attr("action", "<c:url value='/admin/stylist/management'/>");
-		$("#styfrm").submit();
-	});
+$(document).ready(function()　{
+
 });
 </script>
-
-<head>
 </head>
-
 <body>
 	<div class="container">
 		<div class="addstylistform">
-			<form id="styfrm">
-				<h2>スタイリスト追加</h2>
+			<form id="frm">
+				<h2>スタイリスト休暇追加</h2>
 				<p>
 					<span>スタイリストID</span>
 					<input type="text" id="title" name="STYLISTID" placeholder="STYLISTID">

@@ -8,13 +8,14 @@
     	SELECT * FROM MSTUSER WHERE USERID = #{userId} AND USERPASS=#{userPassword}
     </select>-->
     
-    <select id="login" parameterType="String">
+    <select id="login" resultType="UserVO" parameterType="String">
         SELECT * FROM MSTUSER WHERE USERID=#{USERID} AND USERPASS=#{USERPASS}
     </select>
-	<select id="findOne" resultType="UserVO" parameterType="String">
-		SELECT * FROM MSTUSER WHERE USERID = #{userId} AND USERPASS=#{userPassword}
-	</select>
-
+    
+    <select id="checkId" resultType="String" parameterType="String">
+        SELECT * FROM MSTUSER WHERE USERID=#{USERID}
+    </select>
+    
 	<insert id="addUser">
 		INSERT INTO MSTUSER VALUES
 		(#{USERID}, #{USERPASS}, #{USERNAME}, #{USERHURI}, #{USEREMAIL}, #{USERPHONE})

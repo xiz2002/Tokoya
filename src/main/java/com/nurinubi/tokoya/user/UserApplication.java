@@ -17,14 +17,6 @@ public class UserApplication implements UserRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Autowired
-	private SqlSession userlogin;
-
-	@Override
-	public List<UserVO> findOne(String username, String userpass) {
-		return this.userlogin.selectOne(username, userpass);
-	}
-
 	@Override
 	public void insertUser(Map<String, Object> map) throws Exception {
 		map.get("email1");
@@ -32,8 +24,13 @@ public class UserApplication implements UserRepository {
 	}
 
 	@Override
-	public void login(Map<String, Object> map) throws Exception {
-		this.sqlSession.insert("login", map);
+	public List<UserVO> login(Map<String, Object> map) throws Exception {
+		return this.sqlSession.selectList("login", map);
+	}
+
+	@Override
+	public List<UserVO> checkId(String id){
+		return this.sqlSession.selectList("checkId", id);
 	}
 	
 }

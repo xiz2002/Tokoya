@@ -20,13 +20,91 @@ package com.nurinubi.tokoya.reservation.domain;
 
 public class ReservationVO {
 	
+	private String userId;
+	private String userName;
+	private String courseId;
+	private String courseName;
+	private String coursePrice;
+	private String courseTime;
 	private String reservationId;
 	private String reservationDate;
+	private String reservationTime;
+	private String reservationDateTime;
 	private String reservationStatus;
-	private String courseId;
-	private String userId;
 	private String stylistId;
-	
+	private String stylistName;
+	/**
+	 * @return the userId
+	 */
+	public String getUserId() {
+		return userId;
+	}
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	/**
+	 * @return the userName
+	 */
+	public String getUserName() {
+		return userName;
+	}
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	/**
+	 * @return the courseId
+	 */
+	public String getCourseId() {
+		return courseId;
+	}
+	/**
+	 * @param courseId the courseId to set
+	 */
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
+	}
+	/**
+	 * @return the courseName
+	 */
+	public String getCourseName() {
+		return courseName;
+	}
+	/**
+	 * @param courseName the courseName to set
+	 */
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+	/**
+	 * @return the coursePrice
+	 */
+	public String getCoursePrice() {
+		return coursePrice;
+	}
+	/**
+	 * @param coursePrice the coursePrice to set
+	 */
+	public void setCoursePrice(String coursePrice) {
+		this.coursePrice = coursePrice;
+	}
+	/**
+	 * @return the courseTime
+	 */
+	public String getCourseTime() {
+		return courseTime;
+	}
+	/**
+	 * @param courseTime the courseTime to set
+	 */
+	public void setCourseTime(String courseTime) {
+		this.courseTime = courseTime;
+	}
 	/**
 	 * @return the reservationId
 	 */
@@ -52,6 +130,30 @@ public class ReservationVO {
 		this.reservationDate = reservationDate;
 	}
 	/**
+	 * @return the reservationTime
+	 */
+	public String getReservationTime() {
+		return reservationTime;
+	}
+	/**
+	 * @param reservationTime the reservationTime to set
+	 */
+	public void setReservationTime(String reservationTime) {
+		this.reservationTime = reservationTime;
+	}
+	/**
+	 * @return the reservationDateTime
+	 */
+	public String getReservationDateTime() {
+		return reservationDateTime;
+	}
+	/**
+	 * @param reservationDateTime the reservationDateTime to set
+	 */
+	public void setReservationDateTime(String reservationDateTime) {
+		this.reservationDateTime = reservationDateTime;
+	}
+	/**
 	 * @return the reservationStatus
 	 */
 	public String getReservationStatus() {
@@ -62,30 +164,6 @@ public class ReservationVO {
 	 */
 	public void setReservationStatus(String reservationStatus) {
 		this.reservationStatus = reservationStatus;
-	}
-	/**
-	 * @return the courseId
-	 */
-	public String getCourseId() {
-		return courseId;
-	}
-	/**
-	 * @param courseId the courseId to set
-	 */
-	public void setCourseId(String courseId) {
-		this.courseId = courseId;
-	}
-	/**
-	 * @return the userId
-	 */
-	public String getUserId() {
-		return userId;
-	}
-	/**
-	 * @param userId the userId to set
-	 */
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 	/**
 	 * @return the stylistId
@@ -99,27 +177,52 @@ public class ReservationVO {
 	public void setStylistId(String stylistId) {
 		this.stylistId = stylistId;
 	}
+	/**
+	 * @return the stylistName
+	 */
+	public String getStylistName() {
+		return stylistName;
+	}
+	/**
+	 * @param stylistName the stylistName to set
+	 */
+	public void setStylistName(String stylistName) {
+		this.stylistName = stylistName;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("ReservationVO [reservationId=");
+		builder.append("ReservationVO [userId=");
+		builder.append(userId);
+		builder.append(", userName=");
+		builder.append(userName);
+		builder.append(", courseId=");
+		builder.append(courseId);
+		builder.append(", courseName=");
+		builder.append(courseName);
+		builder.append(", coursePrice=");
+		builder.append(coursePrice);
+		builder.append(", courseTime=");
+		builder.append(courseTime);
+		builder.append(", reservationId=");
 		builder.append(reservationId);
 		builder.append(", reservationDate=");
 		builder.append(reservationDate);
+		builder.append(", reservationTime=");
+		builder.append(reservationTime);
+		builder.append(", reservationDateTime=");
+		builder.append(reservationDateTime);
 		builder.append(", reservationStatus=");
 		builder.append(reservationStatus);
-		builder.append(", courseId=");
-		builder.append(courseId);
-		builder.append(", userId=");
-		builder.append(userId);
 		builder.append(", stylistId=");
 		builder.append(stylistId);
+		builder.append(", stylistName=");
+		builder.append(stylistName);
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
 }

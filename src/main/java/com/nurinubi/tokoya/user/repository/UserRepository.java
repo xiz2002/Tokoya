@@ -11,10 +11,10 @@ import com.nurinubi.tokoya.user.domain.UserVO;
 public interface UserRepository {
 
 	//ログイン
-	void login(Map<String, Object> map) throws Exception;
-
-	List<UserVO> findOne(String username, String userpass);
+	List<UserVO> login(Map<String, Object> map) throws Exception;
 	
+	List<UserVO> checkId(String id);
+
 	void insertUser(Map<String, Object> map) throws Exception;
 
 }

@@ -18,7 +18,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java"
 	errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="<c:url value="/js/jquery-1.10.2.js" />"></script>
 <script src="<c:url value="/js/jquery-ui-1.10.4.custom.js" />"></script>
 <script src="<c:url value="/js/jquery.datetimepicker.full.js" />"></script>
@@ -67,17 +67,60 @@ $(function(){
 			success : function(data) {
 				console.log(data);
 				console.log(data.reservation);
-				$("#tb_rev").empty();
-				$("#div_rev").append('<table><tr><th><span>時間</span></th><c:forEach var="item" items="${stylist}"><th><span>${item.stylistName}</span></th></c:forEach><tr></table>');
+				cleanTd(data);
+				var data = JSON.stringify(data);
+				var obj = JSON.parse(data);
+				var time = ["09", "10", "11", "12", "13", "14", "15", "16", "17", "18"];
+				var status="";
+				for(var i in time){
+				for(var j in obj.stylist){
+				for(var k in obj.reservation){
+					if(obj.stylist[j].stylistName==obj.reservation[k].STYLISTNAME){
+						var id=time[i]+":00"+obj.stylist[j].stylistName;
+						if(time[i]==obj.reservation[k].RESERVATIONDATE.hours){
+							if(obj.reservation[k].RESERVATIONSTATUS==1){
+								document.getElementById(id).setAttribute("data-status", 1);
+								}
+							if(obj.reservation[k].RESERVATIONSTATUS==2){
+								document.getElementById(id).setAttribute("data-status", 2);	
+							}
+							if(obj.reservation[k].RESERVATIONSTATUS==3){
+								document.getElementById(id).setAttribute("data-status", 3);
+							}
+						}
+					}
+				}
+				}
+				}
 			}
 		});
 	});
 });
+function cleanTd(data){
+	var time = ["09", "10", "11", "12", "13", "14", "15", "16", "17", "18"];
+	var data = JSON.stringify(data);
+	var obj = JSON.parse(data);
+	for(var i in time){
+		for(var j in obj.stylist){
+			var id=time[i]+":00"+obj.stylist[j].stylistName;
+			document.getElementById(id).setAttribute("data-status", 0);
+		}
+	}
+}
 </script>
 <style>
 table, th, td {
 	border: 1px solid black;
 	border-collapse: collapse;
+}
+[data-status="1"] {
+background-color:red;
+}
+[data-status="2"] {
+background-color:skyblue;
+}
+[data-status="3"] {
+background-color:yellow;
 }
 </style>
 </head>
@@ -88,60 +131,59 @@ table, th, td {
 	<!-- side navigation -->
 	<%@include file="./inc/navi.jsp"%>
 	<!-- /side navigation -->
-	<c:forEach var="reList" items="${reservation }">
-		<c:set var="scTime"><fmt:formatDate value="${reList.RESERVATIONDATE}" type="time" pattern="HH:mm"/></c:set>
-	</c:forEach>
+	<div id="scTime">
+		<c:forEach var="reList" items="${reservation }">
+			<c:set var="scTime">
+				<fmt:formatDate value="${reList.RESERVATIONDATE}" type="time"
+					pattern="HH:mm" />
+			</c:set>
+		</c:forEach>
+	</div>
 	<div id="admin_body" style="float: left; border: 1px solid;">
 		<div>
 			<h3>予約状況</h3>
 		</div>
 		<div>
-			<input type="text" id="datetimepicker" />
-			<input type="button" id="search" value="Search">
+			<input type="text" id="datetimepicker" /> <input type="button"
+				id="search" value="Search">
+		</div>
+		<div>
+		<div style="margin-left:2px; float:left; background-color:red; width:10%;">&nbsp</div>
+		<div style="margin-left:2px; float:left; width:auto;"><span> : 予約</span></div>
+		<div style="margin-left:2px; float:left; background-color:skyblue; width:10%;">&nbsp</div>
+		<div style="margin-left:2px; float:left; width:auto;"><span> : 予約キャンセル</span></div>
+		<div style="margin-left:2px; float:left; background-color:yellow; width:10%;">&nbsp</div>
+		<div style="margin-left:2px; float:left; width:auto;"><span> : 予約終了</span></div>
 		</div>
 		<div id="div_rev">
-		<table id="tb_rev">
-			<tr>
-				<th><span>時間</span></th>
-				<c:forEach var="item" items="${stylist}">
-					<th><span>${item.stylistName}</span></th>
-				</c:forEach>
-			</tr>
-			<c:forEach var="item" items="${time}">
+			<table id="tb_rev">
 				<tr>
-					<td>
-						${item}
-					</td>
-					<c:forEach var="stList" items="${stylist}">
-					<c:forEach var="reList" items="${reservation}">
-					<c:if test="${stList.stylistName==reList.STYLISTNAME}">
-						<c:if test="${item==scTime}">
-						<td>
-							<c:choose>
-							 <c:when test="${reList.RESERVATIONSTATUS==1}">
-							 予約中
-							 </c:when>
-							 <c:when test="${reList.RESERVATIONSTATUS==2}">
-							 予約キャンセル
-							 </c:when>
-							 <c:when test="${reList.RESERVATIONSTATUS==3}">
-							 予約終了
-							 </c:when>
-							</c:choose>
-						</td>
-						</c:if>
-						<c:if test="${item!=scTime}">
-						<td></td>
-						</c:if>
-					</c:if>
-					<c:if test="${stList.stylistName!=reList.STYLISTNAME}">
-						<td></td>
-					</c:if>
-					</c:forEach>
+					<th><span>時間</span></th>
+					<c:forEach var="item" items="${stylist}">
+						<th><span>${item.stylistName}</span></th>
 					</c:forEach>
 				</tr>
-			</c:forEach>
-		</table>
+				<c:forEach var="item" items="${time}">
+					<tr>
+						<td>${item}</td>
+						<c:forEach var="stList" items="${stylist}">
+							<c:forEach var="reList" items="${reservation}">
+								<c:if test="${stList.stylistName==reList.STYLISTNAME}">
+									<c:if test="${item==scTime}">
+										<td id="${item}${stList.stylistName}" data-status="${reList.RESERVATIONSTATUS}">
+									</c:if>
+									<c:if test="${item!=scTime}">
+										<td id="${item}${stList.stylistName}" data-status="0"></td>
+									</c:if>
+								</c:if>
+								<c:if test="${stList.stylistName!=reList.STYLISTNAME}">
+									<td id="${item}${stList.stylistName}" data-status="0"></td>
+								</c:if>
+							</c:forEach>
+						</c:forEach>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
 	</div>
 </body>

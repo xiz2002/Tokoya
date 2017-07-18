@@ -29,7 +29,7 @@ $(document).ready(function(){
 });
 </script>
 <div id="div_write" style="float: left;">
-<form id="frm" method="GET">
+<form id="frm" method="POST">
 	<table id="tb_write" style="border:1px solid;">
 		<tr>
 			<td><label>タイトル</label></td>

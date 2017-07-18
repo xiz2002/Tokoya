@@ -1,13 +1,13 @@
 <!-- 
- * @Class Name : stylistmanagement.jsp
+ * @Class Name : stylistVacance.jsp
  * @Description : 
  * @
- * @	修正日			修正者		修正内容
+ * @	修正日				修正者			修正内容
  * @ 	---------		---------		-------------------------------
- * @ 	2017.07.12		山木雄矢		最初作成
+ * @ 	2017.07.17		Lee				最初作成
  * 
- * @author 山木雄矢
- * @since 2017.07.12
+ * @author Lee
+ * @since 2017
  * @version 0.1
  *
  *  Copyright (C) by NuriNubi All right reserved.

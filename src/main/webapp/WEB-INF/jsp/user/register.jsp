@@ -29,6 +29,9 @@
 		$("#cancle").on("click", function() {
 			location.assign("/home");
 		});
+		$("#id_check").on("click", function() {
+			checkId();
+		});
 	});
 	function setParam() {
 		var name;
@@ -48,6 +51,27 @@
 
 		return true;
 	}
+	function checkId(){
+		var id=$("#id_check").val();
+		$.ajax({
+			type:"POST",
+			dataType:"JSON",
+			data:{id:id},
+			url:"<c:url value='/checkId.do'/>",
+			error: function(data) {
+				console.log(data);
+				console.log("Error : " + Fail);
+			},
+			success : function(data) {
+				if(data=="true"){
+					alert("このIDが使えます。");
+				}else{
+					alert("このIDはもう存在しています。他のIDを入力してください。");
+					$("#userId").val("");
+				}
+			}
+			});
+		}
 </script>
 <body>
 	<div>
@@ -56,21 +80,21 @@
 				<tr>
 					<td><span>氏名</span></td>
 					<td><input type="text" placeholder="姓" class="userName"
-						id="last_name"></td>
-					<td><input type="text" placeholder="名" class="userName"
+						id="last_name"><input type="text" placeholder="名" class="userName"
 						id="first_name"></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td><span>氏名(フリガナ)</span></td>
 					<td><input type="text" placeholder="姓" class="userName"
-						id="huri_last_name"></td>
-					<td><input type="text" placeholder="名" class="userName"
+						id="huri_last_name"><input type="text" placeholder="名" class="userName"
 						id="huri_first_name"></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td><span>ユーザID</span></td>
-					<td><input type="text" name="USERID"></td>
-					<td><input type="button" value="check" id="id_check" /></td>
+					<td><input type="text" name="USERID" id="userId"><input type="button" value="check" id="id_check" /></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td><span>パスワード</span></td>
@@ -90,10 +114,9 @@
 				</tr>
 				<tr>
 					<td><span>Phone</span></td>
-					<td><input type="text" id="phone1" max="3" /> <span>-</span>
-						<input type="text" id="phone2" max="4" /> <span>-</span> <input
+					<td colspan="2"><input type="text" id="phone1" max="3" /><span>-</span>
+						<input type="text" id="phone2" max="4" /><span>-</span> <input
 						type="text" id="phone3" max="4" /></td>
-					<td></td>
 				</tr>
 			</table>
 			<input type="hidden" id="name" name="USERNAME" /> 

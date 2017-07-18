@@ -18,12 +18,40 @@
 <script src="<c:url value="/js/jquery-1.10.2.js"/>"></script>
 <script src="<c:url value="/js/jquery-ui-1.10.4.custom.js"/>"></script>
 <html>
+<style>
+.bt{
+float:left;
+}
+</style>
 <head>
-
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#reservationHistory").on("click", function() {
+		location.assign("/reservation/history");
+	});
+	$("#reservation").on("click", function() {
+		location.assign("/reservation/course");
+	});
+});
+$(function(){
+	console.log();
+});
+</script>
 	<title>Home</title>
 </head>
 <body>
+<input type="hidden" id="check" value="${check }">
+<input type="hidden" id="loginId" value="${loginId }">
+<input type="text" id="loginId" value="${loginId }">
 <%@include file="./inc/top.jsp"%>
+<div>
+<div class="bt">
+<input type="button" id="reservationHistory" value="予約履歴"></input>
+</div>
+<div>
+<input type="button" id="reservation" value="予約"></input>
+</div>
+</div>
 <%@include file="../board/board.jsp"%>
 </body>
 </html>
