@@ -10,8 +10,6 @@ import com.nurinubi.tokoya.admin.domain.StylistVO;
 
 @Mapper
 public interface AdminRepository {
-	List<Map<String, Object>> getReservationListByStylist(Map<String, Object> cmdMap) throws Exception;
-	
 
 	//スタイリスト一覧処理
 	List<StylistVO> getStylistList();

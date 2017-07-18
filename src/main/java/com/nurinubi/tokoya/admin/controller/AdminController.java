@@ -45,13 +45,6 @@ public class AdminController {
 	@Autowired
 	private ReservationRepository reservationRepository;
 	
-	/*@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public ModelAndView adminHome(Map<String, Object> cmdMap) throws Exception {
-		ModelAndView mv = new ModelAndView("admin/admin");
-		List<Map<String, Object>> result = adminRepository.getReservationListByStylist(cmdMap);
-		mv.addObject("result", result);
-		return mv;
-	}*/
 	@RequestMapping(value = "/admin", method = {RequestMethod.POST, RequestMethod.GET})
 	public String adminHome(Model model) throws Exception {
 		List<Map<String, Object>> reservation = reservationRepository.getReservationListByToday();
@@ -81,10 +74,10 @@ public class AdminController {
 	 * スタイリスト追加画面：デフォルト
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/stylist/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/stylist/add", method = RequestMethod.GET)
 	public String addStylist() {
-		
 		//表示するページ設定
+		System.out.println("=====================");
 		return "/admin/stylist/addStylist";
 	}
 	
@@ -132,7 +125,7 @@ public class AdminController {
 		logger.info("スタイリストの追加処理");
 		ModelAndView mv = new ModelAndView("/admin");
 		adminRepository.insertStylist(cmdMap.getMap());
-		mv.setViewName("redirect:/admin/stylist/management");
+		mv.setViewName("redirect:/admin");
 		return mv;
 	}
 }

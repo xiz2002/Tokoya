@@ -42,8 +42,8 @@ $(function(){
 <body>
 <input type="hidden" id="check" value="${check }">
 <input type="hidden" id="loginId" value="${loginId }">
-<input type="text" id="loginId" value="${loginId }">
 <%@include file="./inc/top.jsp"%>
+<div id="body" style="margin-left:500px;">
 <div>
 <div class="bt">
 <input type="button" id="reservationHistory" value="予約履歴"></input>
@@ -53,5 +53,7 @@ $(function(){
 </div>
 </div>
 <%@include file="../board/board.jsp"%>
+</div>
 </body>
+
 </html>

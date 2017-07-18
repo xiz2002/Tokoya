@@ -14,6 +14,7 @@
 	WHERE a.RESERVATIONDATE > DATE_FORMAT(NOW(), '%Y%m%d') 
     AND 
     RESERVATIONDATE < DATE_FORMAT(Date_Add(NOW(), INTERVAL+1 DAY), '%Y%m%d') 
+    ORDER BY a.RESERVATIONDATE
     ]]>
 	</select>
 	

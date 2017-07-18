@@ -29,10 +29,4 @@ public class AdminApplication implements AdminRepository {
 	public void insertStylist(Map<String, Object> map) {
 		this.sqlSession.insert("addStylist", map);
 		}
-	
-	@Override
-	public List<Map<String, Object>> getReservationListByStylist(Map<String, Object> cmdMap) throws Exception {
-		return this.sqlSession.selectList("getReservationListByStylist", cmdMap);
-	}
-	
 }
