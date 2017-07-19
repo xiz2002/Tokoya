@@ -11,5 +11,7 @@ import com.nurinubi.tokoya.board.domain.BoardVO;
 public interface BoardRepository {
 	List<BoardVO> getBoardList();
 	
+	List<BoardVO> getBoardByNoticeId(String id);
+	
 	void insertBoard(Map<String, Object> map) throws Exception;
 }

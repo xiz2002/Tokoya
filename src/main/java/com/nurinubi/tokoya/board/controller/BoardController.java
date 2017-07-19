@@ -1,8 +1,8 @@
 package com.nurinubi.tokoya.board.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.nurinubi.tokoya.board.domain.BoardVO;
 import com.nurinubi.tokoya.board.repository.BoardRepository;
 import com.nurinubi.tokoya.common.CommandMap;
 
@@ -69,7 +70,8 @@ public class BoardController {
 	public ModelAndView boardView(@RequestParam String id) {
 		ModelAndView mav = new ModelAndView(); 
 		System.out.println(id);
-		Map<String, Object> result = new HashedMap();
+		List<BoardVO> result = boardRepository.getBoardByNoticeId(id);
+		mav.setViewName("/board/view");
 		mav.addObject("result", result);
 		return mav;
 	}

@@ -42,7 +42,6 @@ public class UserApplication implements UserRepository {
 	public String checkId(String id){
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("id", id);
-		System.out.println(id);
 		return this.sqlSession.selectOne("checkId", param);
 	}
 	
