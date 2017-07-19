@@ -20,12 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-<<<<<<< HEAD
-=======
-import com.nurinubi.tokoya.admin.repository.AdminRepository;
-import com.nurinubi.tokoya.common.CommandMap;
-import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
->>>>>>> 9d5289b8de3a17c111fb93c65e39673eabf23386
 
 /**
 * @Class Name : AdminController.java.java
