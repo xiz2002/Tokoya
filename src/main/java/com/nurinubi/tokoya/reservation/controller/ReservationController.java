@@ -117,9 +117,9 @@ public class ReservationController {
 	}
 	
 	/** 予約履歴　*/
-	@RequestMapping(value = "/reservation/userHistory", method = RequestMethod.GET)
 	//　臨時ログイン処理し
 	//public ModelAndView revHistoryView(@ModelAttribute("CommonVO") CommonVO cDomain) throws Exception {
+	@RequestMapping(value = "/reservation/userHistory", method = RequestMethod.GET)
 	public ModelAndView revHistoryView(@ModelAttribute("ReservationVO") ReservationVO rDomain) throws Exception {	
 		logger.info("======================================revHistoryViewStart===================================");
 		ModelAndView mav = new ModelAndView();
@@ -127,5 +127,16 @@ public class ReservationController {
 		mav.setViewName("reservation/userHistory");
 		logger.info("======================================revHistoryViewEnd=====================================");
 		return mav;
-	}	
+	}
+	
+	@RequestMapping(value = "/reservation/userCancel", method = RequestMethod.POST)
+	public ModelAndView revCancel(@ModelAttribute("ReservationVO") ReservationVO rDomain) throws Exception {	
+		logger.info("======================================revCancelStart===================================");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("rtn", ReservationRepository.setReserveCancel(rDomain));
+		mav.setViewName("redirect:/reservation/userHistory");
+		logger.info("======================================revCancelEnd=====================================");
+		return mav;
+	}
+	
 }

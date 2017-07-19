@@ -144,7 +144,7 @@
 	<select id="getReserveHistory" parameterType="ReservationVO" resultType="ReservationVO">
 	<![CDATA[
 		SELECT 
-			a.RESERVATIONID as RESERVATIONID,
+			LPAD(a.RESERVATIONID,6,0) as RESERVATIONID,
 			SUBSTR(a.RESERVATIONDATE,1,16 ) as RESERVATIONDATE,
 			a.RESERVATIONSTATUS as RESERVATIONSTATUS,
 			b.COURSENAME as COURSENAME,
@@ -162,6 +162,21 @@
 			MSTSTYLIST d ON d.STYLISTID = a.STYLISTID
 		WHERE
 			a.USERID = #{userId}
+		ORDER BY 
+			RESERVATIONID DESC
 	]]>
 	</select>
+	
+	<update id="setReserveCancel" parameterType="ReservationVO">
+	<![CDATA[
+		UPDATE 
+			TRNRESERVATION 
+		SET
+			RESERVATIONSTATUS = '2'
+		WHERE
+			USERID = #{userId}
+		AND
+			RESERVATIONID = #{reservationId}
+	]]>
+	</update>
 </mapper>
