@@ -18,6 +18,8 @@ import com.nurinubi.tokoya.reservation.domain.ReservationVO;
  * @		修正日			修正者			修正内容
  * @ 	---------		---------		-------------------------------
  * @ 	2017. 7. 14.		李　多　浩			最初作成
+ * 		2017. 7. 16.		李　多　浩			getStaffList追加
+ * 		2017. 7. 18		李　多　浩			getReserveHistory追加
  * 
  * @author 李　多　浩
  * @since 2017
@@ -44,4 +46,5 @@ public interface ReservationRepository {
 	
 	List<ReservationVO> getReserveHistory(ReservationVO rDomain);
 	
+	int setReserveCancel(ReservationVO rDomain);
 }
