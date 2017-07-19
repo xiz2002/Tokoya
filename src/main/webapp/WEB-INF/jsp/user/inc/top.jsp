@@ -9,7 +9,7 @@ $(function(){
 });
 </script>
 <div>
-	<div style="text-align: center;">ユーザーホーム</div>
+	<div style="text-align: center;"><a href="/home">ユーザーホーム</a></div>
 	<div style="text-align: right;">
 		<div>ようこそ
 		<span id="userId"></span> 

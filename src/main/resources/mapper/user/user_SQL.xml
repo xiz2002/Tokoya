@@ -8,12 +8,16 @@
     	SELECT * FROM MSTUSER WHERE USERID = #{userId} AND USERPASS=#{userPassword}
     </select>-->
     
-    <select id="login" resultType="UserVO" parameterType="String">
-        SELECT * FROM MSTUSER WHERE USERID=#{USERID} AND USERPASS=#{USERPASS}
+    <select id="login" resultType="String">
+        SELECT COUNT(*) FROM MSTUSER WHERE USERID=#{id} AND USERPASS=#{pass}
     </select>
     
-    <select id="checkId" resultType="String" parameterType="String">
-        SELECT * FROM MSTUSER WHERE USERID=#{USERID}
+     <select id="loginAdmin" resultType="String">
+        SELECT COUNT(*) FROM MSTADMIN WHERE ADMINID=#{id} AND ADMINPASS=#{pass}
+    </select>
+    
+    <select id="checkId" resultType="String">
+        SELECT COUNT(*) FROM MSTUSER WHERE USERID = #{id}
     </select>
     
 	<insert id="addUser">

@@ -57,8 +57,7 @@
 						"click",
 						function() {
 							var date = $("#datetimepicker").val();
-							$
-									.ajax({
+							$.ajax({
 										type : "POST",
 										dataType : "JSON",
 										data : {
@@ -152,12 +151,8 @@ table, th, td {
 </style>
 </head>
 <body>
-	<!-- top navigation -->
 	<%@include file="./inc/top.jsp"%>
-	<!-- /top navigation -->
-	<!-- side navigation -->
 	<%@include file="./inc/navi.jsp"%>
-	<!-- /side navigation -->
 	<div id="scTime"></div>
 	<div id="admin_body" style="float: left; border: 1px solid;">
 		<div>

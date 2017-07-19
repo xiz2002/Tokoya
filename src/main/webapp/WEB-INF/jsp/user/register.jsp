@@ -52,7 +52,7 @@
 		return true;
 	}
 	function checkId() {
-		var id = $("#id_check").val();
+		var id = $("#userId").val();
 		$.ajax({
 			type : "POST",
 			dataType : "JSON",
@@ -70,18 +70,26 @@
 				if (obj.result == "true") {
 					alert("このIDが使えます。");
 				}
-				if (obj.result == "false") {
-					alert("このIDが使えます。");
-				}
-				{
+				else if (obj.result == "false") {
 					alert("このIDはもう存在しています。他のIDを入力してください。");
-					$("#userId").val("");
 				}
 			}
 		});
 	}
 </script>
+<style>
+.phone{
+width:50px;
+}
+
+.userName, .email, #userId, .pass{
+width:100px;
+}
+</style>
+
 <body>
+<%@include file="./inc/top.jsp"%>
+<div id="body" style="margin-left:450px;">
 	<div>
 		<form id="frm" method="POST">
 			<table class="ta_register" style="border: 1px solid;">
@@ -107,25 +115,25 @@
 				</tr>
 				<tr>
 					<td><span>パスワード</span></td>
-					<td><input type="password" id="pass" name="USERPASS"></td>
+					<td><input type="password" id="pass" class="pass" name="USERPASS"></td>
 					<td><span style="color: red;">＊6文字以上半角英数字</span></td>
 				</tr>
 				<tr>
 					<td><span>パスワードチェック</span></td>
-					<td><input type="password" id="pass_check"></td>
+					<td><input type="password" class="pass" id="pass_check"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td><span>Email</span></td>
-					<td><input type="text" id="email1" /> <span>@</span> <input
-						type="text" id="email2" /></td>
+					<td><input class="email" type="text" id="email1" /> <span>@</span> 
+					<input class="email" type="text" id="email2" /></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td><span>Phone</span></td>
-					<td colspan="2"><input type="text" id="phone1" max="3" /><span>-</span>
-						<input type="text" id="phone2" max="4" /><span>-</span> <input
-						type="text" id="phone3" max="4" /></td>
+					<td colspan="2"><input class="phone" type="text" id="phone1" max="3" /><span>-</span>
+						<input class="phone" type="text" id="phone2" max="4" /><span>-</span> 
+						<input class="phone" type="text" id="phone3" max="4" /></td>
 				</tr>
 			</table>
 			<input type="hidden" id="name" name="USERNAME" /> <input
@@ -138,6 +146,6 @@
 				type="button" value="取り消し" id="cancle">
 		</div>
 	</div>
-
+</div>
 </body>
 </html>

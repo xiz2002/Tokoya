@@ -11,9 +11,9 @@ import com.nurinubi.tokoya.user.domain.UserVO;
 public interface UserRepository {
 
 	//ログイン
-	List<UserVO> login(Map<String, Object> map) throws Exception;
+	String login(String id, String pass, String mode) throws Exception;
 	
-	List<UserVO> checkId(String id);
+	String checkId(String id);
 
 	void insertUser(Map<String, Object> map) throws Exception;
 

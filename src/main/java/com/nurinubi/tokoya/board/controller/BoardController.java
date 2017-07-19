@@ -2,6 +2,9 @@ package com.nurinubi.tokoya.board.controller;
 
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
+
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.nurinubi.tokoya.board.repository.BoardRepository;
 import com.nurinubi.tokoya.common.CommandMap;
 
@@ -60,8 +66,11 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/board/view", method = RequestMethod.GET)
-	public String boardView(Locale locale, Model model) {
-
-		return "/board/view";
+	public ModelAndView boardView(@RequestParam String id) {
+		ModelAndView mav = new ModelAndView(); 
+		System.out.println(id);
+		Map<String, Object> result = new HashedMap();
+		mav.addObject("result", result);
+		return mav;
 	}
 }

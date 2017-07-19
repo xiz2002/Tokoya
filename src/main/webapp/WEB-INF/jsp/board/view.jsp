@@ -29,9 +29,9 @@
 
 お客様にはご迷惑をおかけしておりますことをお詫びいたします。</div>
 
-<button type="submit" name="login">←</button>
-<button type="submit" name="login">ホームに戻る</button>
-<button type="submit" name="login">→</button>
+<input type="button" id="prev">←</button>
+<input type="button" id="home">ホームに戻る</button>
+<input type="button" id="list">→</button>
 </body>
 
 </html>

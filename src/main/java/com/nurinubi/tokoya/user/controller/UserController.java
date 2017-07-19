@@ -78,42 +78,39 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public ModelAndView Loginaction(CommandMap cmdMap, Model model) throws Exception {
-		String paramId = cmdMap.get("USERID").toString();
-		String paramPass = cmdMap.get("USERPASS").toString();
-		List<UserVO> result = userRepository.login(cmdMap.getMap());
-		if (result.size() != 0) {
-				ModelAndView mv = new ModelAndView();
-				mv.addObject("check", 2);
-				mv.addObject("loginId", result.get(0).getUserId());
-				//model.addAttribute("check", "2");
-				//model.addAttribute("loginId", result.get(0).getUserId());
-				RedirectView rv = new RedirectView("/home");
-				rv.setExposeModelAttributes(false);
-				mv.setView(rv);
-				return mv;
+	public ModelAndView Loginaction(@RequestParam String id, @RequestParam String pass) throws Exception {
+		
+		String result = "error";
+		result = userRepository.login(id, pass, "step1");
+		if(result.equals("1"))
+		{
+			result="user";
+		} else if(result.equals("0")){
+			result = userRepository.login(id, pass, "step2");
+			if(result.equals("1")) {
+				result="admin";
+			}else if(result.equals("0")) {
+				result="new";
+			}
 		}
-		if (result.size() == 0&&paramId.equals("admin")&&paramPass.equals("p@ssw0rd")) {
-			model.addAttribute("ckeck", 1);
-			model.addAttribute("loginId", "admin");
-			RedirectView rv = new RedirectView("/admin");
-			rv.setExposeModelAttributes(false);
-			return new ModelAndView(rv);
-		}else {
-			RedirectView rv = new RedirectView("/register");
-			rv.setExposeModelAttributes(false);
-			return new ModelAndView(rv);
-		} 
+		ModelAndView mav = new ModelAndView(); 
+		mav.addObject("data", result);
+		mav.addObject("id", id);
+		mav.setViewName("jsonView");
+		return mav;
 	}
 	@RequestMapping(value = "/checkId.do", method = RequestMethod.POST)
 	public ModelAndView checkId(@RequestParam String id) {
 		ModelAndView mav = new ModelAndView(); 
-		List<UserVO> result = userRepository.checkId(id);
-		if(result.size()==0) {
-			mav.addObject("result", "true");
-		}else {
-			mav.addObject("result", "false");
+		String result = "error";
+		result = userRepository.checkId(id);
+		System.out.println("=============="+result);
+		if(result.equals("0")) {
+			result = "true";
+		}else if(result.equals("1")){
+			result = "false";
 		}
+		mav.addObject("result", result);
 		mav.setViewName("jsonView");
 		return mav;
 	}

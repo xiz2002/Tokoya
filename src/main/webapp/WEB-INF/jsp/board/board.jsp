@@ -128,7 +128,7 @@ table, th, td {
 			<c:forEach var="item" items="${result}">
 				<tr>
 					<td>${item.noticeId }</td>
-					<td><a href="#">${item.noticeTitle }</a></td>
+					<td><a href="<c:url value='/board/view?id=${item.noticeId }'/>">${item.noticeTitle }</a></td>
 					<td><fmt:formatDate value="${item.registerDate }" type="time"
 							pattern="yyyy/MM/dd" /></td>
 					<td></td>
