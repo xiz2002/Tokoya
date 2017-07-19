@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  -->
 
 <mapper namespace="com.nurinubi.tokoya.admin.repository.AdminRepository">
 	<!-- スタイリスト一覧 -->
@@ -13,4 +14,36 @@
         VALUES (#{STYLISTID}, #{STYLISTNAME})
     </insert>
     
+    <!-- スタイリスト追加 -->
+    <!-- 휴가정보 -->
+    <select id="getStyVaList" resultType="Map">
+    		SELECT 
+			OFFDATE 
+		FROM 
+			TRNSTYLISTSCHEDULE 
+		<!--WHERE 
+			STYLISTID = #{stylistId}
+		-->
+    <!-- 
+		SELECT 
+			DISTINCT(DATE(OFFDATE)) AS OFFDATE 
+		FROM 
+			TRNSTYLISTSCHEDULE 
+		WHERE 
+ 	<![CDATA[DATE(OFFDATE) > DATE(NOW());]]>
+		AND   
+			STYLISTID = #{stylistId}-->
+	</select>
+	
+	<!-- 예약정보 -->
+	<select id="getStyReList" resultType="Map">
+		SELECT 
+			DISTINCT(DATE(RESERVATIONDATE)) AS REVDATE
+		FROM 
+			TRNRESERVATION 
+		WHERE 
+			STYLISTID = #{stylistId}
+		AND
+	<![CDATA[DATE(RESERVATIONDATE) > DATE(NOW());]]>
+	</select>
 </mapper>

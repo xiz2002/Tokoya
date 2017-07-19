@@ -2,37 +2,34 @@ package com.nurinubi.tokoya.admin.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
 import com.nurinubi.tokoya.common.CommandMap;
 import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
-import com.nurinubi.tokoya.admin.repository.AdminRepository;
-import com.nurinubi.tokoya.sample.repository.SampleRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
 * @Class Name : AdminController.java.java
 * @Description :  BoardController.java Class
 * @Modification Information
 * @ 
-* @	修正日			修正者		修正内容
+* @	修正日			修正者			修正内容
 * @ 	---------		---------		-------------------------------
-* @ 	2017.07.12		Kim		最初作成
-* 
+* @ 	2017.07.12		Kim				最初作成
+* @         17		Lee				getStylistForVacation 追加 
 * @author Kim
 * @since 2017.07.12
 * @version 0.1
@@ -67,7 +64,6 @@ public class AdminController {
 		System.out.println(model);
 		return "/admin/admin";
 	}
-	
 	
 	@RequestMapping(value = "/searchReservation.do", method = RequestMethod.POST)
 	public ModelAndView serchReservation(@RequestParam String param) throws Exception {
@@ -108,6 +104,7 @@ public class AdminController {
 		//表示するページ設定
 		return "/admin/stylist/management";
 	}
+	
 	/**
 	 * スタイリスト管理画面：追加画面遷移
 	 * @return
@@ -141,5 +138,35 @@ public class AdminController {
 		adminRepository.insertStylist(cmdMap.getMap());
 		mv.setViewName("redirect:/admin/stylist/management");
 		return mv;
+	}
+	
+	/**
+	 * スタイリスト休暇追加
+	 * @return ModelAndView mav
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/admin/stylist/addSchedule", method = RequestMethod.GET)
+	public ModelAndView getVacationSetStylist() throws Exception {
+		logger.info("====================================getStylistForVacationStart======================================");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result", adminRepository.getStylistList());
+		mav.setViewName("admin/stylist/addSchedule");
+		logger.info("====================================getStylistForVacationEnd--======================================");
+		return mav;
+	}
+	
+	/**
+	 * スタイリスト休暇追加
+	 * @return ModelAndView mav
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/admin/stylist/getStyBusyDate", method = RequestMethod.POST)
+	public ModelAndView getStyBusyDate(@RequestParam Map<String, Object> commandMap) throws Exception {
+		logger.info("====================================getStyBusyDateStart======================================");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result", adminRepository.getStyBusyDate(commandMap));
+		mav.setViewName("jsonView");
+		logger.info("====================================getStyBusyDateEnd--======================================");
+		return mav;
 	}
 }
