@@ -18,8 +18,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <head>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<c:url value="/js/jquery-1.10.2.js"/>"></script>
-<script src="<c:url value="/js/jquery-ui-1.10.4.custom.js"/>"></script>
 </head>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -32,6 +33,7 @@
 		$("#login").on("click", function() {
 				var id = $("#id").val();
 				var pass = $("#pass").val();
+				console.log("ddddd");
 				$.ajax({
 					type : "POST",
 					dataType : "JSON",
@@ -62,7 +64,6 @@
 </script>
 </head>
 <body>
-<%@include file="./inc/top.jsp"%>
 <div id="body" style="margin-left:500px;">
 	<h2>ログイン</h2>
 	<div class="container">
