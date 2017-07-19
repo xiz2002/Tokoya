@@ -88,6 +88,7 @@ public class ReservationApplication implements ReservationRepository {
 		Integer i = sqlSession.selectOne("getReservCount");
 		i = new Integer(i.intValue() + 1);
 		String s = ""+i;
+		logger.info(s);
 		rDomain.setReservationId(s);
 		int rtn = this.sqlSession.insert("setReserveInfo", rDomain);
 		logger.info("======================================setReserveApplicationEnd=====================================");

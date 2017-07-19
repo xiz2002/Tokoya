@@ -118,7 +118,7 @@
     </select>
     
 	<select id="getReservCount" resultType="java.lang.Integer">
-		SELECT MAX(RESERVATIONID) AS CNT FROM TRNRESERVATION;
+		SELECT MAX(LPAD(RESERVATIONID,6,0)) as RESERVATIONID FROM TRNRESERVATION;
 	</select> 
     
 	<insert id="setReserveInfo" parameterType="ReservationVO">
