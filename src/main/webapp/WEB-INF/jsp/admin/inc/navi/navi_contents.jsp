@@ -5,6 +5,7 @@ function clickMenu(num){
 	if(num==1){
 		console.log(num);
 		$("#admin_body").load("/admin/board");
+		history.pushState(null,null,"/admin/board");
 	}
 	if(num==2){
 		console.log(num);

@@ -8,13 +8,18 @@
     	SELECT * FROM MSTUSER WHERE USERID = #{userId} AND USERPASS=#{userPassword}
     </select>-->
     
-    <select id="login" parameterType="String">
-        SELECT * FROM MSTUSER WHERE USERID=#{USERID} AND USERPASS=#{USERPASS}
+    <select id="login" resultType="String">
+        SELECT COUNT(*) FROM MSTUSER WHERE USERID=#{id} AND USERPASS=#{pass}
     </select>
-	<select id="findOne" resultType="UserVO" parameterType="String">
-		SELECT * FROM MSTUSER WHERE USERID = #{userId} AND USERPASS=#{userPassword}
-	</select>
-
+    
+     <select id="loginAdmin" resultType="String">
+        SELECT COUNT(*) FROM MSTADMIN WHERE ADMINID=#{id} AND ADMINPASS=#{pass}
+    </select>
+    
+    <select id="checkId" resultType="String">
+        SELECT COUNT(*) FROM MSTUSER WHERE USERID = #{id}
+    </select>
+    
 	<insert id="addUser">
 		INSERT INTO MSTUSER VALUES
 		(#{USERID}, #{USERPASS}, #{USERNAME}, #{USERHURI}, #{USEREMAIL}, #{USERPHONE})

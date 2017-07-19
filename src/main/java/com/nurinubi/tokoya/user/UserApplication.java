@@ -1,5 +1,6 @@
 package com.nurinubi.tokoya.user;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,14 +18,6 @@ public class UserApplication implements UserRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Autowired
-	private SqlSession userlogin;
-
-	@Override
-	public List<UserVO> findOne(String username, String userpass) {
-		return this.userlogin.selectOne(username, userpass);
-	}
-
 	@Override
 	public void insertUser(Map<String, Object> map) throws Exception {
 		map.get("email1");
@@ -32,8 +25,24 @@ public class UserApplication implements UserRepository {
 	}
 
 	@Override
-	public void login(Map<String, Object> map) throws Exception {
-		this.sqlSession.insert("login", map);
+	public String login(String id, String pass, String mode) throws Exception {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		param.put("pass", pass);
+		if(mode.equals("step1")) {
+			return this.sqlSession.selectOne("login", param);
+		}else if (mode.equals("step2")) {
+			return this.sqlSession.selectOne("loginAdmin", param);
+		}else {
+			return "error";
+		}
+	}
+
+	@Override
+	public String checkId(String id){
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		return this.sqlSession.selectOne("checkId", param);
 	}
 	
 }

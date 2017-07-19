@@ -20,7 +20,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#write").on("click", function(){
+	$("#stylistadd").on("click", function(){
 		$("#styfrm").attr("action", "<c:url value='/admin/stylist/insertWrite.do'/>");
 		$("#styfrm").submit();
 	});
@@ -37,7 +37,7 @@ $(document).ready(function(){
 <body>
 	<div class="container">
 		<div class="addstylistform">
-			<form id="styfrm">
+			<form id="styfrm" method="POST">
 				<h2>スタイリスト追加</h2>
 				<p>
 					<span>スタイリストID</span>
@@ -49,7 +49,7 @@ $(document).ready(function(){
 				</p>
 				<!-- 各種ボタン -->
 			</form>
-			<button type="submit" name="stylistadd">追加</button>
+			<button type="submit" id="stylistadd" name="stylistadd">追加</button>
 			<button type="submit" name="cansel">キャンセル</button>
 			<!-- /page content -->
 			<!-- footer -->

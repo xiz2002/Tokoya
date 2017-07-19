@@ -1,11 +1,10 @@
 package com.nurinubi.tokoya.board.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.nurinubi.tokoya.board.domain.BoardVO;
 import com.nurinubi.tokoya.board.repository.BoardRepository;
 import com.nurinubi.tokoya.common.CommandMap;
 
@@ -43,6 +45,7 @@ public class BoardController {
 	public String listBoard(Model model) throws Exception {
 		logger.info("お知らせのホーム画面(ユーザー)");
 		model.addAttribute("result", boardRepository.getBoardList());
+		model.addAttribute("total", boardRepository.getBoardList().size());
 		return "/board/board";
 	}
 
@@ -64,8 +67,12 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/board/view", method = RequestMethod.GET)
-	public String boardView(Locale locale, Model model) {
-
-		return "/board/view";
+	public ModelAndView boardView(@RequestParam String id) {
+		ModelAndView mav = new ModelAndView(); 
+		System.out.println(id);
+		List<BoardVO> result = boardRepository.getBoardByNoticeId(id);
+		mav.setViewName("/board/view");
+		mav.addObject("result", result);
+		return mav;
 	}
 }

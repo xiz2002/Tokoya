@@ -20,6 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+<<<<<<< HEAD
+=======
+import com.nurinubi.tokoya.admin.repository.AdminRepository;
+import com.nurinubi.tokoya.common.CommandMap;
+import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
+>>>>>>> 9d5289b8de3a17c111fb93c65e39673eabf23386
 
 /**
 * @Class Name : AdminController.java.java
@@ -48,14 +54,7 @@ public class AdminController {
 	@Autowired
 	private ReservationRepository reservationRepository;
 	
-	/*@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public ModelAndView adminHome(Map<String, Object> cmdMap) throws Exception {
-		ModelAndView mv = new ModelAndView("admin/admin");
-		List<Map<String, Object>> result = adminRepository.getReservationListByStylist(cmdMap);
-		mv.addObject("result", result);
-		return mv;
-	}*/
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin", method = {RequestMethod.POST, RequestMethod.GET})
 	public String adminHome(Model model) throws Exception {
 		List<Map<String, Object>> reservation = reservationRepository.getReservationListByToday();
 		model.addAttribute("reservation", reservation);
@@ -86,8 +85,8 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/admin/stylist/add", method = RequestMethod.GET)
 	public String addStylist() {
-		
 		//表示するページ設定
+		System.out.println("=====================");
 		return "/admin/stylist/addStylist";
 	}
 	
@@ -109,7 +108,7 @@ public class AdminController {
 	 * スタイリスト管理画面：追加画面遷移
 	 * @return
 	 */
-	@RequestMapping(value = "/stylistinsert", method = RequestMethod.GET, params = "stylistinsert")
+	@RequestMapping(value = "/stylistinsert", method = RequestMethod.POST, params = "stylistinsert")
 	public String stylistinsert() {
 		logger.info("addStylist");
 		
@@ -121,7 +120,7 @@ public class AdminController {
 	 * スタイリスト追加画面：管理画面遷移
 	 * @return
 	 */
-	@RequestMapping(value = "/addstylistform", method = RequestMethod.GET, params = "cansel")
+	@RequestMapping(value = "/addstylistform", method = RequestMethod.POST, params = "cansel")
 	public String stylistadd() {
 		logger.info("addStylist");
 		
@@ -130,13 +129,13 @@ public class AdminController {
 	}
 	
 	// スタイリストの追加処理
-	@RequestMapping(value = "/admin/stylist/insertWrite.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/stylist/insertWrite.do", method = RequestMethod.POST)
 	public ModelAndView insertWrite(CommandMap cmdMap)
 			throws Exception {
 		logger.info("スタイリストの追加処理");
 		ModelAndView mv = new ModelAndView("/admin");
 		adminRepository.insertStylist(cmdMap.getMap());
-		mv.setViewName("redirect:/admin/stylist/management");
+		mv.setViewName("redirect:/admin");
 		return mv;
 	}
 	

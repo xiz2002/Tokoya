@@ -1,5 +1,6 @@
 package com.nurinubi.tokoya.board;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,4 +25,12 @@ public class BoardApplication implements BoardRepository {
 	public void insertBoard(Map<String, Object> map) {
 		this.sqlSession.insert("addBoardList", map);
 		}
+	
+	@Override
+	public List<BoardVO> getBoardByNoticeId(String id) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		return this.sqlSession.selectList("getBoardByNoticeId", id);
+	}
+	
 }

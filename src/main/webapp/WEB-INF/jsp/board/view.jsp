@@ -14,7 +14,7 @@
  * -->
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false" %>
 <html>
 <head>
@@ -28,10 +28,17 @@
 <div class="news__detail__wrapper">
 
 お客様にはご迷惑をおかけしておりますことをお詫びいたします。</div>
-
-<button type="submit" name="login">←</button>
-<button type="submit" name="login">ホームに戻る</button>
-<button type="submit" name="login">→</button>
+<div>
+<c:forEach var="item" items="${result }">
+NoticeId : ${item.noticeId } <br/>
+タイトル : ${item.noticeTitle } <br/>
+内容 : ${item.noticeBody } <br/>
+登録日　：　<fmt:formatDate value="${item.registerDate }" type="time" pattern="yyyy-MM-dd" /> <br/>
+</c:forEach>
+</div>
+<input type="button" id="prev">←</button>
+<input type="button" id="home">ホームに戻る</button>
+<input type="button" id="list">→</button>
 </body>
 
 </html>

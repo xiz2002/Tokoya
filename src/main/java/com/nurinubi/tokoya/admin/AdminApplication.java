@@ -45,6 +45,7 @@ public class AdminApplication implements AdminRepository {
 	@Override
 	public void insertStylist(Map<String, Object> map) {
 		this.sqlSession.insert("addStylist", map);
+<<<<<<< HEAD
 	}
 
 	@Override
@@ -60,4 +61,7 @@ public class AdminApplication implements AdminRepository {
 		return null;
 	}
 	
+=======
+		}
+>>>>>>> 9d5289b8de3a17c111fb93c65e39673eabf23386
 }
