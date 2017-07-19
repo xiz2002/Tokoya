@@ -24,7 +24,9 @@ import org.springframework.stereotype.Repository;
  * @		修正日			修正者			修正内容
  * @ 	---------		---------		-------------------------------
  * @ 	2017. 7. 14.		李　多　浩			最初作成
- * 		2017. 7. 16.		李　多　浩			getStaffListなどを追加
+ * 		2017. 7. 16.		李　多　浩			getStaffList追加
+ * 		2017. 7. 18		李　多　浩			getReserveHistory追加
+ * 
  * @author 李　多　浩
  * @since 2017
  * @version 0.1
@@ -115,5 +117,17 @@ public class ReservationApplication implements ReservationRepository {
 		logger.info(rDomain.toString());
 		logger.info("======================================getReserveHistoryEnd=========================================");
 		return this.sqlSession.selectList("getReserveHistory", rDomain);
+	}
+	
+	@Override
+	public int setReserveCancel(ReservationVO rDomain) {
+		logger.info("======================================setReserveCancelStart=======================================");
+		/** 임시 */
+		rDomain.setUserId("User2");
+		/** */
+		logger.info(rDomain.toString());
+		logger.info("======================================setReserveCancelEnd=========================================");
+		return this.sqlSession.update("setReserveCancel", rDomain);
+//		return null;
 	}
 }
