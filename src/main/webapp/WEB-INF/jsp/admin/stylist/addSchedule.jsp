@@ -17,26 +17,84 @@
 <!DOCTYPE>
 <html>
 <head>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>" />
+<link rel="stylesheet" href="<c:url value="/css/jquery-ui-1.10.4.custom.css"/>" />
+<style>
+	fieldset {
+		border: 0;
+	}
+	label {
+		display: block;
+		margin: 30px 0 0 0;
+	}
+	.overflow {
+		height: 200px;
+	}
+</style>
+<style>
+.left-box {
+	background: #FFFFFF;
+	float: left;
+	width: 50%;
+}
+.right-box {
+	background: #FFFFFF;
+	float: right;
+	width: 50%;
+}
+</style>
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 <script type="text/javascript">
-$(document).ready(function()　{
-
-});
+	$(document).ready(function() {
+		$( function() {
+			$( "#styList" ).selectmenu({
+				change: function(event, data) {
+					var styid = $("#styList").val();
+					console.log(styid);
+					$.ajax({
+						type:"POST",
+						url:"<c:url value='/admin/stylist/getStyBusyDate'/>",
+						data : { stylistId : styid },
+						dataType : "json",
+						error: function(data) {
+							
+						},
+						success : function(data) {
+						
+						}
+					});
+				}
+			})
+		})
+		
+		$( function() {
+			$( "#datepicker" ).datepicker();
+		});
+	});
 </script>
 </head>
 <body>
 	<div class="container">
 		<div class="addstylistform">
 			<form id="frm">
-				<h2>スタイリスト休暇追加</h2>
+				<div class='left-box'>
+					<h2>スタイリスト休暇追加</h2>
+					<fieldset>
+						<label for="styList">スタイリスト選択</label>
+		    				<select name="styList" id="styList">
+								<option disabled selected>選択してください</option>
+							<c:forEach var="item" items="${result}">
+								<option value="'${item.stylistId }'">${item.stylistName }</option>
+							</c:forEach>
+		    				</select>
+  					</fieldset>
+				</div>
+				<div class='right-box'></div>
+				<h2>カレンダー</h2>
 				<p>
-					<span>スタイリストID</span>
-					<input type="text" id="title" name="STYLISTID" placeholder="STYLISTID">
-				</p>
-				<p>
-					<span>スタイリスト名</span>
 					<input type="text" id="body" name="STYLISTNAME" placeholder="STYLISTNAME">
 				</p>
 				<!-- 各種ボタン -->
@@ -48,8 +106,6 @@ $(document).ready(function()　{
 			<!-- /footer -->
 		</div>
 	</div>
-	<!-- 
-	< %@include file="../sample/inc/scripts.jsp"%>
-	 -->
+	<!-- script -->
 </body>
 </html>
