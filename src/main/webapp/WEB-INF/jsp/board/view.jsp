@@ -20,14 +20,10 @@
 <head>
 	<title>Home</title>
 </head>
-<body>
-<div class="heading">
-<h3>臨時休業のお知らせ</h3>
-</div>
-<hr/>
-<div class="news__detail__wrapper">
 
-お客様にはご迷惑をおかけしておりますことをお詫びいたします。</div>
+<body>
+<%@include file="../user/inc/top.jsp"%>
+<div id="body" style="margin-left:500px;">
 <div>
 <c:forEach var="item" items="${result }">
 NoticeId : ${item.noticeId } <br/>
@@ -35,10 +31,11 @@ NoticeId : ${item.noticeId } <br/>
 内容 : ${item.noticeBody } <br/>
 登録日　：　<fmt:formatDate value="${item.registerDate }" type="time" pattern="yyyy-MM-dd" /> <br/>
 </c:forEach>
+<div>
+<a href="/home">ホーム</a>
 </div>
-<input type="button" id="prev">←</button>
-<input type="button" id="home">ホームに戻る</button>
-<input type="button" id="list">→</button>
+</div>
+</div>
 </body>
 
 </html>
