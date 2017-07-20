@@ -89,6 +89,7 @@ public class ReservationController {
 //		mv.addObject("obj1", list); 
 //		mv.addObject("obj2", map);
 //		Keypoint ! setViewName에 들어갈 String 파라미터는 JsonView bean 설정해줬던 id와 같아야 한다.
+//		mav.setViewName("jsonView");
 		return mav;
 	}
 	

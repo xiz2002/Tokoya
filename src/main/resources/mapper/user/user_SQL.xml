@@ -3,27 +3,61 @@
 
 <mapper namespace="com.nurinubi.tokoya.user.repository.UserRepository">
 
-    <!-- 
-    <select id="findOne" resultType="UserVO" parameterType="String">
-    	SELECT * FROM MSTUSER WHERE USERID = #{userId} AND USERPASS=#{userPassword}
-    </select>-->
+	<resultMap id="loginUserCheckResult" type="java.util.HashMap">
+		<result javaType="java.lang.String" column="RESULT" property="result" />
+	</resultMap> 
+	
+	<select id="loginUserCheck" parameterType="String" resultMap="loginUserCheckResult">
+		SELECT 
+			COUNT(USERID) AS RESULT
+		FROM
+			MSTUSER 
+		WHERE 
+			USERID=#{id} 
+		AND 
+			USERPASS=#{pass}
+	</select>
+	
+	<select id="loginUserInfo" parameterType="String" resultType="UserVO">
+		SELECT 
+			USERID,
+			USERNAME,
+			USERHURI,
+			USERSTATUS,
+			USERISADMIN 
+		FROM
+			MSTUSER 
+		WHERE 
+			USERID=#{id} 
+	</select>
     
-    <select id="login" resultType="String">
-        SELECT COUNT(*) FROM MSTUSER WHERE USERID=#{id} AND USERPASS=#{pass}
-    </select>
-    
-     <select id="loginAdmin" resultType="String">
-        SELECT COUNT(*) FROM MSTADMIN WHERE ADMINID=#{id} AND ADMINPASS=#{pass}
-    </select>
-    
-    <select id="checkId" resultType="String">
-        SELECT COUNT(*) FROM MSTUSER WHERE USERID = #{id}
-    </select>
+	<select id="checkId" resultType="String">
+		SELECT 
+			COUNT(USERID) 
+		FROM 
+			MSTUSER 
+		WHERE 
+			USERID = #{id}
+	</select>
     
 	<insert id="addUser">
-		INSERT INTO MSTUSER (USERID, USERPASS, USERNAME, USERHURI, USEREMAIL, USERPHONE) VALUES
-		(#{USERID}, #{USERPASS}, #{USERNAME}, #{USERHURI}, #{USEREMAIL}, #{USERPHONE})
+		INSERT INTO 
+			MSTUSER (
+				USERID,
+				USERPASS,
+				USERNAME,
+				USERHURI,
+				USEREMAIL,
+				USERPHONE
+			)
+		VALUES (
+			#{USERID}, 
+			#{USERPASS}, 
+			#{USERNAME}, 
+			#{USERHURI}, 
+			#{USEREMAIL}, 
+			#{USERPHONE}
+		)
 	</insert>
-
 
 </mapper>

@@ -1,5 +1,7 @@
 package com.nurinubi.tokoya.user.domain;
 
+import java.io.Serializable;
+
 /**
 <!--
  * 
@@ -8,7 +10,8 @@ package com.nurinubi.tokoya.user.domain;
  * @
  * @		修正日			修正者			修正内容
  * @ 	---------		---------		-------------------------------
- * @ 	2017. 7. 13.		山木雄矢			最初作成
+ * @ 	2017. 07. 13.	山木雄矢			最初作成
+ * 		2017. 07. 20. 	Lee				userStatus, userIsAdmin, Serializable 追加
  * 
  * @author 山木雄矢
  * @since 2017
@@ -18,7 +21,9 @@ package com.nurinubi.tokoya.user.domain;
  * -->
  */
 
-public class UserVO{
+public class UserVO implements Serializable {
+	
+	private static final long serialVersionUID = -4399181419872094995L;
 	
 	private String userId;
 	private String userPass;
@@ -26,30 +31,37 @@ public class UserVO{
 	private String userHuri;
 	private String userEmail;
 	private String userPhone;
+	private String userStatus;
+	private String userIsAdmin;
+	
 	/**
 	 * @return the userId
 	 */
 	public String getUserId() {
 		return userId;
 	}
+	
 	/**
 	 * @param userId the userId to set
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
 	/**
 	 * @return the userPassword
 	 */
 	public String getUserPass() {
 		return userPass;
 	}
+	
 	/**
 	 * @param userPassword the userPassword to set
 	 */
 	public void setUserPass(String userPass) {
 		this.userPass = userPass;
 	}
+	
 	/**
 	 * @return the userName
 	 */
@@ -98,13 +110,42 @@ public class UserVO{
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
 	}
+	
+	/**
+	 * @return the userStatus
+	 */
+	public String getUserStatus() {
+		return userStatus;
+	}
+
+	/**
+	 * @param userStatus the userStatus to set
+	 */
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
+	}
+
+	/**
+	 * @return the userIsAdmin
+	 */
+	public String getUserIsAdmin() {
+		return userIsAdmin;
+	}
+
+	/**
+	 * @param userIsAdmin the userIsAdmin to set
+	 */
+	public void setUserIsAdmin(String userIsAdmin) {
+		this.userIsAdmin = userIsAdmin;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("SampleVO [userId=");
+		builder.append("UserVO [userId=");
 		builder.append(userId);
 		builder.append(", userPass=");
 		builder.append(userPass);
@@ -116,12 +157,10 @@ public class UserVO{
 		builder.append(userEmail);
 		builder.append(", userPhone=");
 		builder.append(userPhone);
-		builder.append(", getClass()=");
-		builder.append(getClass());
-		builder.append(", hashCode()=");
-		builder.append(hashCode());
-		builder.append(", toString()=");
-		builder.append(super.toString());
+		builder.append(", userStatus=");
+		builder.append(userStatus);
+		builder.append(", userIsAdmin=");
+		builder.append(userIsAdmin);
 		builder.append("]");
 		return builder.toString();
 	}
