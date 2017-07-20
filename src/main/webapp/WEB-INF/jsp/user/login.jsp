@@ -20,6 +20,9 @@
 <script src="<c:url value="/js/jquery-1.10.2.js"/>"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		$("#id_error").hide();
+		$("#pass_error").hide();
+		
 		$("#register").on("click", function() {
 			location.assign("/register");
 		});
@@ -29,32 +32,65 @@
 		$("#login").on("click", function() {
 			var id = $("#userId").val();
 			var pass = $("#userPass").val();
-			$.ajax({
-				type : "POST",
-				dataType : "JSON",
-				data : {	id : id, pass : pass	},
-				url : "<c:url value='/login.do'/>",
-				error : function(data) {
-					console.log(data);
-					console.log("Error : " + Fail);
-				},
-				success : function(data) {
-					var data = JSON.stringify(data);
-					var obj = JSON.parse(data);
-					console.log(obj);
-					console.log(obj.loginTF);
-					switch(obj.loginTF) {
-					case true:
-						location.assign("/");
-						break;
-					default:
-						console.log("Fail");
-						$("#alert").val("IDとPASSWORDを正しく入力してください。新規登録の場合は「新規登録」ボタンをクリックしてください。");
-						break;
+			var chkId = checkId(id);
+			var chkPass = checkPass(pass);
+			console.log(chkId);
+			console.log(chkPass)
+			if(chkId && chkPass) {
+				$.ajax({
+					type : "POST",
+					dataType : "JSON",
+					data : {	id : id, pass : pass	},
+					url : "<c:url value='/login.do'/>",
+					error : function(data) {
+						console.log(data);
+						console.log("Error : " + Fail);
+					},
+					success : function(data) {
+						var data = JSON.stringify(data);
+						var obj = JSON.parse(data);
+						console.log(obj);
+						console.log(obj.loginTF);
+						switch(obj.loginTF) {
+						case true:
+							location.assign("/");
+							break;
+						default:
+							console.log("Fail");
+							alert("IDとPASSWORDが一致しないんです。<br>IDがない場合は 「新規登録」ボタンをクリックしてください。");
+							break;
+						}
 					}
-				}
-			})
+				})
+			}else{
+				alert("IDとPASSWORDを正しく入力してください。");
+			}
 		});
+		function checkId(a) {
+			var flag = true; 
+			var blank_pattern = /[\s]/g;
+			var id_pattern = /^[a-z0-9]{4,10}$/;
+			if(a==null||!id_pattern.test(a)){
+				$("#id_error").show();
+				flag = false;
+			}else {
+				$("#id_error").hide();
+			}
+			return flag;
+		}	
+		function checkPass(a) {
+			var flag = true;
+			var blank_pattern = /[\s]/g;
+			var pass_pattern = /^[a-z0-9]{4,20}$/;
+			//pass check
+			if(a==null||!pass_pattern.test(a)){
+				$("#pass_error").show();
+				flag = false;
+			}else{
+				$("#pass_error").hide();
+			}
+			return flag;
+		}
 	});
 </script>
 </head>

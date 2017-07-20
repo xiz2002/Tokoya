@@ -48,14 +48,14 @@ public class AdminController {
 	@Autowired
 	private ReservationRepository reservationRepository;
 	
-	@RequestMapping(value = "/admin", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adminHome(Model model) throws Exception {
 		List<Map<String, Object>> reservation = reservationRepository.getReservationListByToday();
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("stylist", adminRepository.getStylistList());
 		model.addAttribute("time", time);
 		System.out.println(model);
-		return "/admin/admin";
+		return "admin/admin";
 	}
 	
 	@RequestMapping(value = "/searchReservation.do", method = RequestMethod.POST)
@@ -81,7 +81,7 @@ public class AdminController {
 	public String addStylist() {
 		//表示するページ設定
 		System.out.println("=====================");
-		return "/admin/stylist/addStylist";
+		return "admin/stylist/addStylist";
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class AdminController {
 		
         model.addAttribute("result", adminRepository.getStylistList());
 		//表示するページ設定
-		return "/admin/stylist/management";
+		return "admin/stylist/management";
 	}
 	
 	/**
@@ -107,7 +107,7 @@ public class AdminController {
 		logger.info("addStylist");
 		
 		//表示するページ設定
-		return "/admin/stylist/addStylist";
+		return "admin/stylist/addStylist";
 	}
 	
 	/**
@@ -119,7 +119,7 @@ public class AdminController {
 		logger.info("addStylist");
 		
 		//表示するページ設定
-		return "/admin/stylist/management";
+		return "admin/stylist/management";
 	}
 	
 	// スタイリストの追加処理
