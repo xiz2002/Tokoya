@@ -35,6 +35,8 @@ public class StylistVO {
 //スタイリスト
 private String stylistId;
 private String stylistName;
+private String stylistStatus;
+
 
 
 /**
@@ -61,6 +63,18 @@ public String getStylistName() {
 public void setStylistName(String stylistName) {
 	this.stylistName = stylistName;
 }
+/**
+ * @return the stylistname
+ */
+public String getStylistStatus() {
+	return stylistStatus;
+}
+/**
+ * @param stylistname the stylistname to set
+ */
+public void setStylistStatus(String stylistStatus) {
+	this.stylistStatus = stylistStatus;
+}
 /* (non-Javadoc)
  * @see java.lang.Object#toString()
  */
@@ -69,8 +83,10 @@ public String toString() {
 	StringBuilder builder = new StringBuilder();
 	builder.append("StylistVO [stylistid=");
 	builder.append(stylistId);
-	builder.append(", stylistname=");
+	builder.append(", stylistName=");
 	builder.append(stylistName);
+	builder.append(", stylistStatus=");
+	builder.append(stylistStatus);
 	builder.append(", getClass()=");
 	builder.append(getClass());
 	builder.append(", hashCode()=");

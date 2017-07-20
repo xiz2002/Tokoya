@@ -4,13 +4,39 @@
 <mapper namespace="com.nurinubi.tokoya.admin.repository.AdminRepository">
 	<!-- スタイリスト一覧 -->
     <select id="getStylistList" resultType="StylistVO">
-        SELECT * FROM MSTSTYLIST
+        SELECT * FROM MSTSTYLIST where STYLISTSTATUS=0
     </select>
     
     <!-- スタイリスト追加 -->
     <insert id="addStylist" parameterType="String">
-        INSERT INTO MSTSTYLIST (STYLISTID, STYLISTNAME) 
-        VALUES (#{STYLISTID}, #{STYLISTNAME})
+        INSERT INTO MSTSTYLIST (STYLISTID, STYLISTNAME, STYLISTSTATUS) 
+        VALUES (#{STYLISTID}, #{STYLISTNAME},0)
     </insert>
+    
+    <!-- スタイリスト削除
+    <delete id="delStylist" parameterType="StylistVO">
+    	DELETE FROM MSTSTYLIST WHERE STYLISTID=#{stylistId} AND STYLISTSTATUS=0
+    </delete>
+     -->
+     
+    <!-- スタイリスト削除 -->
+    <update id="upStylistStatus" parameterType="StylistVO">
+    	UPDATE MSTSTYLIST SET STYLISTSTATUS=1 WHERE STYLISTID=#{stylistId}
+    </update>
+    
+    <!-- スタイリスト削除確認 -->
+    <select id="judgeStylist" resultType="StylistVO">
+    	select * from MSTSTYLIST where STYLISTSTATUS=0 and exists (select STYLISTID from TRNRESERVATION where MSTSTYLIST.STYLISTID=#{stylistId})
+    </select>
+    
+    <!-- スタイリスト更新 -->
+    <update id="upStylist" parameterType="StylistVO">
+    	UPDATE MSTSTYLIST SET STYLISTNAME=#{stylistName} WHERE STYLISTID=#{stylistId}
+    </update>
+    
+    <!-- スタイリスト詳細 -->
+    <select id="getStylistDetail" resultType="StylistVO">
+    	SELECT * FROM MSTSTYLIST WHERE STYLISTID=#{id}
+    </select>
     
 </mapper>
