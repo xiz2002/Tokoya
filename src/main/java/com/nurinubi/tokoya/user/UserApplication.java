@@ -19,7 +19,6 @@ public class UserApplication implements UserRepository {
 	
 	@Override
 	public void insertUser(Map<String, Object> map) throws Exception {
-		map.get("email1");
 		this.sqlSession.insert("addUser", map);
 	}
 

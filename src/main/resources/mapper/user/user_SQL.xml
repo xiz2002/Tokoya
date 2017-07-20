@@ -41,6 +41,7 @@
 	</select>
     
 	<insert id="addUser">
+<<<<<<< HEAD
 		INSERT INTO 
 			MSTUSER (
 				USERID,
@@ -58,6 +59,10 @@
 			#{USEREMAIL}, 
 			#{USERPHONE}
 		)
+=======
+		INSERT INTO MSTUSER (USERID, USERPASS, USERNAME, USERHURI, USEREMAIL, USERPHONE) VALUES
+		(#{USERID}, #{USERPASS}, #{USERNAME}, #{USERHURI}, #{USEREMAIL}, #{USERPHONE})
+>>>>>>> 347be81ba46022fae254da37f2bc00d2abda920e
 	</insert>
 
 </mapper>
