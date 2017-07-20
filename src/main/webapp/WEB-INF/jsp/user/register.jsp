@@ -88,7 +88,6 @@ width:100px;
 </style>
 
 <body>
-<%@include file="./inc/top.jsp"%>
 <div id="body" style="margin-left:450px;">
 	<div>
 		<form id="frm" method="POST">

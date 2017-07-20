@@ -33,9 +33,20 @@
 	
 	<annotation-driven>
 		<argument-resolvers>
-			<beans:bean
-				class="com.nurinubi.tokoya.common.resolver.CustomMapArgumentResolver"></beans:bean>
+			<beans:bean	class="com.nurinubi.tokoya.common.resolver.CustomMapArgumentResolver"/>
 		</argument-resolvers>
 	</annotation-driven>
+	
+	<!-- login Interceptor -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/reservation/*"/>
+			<beans:bean class="com.nurinubi.tokoya.common.interceptor.LoginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/admin*"/>
+			<beans:bean class="com.nurinubi.tokoya.common.interceptor.AdminCheckInterceptor"/>
+		</interceptor>
+	</interceptors>
 
 </beans:beans>

@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
-import com.nurinubi.tokoya.common.CommandMap;
+import com.nurinubi.tokoya.common.domain.CommandMap;
 import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
