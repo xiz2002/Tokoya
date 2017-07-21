@@ -58,6 +58,6 @@ public interface AdminRepository {
 	List<String> getStyBusyDate(Map<String,Object> commandMap) throws Exception;
 	
 	//スタイリストスケジュール
-	List<ScheduleVO> getStylistSchedule(String date, String stylist) throws Exception;
+	Map<String, Object> getStylistSchedule(String date, String stylist) throws Exception;
 
 }

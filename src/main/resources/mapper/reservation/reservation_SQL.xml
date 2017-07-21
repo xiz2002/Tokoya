@@ -191,4 +191,19 @@
 	]]>
 	</update>
 	
+	<select id="getReservationByStylist" resultType="ReservationVO">
+	<![CDATA[
+		SELECT
+			DATE_FORMAT(RESERVATIONDATE, '%d.%m.%Y') AS RESERVATIONDATE
+		FROM
+			TRNRESERVATION
+		WHERE 
+			RESERVATIONDATE > DATE_FORMAT(#{date}, '%Y%m%d') 
+		AND
+			RESERVATIONDATE < DATE_FORMAT(Date_Add(#{date}, INTERVAL+1 MONTH), '%Y%m%d')	
+		AND
+			STYLISTID = #{stylistId}
+	]]>
+	</select>
+	
 </mapper>

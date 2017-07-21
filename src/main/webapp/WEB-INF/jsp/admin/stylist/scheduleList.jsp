@@ -29,22 +29,12 @@
 <script type="text/javascript">
 
 $(function() {
-	var d = new Date();
-	var t = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
-	$('#DatePicker').datetimepicker({
-		value: t,
-		format:'Ymd',
-		todayButton: false,
-		timepicker:false,
-		inline: true,
-		yearStart: 2015,
-		yearEnd: d.getFullYear()+1,
-		
-	});
 $("#search").on("click", function() {
 	var year = document.getElementById("year").value;
 	var month = document.getElementById("month").value;
-	var paramDate = year+month.substr(0, month.length-1);
+	var lastDay = setLastDay(year, month)
+	var t = new Date(year+"-"+month);
+	var paramDate = year+month;
 	var paramStylist=document.getElementById("stylist").value;
 	$.ajax({
 		type:"POST",
@@ -52,22 +42,42 @@ $("#search").on("click", function() {
 		data:{date:paramDate, stylist:paramStylist},
 		url:"/admin/stylist/schedule.do",
 		error : function(data) {
+			alert("error");
 		},
 		success : function(data) {
 			var data = JSON.stringify(data);
 			var obj = JSON.parse(data);
-			var date;
-			console.log(obj);
-			for(i in obj.data){
-				date += obj.data[i].offDate;
+			var date = "";
+			console.log(obj.data);
+			for(i in obj.data.offDate){
+					date += "'"+obj.data.offDate[i].offDate+"',";
 			}
-			//disabledDates: ['01.01.2017'], formatDate:'d.m.Y'
-			date = "<input type='text'>"+date+"</input>";
-			$("#test").append(date);
+			for(j in obj.data.reservation){
+					date += "'"+obj.data.reservation[j].reservationDate+"',";
+			}
+			$('#DatePicker').datetimepicker({
+				value: t,
+				//minDate: t, 
+				maxDate: lastDay,
+				format:'Ymd',
+				todayButton: false,
+				timepicker:false,
+				inline: true,
+				yearStart: t.getFullYear(),
+				yearEnd: t.getFullYear()-1,
+				monthStart:t.getMonth() + 1,
+				monthEnd:t.getMonth(),
+				disabledDates: date, formatDate:'d.m.Y'
+			});
 		}
 	});
 });
 });
+
+function setLastDay(year, month){
+	var lastday = new Date( (new Date(year, month, 1))-1 );
+	return lastday;
+}
 </script>
 <style>
 table, th, td {
@@ -75,7 +85,7 @@ table, th, td {
 	border-collapse: collapse;
 }
 
-[data-status="1"] {
+/* [data-status="1"] {
 	background-color: red;
 }
 
@@ -85,7 +95,7 @@ table, th, td {
 
 [data-status="3"] {
 	background-color: yellow;
-}
+} */
 </style>
 </head>
 <body>
@@ -104,14 +114,16 @@ table, th, td {
 				<option value="${items }">${items }</option>
 				</c:forEach>
 			</select>
+			<span>年</span>
 			<select id="month">
 			<c:forEach var="items" items="${month }">
 				<option value="${items }">${items }</option>
 				</c:forEach>
 			</select>
+			<span>月</span>
 			 <input type="button" id="search" value="検索">
 		</div>
-		<div>
+		<!-- <div>
 			<div
 				style="margin-left: 2px; float: left; background-color: red; width: 10%;">&nbsp</div>
 			<div style="margin-left: 2px; float: left; width: auto;">
@@ -127,10 +139,9 @@ table, th, td {
 			<div style="margin-left: 2px; float: left; width: auto;">
 				<span> : 未定</span>
 			</div>
-		</div>
+		</div> -->
 		<div id="DatePicker">
 		</div>
-		<div id="test"></div>
 		<div id="button">
 			<input type="button" id="add" value="追加">
 			<input type="button" id="add" value="修正">

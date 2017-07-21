@@ -48,7 +48,7 @@ import com.nurinubi.tokoya.admin.domain.StylistVO;
 public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	public String time[]= {"09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"};
-	public String month[]= {"01月", "02月", "03月", "04月", "05月", "06月", "07月", "08月", "09月", "10月", "11月", "12月"};
+	public String month[]= {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
 	/** WriteService */
 	
 	@Autowired

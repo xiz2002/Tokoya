@@ -12,6 +12,7 @@ import com.nurinubi.tokoya.admin.domain.ScheduleVO;
 import com.nurinubi.tokoya.admin.domain.StylistVO;
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
 import com.nurinubi.tokoya.board.domain.BoardVO;
+import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -115,12 +116,16 @@ public class AdminApplication implements AdminRepository {
 	}
 
 	@Override
-	public List<ScheduleVO> getStylistSchedule(String date, String stylist) throws Exception {
+	public Map<String, Object> getStylistSchedule(String date, String stylist) throws Exception {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("date", date+"01");
 		param.put("stylistId", stylist);
 		System.out.println(date);
-		List<ScheduleVO> result = this.sqlSession.selectList("getStylistSchedule", param);
+		List<ScheduleVO> offDate = this.sqlSession.selectList("getStylistSchedule", param);
+		List<ReservationVO> reservation = this.sqlSession.selectList("getReservationByStylist", param);
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("offDate", offDate);
+		result.put("reservation", reservation);
 		return result;
 	}
 	
