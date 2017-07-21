@@ -127,7 +127,7 @@
 		}
 		var $frm = $('#frm');
 		var rDate = $('<input type="hidden" id="reservationDate" name="reservationDate" value="' + $('#DatePicker').val() + '" />');
-		var rTime = $('<input type="hidden" id="reservationTime" name="reservationTime" value="' + $('#TimePicker').val() + '" />');	
+		var rTime = $('<input type="hidden" id="reservationStartTime" name="reservationStartTime" value="' + $('#TimePicker').val() + '" />');	
 		rDate.appendTo($frm);
 		rTime.appendTo($frm);
 		$frm.attr("action", "<c:url value='/reservation/check'/>");
@@ -156,7 +156,6 @@
 						<!-- # -->
 						<td>
 							<input type="hidden" name="courseId" id="courseId" value="${result.courseId}"/>
-							<!-- <input type="hidden" name="userId" id="userId" value="${result.courseId}"/> -->
 							<input type="hidden" name="stylistId" id="stylistId" value=""/>
 						</td>
 						<!-- Date -->
@@ -174,7 +173,6 @@
 						<!-- 各種ボタン -->
 						<td>
 							<input type="button" name="bntChkOut" id="btnChkOut" value="CheckOut" onclick="checkout()" /><br>
-							<input type="reset" id="cancel" value="Cancel" />
 						</td>
 					</tr>
 					<tr>

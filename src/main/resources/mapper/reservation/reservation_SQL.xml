@@ -24,39 +24,39 @@
 	
 	<select id="getReservationListByToday" resultType="Map">
     <![CDATA[  
-	SELECT 
-		a.RESERVATIONID, a.RESERVATIONDATE, a.RESERVATIONSTATUS, 
-		b.COURSETIME,  
-		c.STYLISTID, c.STYLISTNAME
-	FROM 
-		TRNRESERVATION a
-    	LEFT JOIN 
-		MSTCOURSE b ON b.COURSEID = a.COURSEID
-			LEFT JOIN 
-				MSTSTYLIST c ON a.STYLISTID = c.STYLISTID
-	WHERE 
-		a.RESERVATIONDATE > DATE_FORMAT(NOW(), '%Y%m%d') 
-    AND
-		RESERVATIONDATE < DATE_FORMAT(Date_Add(NOW(), INTERVAL+1 DAY), '%Y%m%d') 
+		SELECT 
+			a.RESERVATIONID, a.RESERVATIONDATE, a.RESERVATIONSTATUS, 
+			b.COURSETIME,  
+			c.STYLISTID, c.STYLISTNAME
+		FROM 
+			TRNRESERVATION a
+	    	LEFT JOIN 
+			MSTCOURSE b ON b.COURSEID = a.COURSEID
+				LEFT JOIN 
+					MSTSTYLIST c ON a.STYLISTID = c.STYLISTID
+		WHERE 
+			a.RESERVATIONDATE > DATE_FORMAT(NOW(), '%Y%m%d') 
+	    AND
+			RESERVATIONDATE < DATE_FORMAT(Date_Add(NOW(), INTERVAL+1 DAY), '%Y%m%d') 
     ]]>
 	</select>
 	
 	<select id="getReservationByDate" resultType="Map">
     <![CDATA[  
-    SELECT 
-    		a.RESERVATIONID, a.RESERVATIONDATE, a.RESERVATIONSTATUS, 
-    		b.COURSETIME,  
-    		c.STYLISTID, c.STYLISTNAME
-    FROM 
-		TRNRESERVATION a
-    	LEFT JOIN 
-    		MSTCOURSE b ON b.COURSEID = a.COURSEID
-	LEFT JOIN 
-		MSTSTYLIST c ON a.STYLISTID = c.STYLISTID
-	WHERE 
-		a.RESERVATIONDATE > DATE_FORMAT(#{date}, '%Y%m%d') 
-	AND 
-		RESERVATIONDATE < DATE_FORMAT(Date_Add(#{date}, INTERVAL+1 DAY), '%Y%m%d') 
+	    SELECT 
+	    		a.RESERVATIONID, a.RESERVATIONDATE, a.RESERVATIONSTATUS, 
+	    		b.COURSETIME,  
+	    		c.STYLISTID, c.STYLISTNAME
+	    FROM 
+			TRNRESERVATION a
+	    	LEFT JOIN 
+	    		MSTCOURSE b ON b.COURSEID = a.COURSEID
+		LEFT JOIN 
+			MSTSTYLIST c ON a.STYLISTID = c.STYLISTID
+		WHERE 
+			a.RESERVATIONDATE > DATE_FORMAT(#{date}, '%Y%m%d') 
+		AND 
+			RESERVATIONDATE < DATE_FORMAT(Date_Add(#{date}, INTERVAL+1 DAY), '%Y%m%d') 
     ]]>
 	</select>
 	
@@ -71,6 +71,7 @@
 	</select>
 	
     <select id="getStaffList" parameterType="Map" resultMap="staffList">
+    <![CDATA[
         SELECT 
 			STYLISTID,
 			STYLISTNAME
@@ -83,11 +84,20 @@
             )
         ) AND (
             STYLISTID NOT IN (
-                SELECT STYLISTID
-                FROM TRNRESERVATION
-                WHERE RESERVATIONDATE = #{time} 
+                SELECT 
+					STYLISTID
+                FROM 
+					TRNRESERVATION
+                WHERE
+					RESERVATIONDATE = #{time}
+				OR
+					RESERVATIONENDDATE >= #{time}
+				AND
+					RESERVATIONENDDATE <= #{endTime}
             )
-        );
+        ) AND 
+			STYLISTSTATUS = 0;
+	]]>
     </select>
     
     <select id="getCheckInfo" parameterType="ReservationVO" resultType="ReservationVO">
@@ -124,7 +134,8 @@
 		INSERT INTO 	
 			TRNRESERVATION (
 				RESERVATIONID, 
-				RESERVATIONDATE, 
+				RESERVATIONDATE,
+				RESERVATIONENDDATE, 
 				RESERVATIONSTATUS, 
 				COURSEID, 
 				USERID, 
@@ -133,6 +144,7 @@
 		VALUES (
 			#{reservationId},
 			#{reservationDateTime},
+			#{reservationEndDateTime},
 			#{reservationStatus},
 			#{courseId},
 			#{userId},
@@ -153,11 +165,11 @@
 			d.STYLISTNAME as STYLISTNAME
 		FROM 
 			TRNRESERVATION a
-			LEFT JOIN 
+		LEFT JOIN 
 		    	MSTCOURSE b ON b.COURSEID = a.COURSEID
-			LEFT JOIN
+		LEFT JOIN
 			MSTUSER c ON c.USERID = a.USERID
-			LEFT JOIN
+		LEFT JOIN
 			MSTSTYLIST d ON d.STYLISTID = a.STYLISTID
 		WHERE
 			a.USERID = #{userId}

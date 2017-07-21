@@ -43,6 +43,7 @@ public class ReservationApplication implements ReservationRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	//1.
 	@Override
 	public List<HashMap<String, Object>> getCourseList() {
 		logger.debug("======================================getCourseListApplicationStart===================================");
@@ -51,45 +52,46 @@ public class ReservationApplication implements ReservationRepository {
 		logger.debug("======================================getCourseListApplicationEnd=====================================");
 		return list;
 	}
-
+	
+	//2.
 	@Override
 	public List<HashMap<String, Object>> getStaffList(Map<String, Object> commandMap) {
 		logger.debug("======================================getStaffListApplicationStart===================================");
 		logger.debug(commandMap.toString());
-		commandMap.put("time", commandMap.get("date") + "" +commandMap.get("time")+"0000");
+		commandMap.put("time", commandMap.get("date") + "" + commandMap.get("time") + "0000");
+		commandMap.put("endTime",commandMap.get("date") + "230000");
 		List<HashMap<String, Object>> list = this.sqlSession.selectList("getStaffList", commandMap);
 		logger.debug(list.toString());
 		logger.debug("======================================getStaffListApplicationEnd=====================================");
 		return list;
 	}
-
+	
+	//3.
 	@Override
 	public ReservationVO getCheckInfo(ReservationVO rDomain) {
 		logger.debug("======================================getCheckInfoApplicationStart===================================");
+		logger.debug("before : "+rDomain.toString());
 		ReservationVO rtn = this.sqlSession.selectOne("getCheckInfo", rDomain);
 		rtn.setReservationDate(rDomain.getReservationDate());
-		rtn.setReservationTime(rDomain.getReservationTime());
-		/** 임시 */
-		//rtn.setUserId(rDomain.getUserId());
-		//rtn.setUserId(rDomain.getUserName());
-		rtn.setUserId("User2");
-		rtn.setUserName("aaaaa");
-		/** */
+		rtn.setReservationStartTime(rDomain.getReservationStartTime());
 		logger.debug(rtn.toString());
 		logger.debug("======================================getCheckInfoApplicationEnd=====================================");
 		return rtn;
 	}
-
+	
+	//4.
 	@Override
 	public int setReserve(ReservationVO rDomain) {
 		logger.debug("======================================setReserveApplicationStart===================================");
-		rDomain.setReservationDateTime(rDomain.getReservationDate()+""+rDomain.getReservationTime()+"0000");
+		rDomain.setReservationDateTime(rDomain.getReservationDate()+""+rDomain.getReservationStartTime()+"0000");
+		rDomain.setReservationEndDateTime(rDomain.getReservationDate()+""+(Integer.parseInt(rDomain.getCourseTime())+Integer.parseInt(rDomain.getReservationStartTime()))+"0000");
 		rDomain.setReservationStatus("1");
+		//ReservationIDを設定するためテーブルの全体カウンター
 		Integer i = sqlSession.selectOne("getReservCount");
 		i = new Integer(i.intValue() + 1);
 		String s = ""+i;
-		logger.debug(s);
 		rDomain.setReservationId(s);
+		//Insert
 		int rtn = this.sqlSession.insert("setReserveInfo", rDomain);
 		logger.debug("======================================setReserveApplicationEnd=====================================");
 		return rtn;
@@ -112,9 +114,6 @@ public class ReservationApplication implements ReservationRepository {
 	@Override
 	public List<ReservationVO> getReserveHistory(ReservationVO rDomain) {
 		logger.debug("======================================getReserveHistoryStart=======================================");
-		/** 임시 */
-		rDomain.setUserId("User2");
-		/** */
 		logger.debug(rDomain.toString());
 		logger.debug("======================================getReserveHistoryEnd=========================================");
 		return this.sqlSession.selectList("getReserveHistory", rDomain);
@@ -123,9 +122,6 @@ public class ReservationApplication implements ReservationRepository {
 	@Override
 	public int setReserveCancel(ReservationVO rDomain) {
 		logger.debug("======================================setReserveCancelStart=======================================");
-		/** 임시 */
-		rDomain.setUserId("User2");
-		/** */
 		logger.debug(rDomain.toString());
 		logger.debug("======================================setReserveCancelEnd=========================================");
 		return this.sqlSession.update("setReserveCancel", rDomain);

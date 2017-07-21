@@ -63,7 +63,7 @@
 	
 	//checkout
 	function checkout() {
-		if($("#cid").attr('value') == '' || $("#cid").attr('value') == "undefined") {
+		if($("#courseId").attr('courseId') == '' || $("#courseId").attr('value') == "undefined") {
 			alert("コースを選択してください。");
 			return;
 		}
@@ -79,8 +79,8 @@
 		<div class="reservationDate">
 			<h2>コース選択</h2>
 			<form id="frm" name="frm" method="post">
-				<input type="hidden" name="courseId" id="courseId"></input>
-				<!--<input type="hidden" name="userId" id="userId">${uInfo.userId}<input>-->
+				<input type="hidden" name="courseId" id="courseId"/>
+				<input type="hidden" name="userId" id="userId" value="${sessionScope.userInfo.userId}"/>
 				<!-- 選択 -->
 				<table>
 					<tr>
