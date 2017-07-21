@@ -14,33 +14,8 @@
  * -->
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage="" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="<c:url value="/js/jquery-1.10.2.js"/>"></script>
-<script src="<c:url value="/js/jquery-ui-1.10.4.custom.js"/>"></script>
-<html>
-<style>
-.bt {
-	float: left;
-}
-</style>
-<head>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#reservationHistory").on("click", function() {
-			location.assign("/reservation/userHistory");
-		});
-		$("#reservation").on("click", function() {
-			location.assign("/reservation/course");
-		});
-	});
-	$(function() {
-		console.log();
-	});
-</script>
-<title>Home</title>
-</head>
-<body>
-	<%@include file="../inc/top.jsp"%>
-	<div id="body" style="margin-left: 500px;">
+<%@ include file="../inc/header.jsp" %>
+	<%-- <div id="body" style="margin-left: 500px;">
 		<div>
 			<div class="bt">
 				<input type="button" id="reservationHistory" value="予約履歴"></input>
@@ -50,7 +25,25 @@
 			</div>
 		</div>
 		<%@include file="../board/board.jsp"%>
-	</div>
-</body>
-
-</html>
+	</div> --%>
+		<!-- page content -->
+		<div class="right_col" role="main">
+			<%@include file="../board/board.jsp"%>
+		</div>
+		<!-- /page content -->
+	<!-- Script -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#reservationHistory").on("click", function() {
+				location.assign("/reservation/userHistory");
+			});
+			$("#reservation").on("click", function() {
+				location.assign("/reservation/course");
+			});
+		});
+		$(function() {
+			console.log();
+		});
+	</script>
+	<!-- Script -->
+<%@ include file="../inc/footer.jsp" %>
