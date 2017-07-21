@@ -12,6 +12,11 @@ function clickMenu(num){
 		$("#admin_body").load("/admin/stylist/management");
 		history.pushState(null,null,"/admin/stylist/management");
 	}
+	if(num==3){
+		console.log(num);
+		$("#admin_body").load("/admin/stylist/schedule");
+		history.pushState(null,null,"/admin/stylist/schedule");
+	}
 } 
 </script>
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">

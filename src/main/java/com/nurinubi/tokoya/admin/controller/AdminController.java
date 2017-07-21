@@ -2,6 +2,8 @@ package com.nurinubi.tokoya.admin.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +43,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	public String time[]= {"09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"};
+	public String month[]= {"1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"};
 	/** WriteService */
 	@Autowired
 	private AdminRepository adminRepository;
@@ -54,7 +57,6 @@ public class AdminController {
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("stylist", adminRepository.getStylistList());
 		model.addAttribute("time", time);
-		System.out.println(model);
 		return "/admin/admin";
 	}
 	
@@ -124,8 +126,7 @@ public class AdminController {
 	
 	// スタイリストの追加処理
 	@RequestMapping(value = "/admin/stylist/insertWrite.do", method = RequestMethod.POST)
-	public ModelAndView insertWrite(CommandMap cmdMap)
-			throws Exception {
+	public ModelAndView insertWrite(CommandMap cmdMap) throws Exception {
 		logger.info("スタイリストの追加処理");
 		ModelAndView mv = new ModelAndView("/admin");
 		adminRepository.insertStylist(cmdMap.getMap());
@@ -161,5 +162,22 @@ public class AdminController {
 		mav.setViewName("jsonView");
 		logger.info("====================================getStyBusyDateEnd--======================================");
 		return mav;
+	}
+	
+	@RequestMapping(value = "/admin/stylist/schedule", method = RequestMethod.GET)
+	public String stylistSchedule(Model model) throws Exception {
+		List<Map<String, Object>> reservation = reservationRepository.getReservationListByToday();
+		Calendar cld = Calendar.getInstance();
+		int thisYear = cld.get(cld.YEAR);
+		List<String> yearList = new ArrayList<String>();
+		for(int i=2015; i<=thisYear+1; i++) {
+			yearList.add(String.valueOf(i));
+		}
+		System.out.println(yearList.get(0));
+		model.addAttribute("reservation", reservation);
+		model.addAttribute("stylist", adminRepository.getStylistList());
+		model.addAttribute("month", month);
+		model.addAttribute("year", yearList);
+		return "/admin/stylist/scheduleList_2";
 	}
 }

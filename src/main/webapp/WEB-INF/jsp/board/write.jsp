@@ -24,7 +24,7 @@ $(document).ready(function(){
 		$("#frm").submit();
 	});
 	$("#cancle").on("click", function(){
-		location.href("/admin");
+		location.assign("/admin");
 	});
 });
 </script>

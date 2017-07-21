@@ -69,7 +69,7 @@
 		}
 		$("#frm").attr("action", "<c:url value='/reservation/date'/>");
 		$("#frm").attr("target","_self");
-		$("#frm").submit()
+		$("#frm").submit();
 	};
 
 </script>

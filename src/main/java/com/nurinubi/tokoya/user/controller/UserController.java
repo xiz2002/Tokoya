@@ -1,8 +1,5 @@
 package com.nurinubi.tokoya.user.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.nurinubi.tokoya.common.CommandMap;
-import com.nurinubi.tokoya.user.domain.UserVO;
 import com.nurinubi.tokoya.user.repository.UserRepository;
 import com.nurinubi.tokoya.board.repository.BoardRepository;
-import com.nurinubi.tokoya.user.domain.UserVO;
 /**
  * @Class Name : AdminController.java.java
  * @Description : BoardController.java Class
@@ -62,7 +56,7 @@ public class UserController {
 	public String register(CommandMap cmdMap) throws Exception {
 		logger.info("会員登録処理");
 		userRepository.insertUser(cmdMap.getMap());
-		return "redirect:/home";
+		return "redirect:/login";
 	}
 
 	/**
@@ -70,7 +64,7 @@ public class UserController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		logger.info("login");
 		// 表示するページ設定
@@ -104,7 +98,6 @@ public class UserController {
 		ModelAndView mav = new ModelAndView(); 
 		String result = "error";
 		result = userRepository.checkId(id);
-		System.out.println("=============="+result);
 		if(result.equals("0")) {
 			result = "true";
 		}else if(result.equals("1")){
