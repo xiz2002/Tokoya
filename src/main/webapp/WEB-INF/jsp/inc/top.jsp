@@ -5,6 +5,9 @@
 <script src="<c:url value="/js/jquery-ui-1.10.4.custom.js"/>"></script>
 <script type="text/javascript">
 $(function(){
+	$("#login").on("click", function(){
+		location.assign("/login");
+	});
 	$("#userId").append("Guest");	
 });
 </script>
@@ -15,11 +18,9 @@ $(function(){
 		<span id="userId"></span> 
 		 さん
 		</div>
-		<form action="/login" method="POST">
 		<div>
-			<input type="submit" value="Log In" id="login" data-login="false" />
+			<input type="button" value="Log In" id="login"/>
 		</div>
-		</form>
 	</div>
 	<hr />
 </div>

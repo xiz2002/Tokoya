@@ -1,4 +1,4 @@
-package com.nurinubi.tokoya.common;
+package com.nurinubi.tokoya.common.domain;
  
 import java.util.HashMap;
 import java.util.Map;

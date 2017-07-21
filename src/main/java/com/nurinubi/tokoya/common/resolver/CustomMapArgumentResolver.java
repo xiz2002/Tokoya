@@ -3,14 +3,14 @@ package com.nurinubi.tokoya.common.resolver;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
- 
+
+import com.nurinubi.tokoya.common.domain.CommandMap;
+
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
- 
-import com.nurinubi.tokoya.common.CommandMap;
  
 public class CustomMapArgumentResolver implements HandlerMethodArgumentResolver{
     @Override

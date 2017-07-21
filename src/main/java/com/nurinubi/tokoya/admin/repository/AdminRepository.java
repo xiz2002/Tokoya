@@ -5,9 +5,26 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.nurinubi.tokoya.admin.domain.AdminVO;
 import com.nurinubi.tokoya.admin.domain.StylistVO;
+
 import com.nurinubi.tokoya.reservation.domain.ReservationVO;
+
+/**
+* @Class Name : AdminController.java.java
+* @Description :  BoardController.java Class
+* @Modification Information
+* @ 
+* @	修正日			修正者			修正内容
+* @ 	---------		---------		-------------------------------
+* @ 	2017.07.12		Kim				最初作成
+* @ 			16		Kim				
+* @author Kim
+* @since 2017.07.12
+* @version 0.1
+*
+*  Copyright (C) by NuriNubi All right reserved.
+*/
+
 
 @Mapper
 public interface AdminRepository {
@@ -21,6 +38,7 @@ public interface AdminRepository {
 	//スタイリスト追加処理
 	void insertStylist(Map<String, Object> map) throws Exception;
 	
+
 	//スタイリスト削除処理
 	//int delStylist(StylistVO styvo);
 	
@@ -32,4 +50,8 @@ public interface AdminRepository {
 	
 	//スタイリスト更新処理
 	int upStylist(StylistVO styvo);
+
+	List<String> getStyBusyDate(Map<String,Object> commandMap) throws Exception;
+	
+
 }
