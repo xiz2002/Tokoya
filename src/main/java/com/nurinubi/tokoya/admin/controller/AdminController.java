@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nurinubi.tokoya.admin.domain.ScheduleVO;
@@ -155,12 +156,13 @@ public class AdminController {
 		//System.out.println("///// styvo ：" + styvo + " /////");
 		ModelAndView mv = new ModelAndView();
 		//System.out.println("///// mv:" + mv + " /////");
-		String ans = adminRepository.judgeStylist(styvo).toString();
-		System.out.println(ans);
-		if(ans != ""){
+		//String ans = adminRepository.judgeStylist(styvo).toString();
+		//System.out.println("///// ans:" + ans + " /////");
+		//if(ans == ""){
 			mv.addObject("rtn",adminRepository.upStylistStatus(styvo));
-		}
+		//}
 		mv.setViewName("redirect:/admin/stylist/management");
+		System.out.println("///// mv:" + mv + " /////");
 		logger.info("<--- スタイリストの削除処理終了 --->");
 		return mv;
 	}
@@ -191,9 +193,18 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/admin/stylist/edit", method = RequestMethod.GET)
 	public ModelAndView stylistdetail(@RequestParam String id) {
+		
 		ModelAndView mv = new ModelAndView(); 
 		logger.info("<--- スタイリスト詳細処理開始 --->");
+		//mv.addObject("deljuge", ans);
 		//System.out.println("///// id ：" + id + " /////");
+		//事前に対象のスタイリストに削除可能か判定
+		List<StylistVO> ans = adminRepository.judgeStylist(id);
+		//予約が無い場合は削除フラグを立てる
+		if(ans.isEmpty()){
+			mv.addObject("deljuge", 1);
+		}
+		//System.out.println("///// ans詳細:" + ans + " /////");
 		List<StylistVO> result = adminRepository.getStylistDetail(id);
 		//System.out.println("///// result ：" + result + " /////");
 		mv.setViewName("/admin/stylist/edit");

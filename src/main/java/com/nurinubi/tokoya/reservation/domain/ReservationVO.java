@@ -28,8 +28,10 @@ public class ReservationVO {
 	private String courseTime;
 	private String reservationId;
 	private String reservationDate;
-	private String reservationTime;
+	private String reservationStartTime;
+	private String reservationEndTime;
 	private String reservationDateTime;
+	private String reservationEndDateTime;
 	private String reservationStatus;
 	private String stylistId;
 	private String stylistName;
@@ -130,16 +132,28 @@ public class ReservationVO {
 		this.reservationDate = reservationDate;
 	}
 	/**
-	 * @return the reservationTime
+	 * @return the reservationStartTime
 	 */
-	public String getReservationTime() {
-		return reservationTime;
+	public String getReservationStartTime() {
+		return reservationStartTime;
 	}
 	/**
-	 * @param reservationTime the reservationTime to set
+	 * @param reservationStartTime the reservationStartTime to set
 	 */
-	public void setReservationTime(String reservationTime) {
-		this.reservationTime = reservationTime;
+	public void setReservationStartTime(String reservationStartTime) {
+		this.reservationStartTime = reservationStartTime;
+	}
+	/**
+	 * @return the reservationEndTime
+	 */
+	public String getReservationEndTime() {
+		return reservationEndTime;
+	}
+	/**
+	 * @param reservationEndTime the reservationEndTime to set
+	 */
+	public void setReservationEndTime(String reservationEndTime) {
+		this.reservationEndTime = reservationEndTime;
 	}
 	/**
 	 * @return the reservationDateTime
@@ -152,6 +166,18 @@ public class ReservationVO {
 	 */
 	public void setReservationDateTime(String reservationDateTime) {
 		this.reservationDateTime = reservationDateTime;
+	}
+	/**
+	 * @return the reservationEndDateTime
+	 */
+	public String getReservationEndDateTime() {
+		return reservationEndDateTime;
+	}
+	/**
+	 * @param reservationEndDateTime the reservationEndDateTime to set
+	 */
+	public void setReservationEndDateTime(String reservationEndDateTime) {
+		this.reservationEndDateTime = reservationEndDateTime;
 	}
 	/**
 	 * @return the reservationStatus
@@ -211,10 +237,14 @@ public class ReservationVO {
 		builder.append(reservationId);
 		builder.append(", reservationDate=");
 		builder.append(reservationDate);
-		builder.append(", reservationTime=");
-		builder.append(reservationTime);
+		builder.append(", reservationStartTime=");
+		builder.append(reservationStartTime);
+		builder.append(", reservationEndTime=");
+		builder.append(reservationEndTime);
 		builder.append(", reservationDateTime=");
 		builder.append(reservationDateTime);
+		builder.append(", reservationEndDateTime=");
+		builder.append(reservationEndDateTime);
 		builder.append(", reservationStatus=");
 		builder.append(reservationStatus);
 		builder.append(", stylistId=");
@@ -224,5 +254,4 @@ public class ReservationVO {
 		builder.append("]");
 		return builder.toString();
 	}
-
 }

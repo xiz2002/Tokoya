@@ -32,7 +32,7 @@
 			buttons: {
 				Ok: function() {
 					$( this ).dialog( "close" );
-					location.replace('/home'); 
+					location.replace('/'); 
 				}
 			}
 		});
@@ -43,7 +43,7 @@
 			buttons: {
 				Ok: function() {
 					$( this ).dialog( "close" );
-					location.replace('/home');
+					location.replace('/');
 				}
 			}
 		});
@@ -84,7 +84,7 @@
 				</tr>
 				<tr>
 					<td>予約時間</td>
-					<td>${result.reservationTime}</td>
+					<td>${result.reservationStartTime}</td>
 				</tr>
 				<tr>
 					<td>スタイリスト</td>
@@ -103,7 +103,7 @@
 		<input type="hidden" id="coursePrice" name="coursePrice" value="${result.coursePrice}"/>
 		<input type="hidden" id="courseTime" name="courseTime" value="${result.courseTime}"/>
 		<input type="hidden" id="reservationDate" name="reservationDate" value="${result.reservationDate}"/>
-		<input type="hidden" id="reservationTime" name="reservationTime" value="${result.reservationTime}"/>
+		<input type="hidden" id="reservationStartTime" name="reservationStartTime" value="${result.reservationStartTime}"/>
 		<input type="hidden" id="stylistId" name="stylistId" value="${result.stylistId}"/>
 		<input type="hidden" id="stylistName" name="stylistName" value="${result.stylistName}"/>
 	</form>

@@ -80,10 +80,21 @@ public class AdminApplication implements AdminRepository {
 		return this.sqlSession.update("upStylist", styvo);
 	}
 	
-	@Override
-	public List<StylistVO> judgeStylist(StylistVO styvo) {
+	/**@Override
+	public List<StylistVO> judgeStylist1(StylistVO styvo) {
 		return this.sqlSession.selectList("judgeStylist",styvo);
+	}**/
+	
+	@Override
+	public List<StylistVO> judgeStylist(String id) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		//System.out.println("///// id ：" + id + " /////");
+		//System.out.println("///// param ：" + param + " /////");
+		//System.out.println(this.sqlSession.selectList("judgeStylist",id));
+		return this.sqlSession.selectList("judgeStylist",id);
 	}
+	
 	@Override
 	public int upStylistStatus(StylistVO styvo) {
 		return this.sqlSession.update("upStylistStatus", styvo);
@@ -102,6 +113,7 @@ public class AdminApplication implements AdminRepository {
 		return null;
 
 	}
+<<<<<<< HEAD
 
 	@Override
 	public List<ScheduleVO> getStylistSchedule(String date, String stylist) throws Exception {
@@ -112,4 +124,8 @@ public class AdminApplication implements AdminRepository {
 		List<ScheduleVO> result = this.sqlSession.selectList("getStylistSchedule", param);
 		return result;
 	}
+=======
+	
+	
+>>>>>>> 009d24d841c75019557ea609a847631e8cc0fe38
 }
