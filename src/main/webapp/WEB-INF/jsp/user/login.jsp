@@ -13,17 +13,16 @@
  *
  *  Copyright (C) by NuriNubi All right reserved.
  * -->
-<%@ page contentType="text/html; charset=UTF-8" language="java"
-	errorPage=""%>
+<%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <head>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<c:url value="/js/jquery-1.10.2.js"/>"></script>
-</head>
 <script type="text/javascript">
 	$(document).ready(function() {
+		$("#id_error").hide();
+		$("#pass_error").hide();
+		
 		$("#register").on("click", function() {
 			location.assign("/register");
 		});
@@ -31,15 +30,17 @@
 			location.assign("/home");
 		});
 		$("#login").on("click", function() {
-				var id = $("#id").val();
-				var pass = $("#pass").val();
-				console.log("ddddd");
+			var id = $("#userId").val();
+			var pass = $("#userPass").val();
+			var chkId = checkId(id);
+			var chkPass = checkPass(pass);
+			console.log(chkId);
+			console.log(chkPass)
+			if(chkId && chkPass) {
 				$.ajax({
 					type : "POST",
 					dataType : "JSON",
-					data : {
-						id : id, pass : pass
-					},
+					data : {	id : id, pass : pass	},
 					url : "<c:url value='/login.do'/>",
 					error : function(data) {
 						console.log(data);
@@ -48,49 +49,71 @@
 					success : function(data) {
 						var data = JSON.stringify(data);
 						var obj = JSON.parse(data);
-						if(obj.data == "user"){
-							alert(obj.id+"さんようこそ！")
-							location.assign("/home");
-						}else if(obj.data=="admin"){
-							alert("管理者でログインができました。");
-							location.assign("/admin");
-						}else{
-							alert("IDとPASSWORDを正しく入力してください。新規登録の場合は「新規登録」ボタンをクリックしてください。");
+						console.log(obj);
+						console.log(obj.loginTF);
+						switch(obj.loginTF) {
+						case true:
+							location.assign("/");
+							break;
+						default:
+							console.log("Fail");
+							alert("IDとPASSWORDが一致しないんです。<br>IDがない場合は 「新規登録」ボタンをクリックしてください。");
+							break;
 						}
 					}
-				});
+				})
+			}else{
+				alert("IDとPASSWORDを正しく入力してください。");
+			}
 		});
+		function checkId(a) {
+			var flag = true; 
+			var blank_pattern = /[\s]/g;
+			var id_pattern = /^[a-z0-9]{4,10}$/;
+			if(a==null||!id_pattern.test(a)){
+				$("#id_error").show();
+				flag = false;
+			}else {
+				$("#id_error").hide();
+			}
+			return flag;
+		}	
+		function checkPass(a) {
+			var flag = true;
+			var blank_pattern = /[\s]/g;
+			var pass_pattern = /^[a-z0-9]{4,20}$/;
+			//pass check
+			if(a==null||!pass_pattern.test(a)){
+				$("#pass_error").show();
+				flag = false;
+			}else{
+				$("#pass_error").hide();
+			}
+			return flag;
+		}
 	});
 </script>
 </head>
 <body>
-<div id="body" style="margin-left:500px;">
-	<h2>ログイン</h2>
-	<div class="container">
-		<div class="loginform">
-			<form id="logfrm" method="POST">
-				<h2>ログイン</h2>
-				<!-- 入力内容 -->
-				<p>
-				  <span>ユーザーID</span>
-				  <input type="text" id="id" name="USERID" placeholder="Userid">
-  			</p>
-				<p>
-					<span>パスワード</span> <input type="password" id="pass" name="USERPASS"
-						placeholder="Password">
-				</p>
-				<p>
-					<label for="remember"> <input type="checkbox" id="remember"
-						value="remember" /> <span>ログイン情報保持</span>
-					</label>
-				</p>
-				<!-- 各種ボタン -->
-				<input type="button" id="login" value="ログイン">
-				<button type="button" id="register">新規登録</button>
-				<button type="button" id="cancle">キャンセル</button>
-			</form>
+	<div id="body" style="margin-left: 500px;">
+		<h2>ログイン</h2>
+		<div class="container">
+			<div class="loginform">
+				<form id="logfrm" method="POST">
+					<!-- 入力内容 -->
+					<p>
+						<span>ユーザーID</span> <input type="text" id="userId" name="userId" placeholder="Userid">
+					</p>
+					<p>
+						<span>パスワード</span> <input type="password" id="userPass" name="userPass" placeholder="Password">
+					</p>
+					<!-- 各種ボタン -->
+					<input type="button" id="login" value="ログイン">
+					<button type="button" id="register">新規登録</button>
+					<button type="button" id="cancle">キャンセル</button>
+				</form>
+			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

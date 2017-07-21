@@ -22,7 +22,7 @@
 </head>
 
 <body>
-<%@include file="../user/inc/top.jsp"%>
+<%@include file="../inc/top.jsp"%>
 <div id="body" style="margin-left:500px;">
 <div>
 <c:forEach var="item" items="${result }">

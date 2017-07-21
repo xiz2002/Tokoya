@@ -42,7 +42,7 @@ $(function(){
 <body>
 <input type="hidden" id="check" value="${check }">
 <input type="hidden" id="loginId" value="${loginId }">
-<%@include file="./inc/top.jsp"%>
+<%@include file="../inc/top.jsp"%>
 <div id="body" style="margin-left:500px;">
 <div>
 <div class="bt">
