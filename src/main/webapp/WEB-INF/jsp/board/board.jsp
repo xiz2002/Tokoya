@@ -113,10 +113,22 @@ table, th, td {
 			return;
 		}
 		document.getElementById('curPage').value = pageNum;
-		selSheet(pageNum);
+		
+		var param = {"selectedPageNum": pageNum};
+		$.ajax({
+		    url: '/admin/board',
+		    type: 'GET',
+		    contentType: 'application/json; charset=utf-8',
+		    data: param,
+		    success: function(result) {
+		        $('#board_list').html(result);
+		    }
+		});
+		
+		
 	}
 </script>
-<div>
+<div id="board_list">
 	<div>
 		<table style="border: 1px solid;">
 			<tr>
@@ -137,8 +149,8 @@ table, th, td {
 		</table>
 	</div>
 	<!-- paging -->
-	<input type="hidden" name="pageCnt" id="pageCnt" value="5" /> <input
-		type="hidden" name="curPage" id="curPage" value="1" /> <input
+	<input type="hidden" name="pageCnt" id="pageCnt" value="10" /> <input
+		type="hidden" name="curPage" id="curPage" value="${curPage}" /> <input
 		type="hidden" name="stNum" id="stNum" value="1" /> <input
 		type="hidden" name="endNum" id="endNum" value="5" /> <input
 		type="hidden" name="totalCnt" id="totalCnt" value="${total}" /> <input
@@ -146,6 +158,6 @@ table, th, td {
 		id="paging"></span>
 	<!-- paging -->
 	<div>
-		<a href="javascript:void(0);" onclick="writeForm()" id="write">投稿</a>
+		<a href="javascript:void(0);" onclick="writeForm()" id="write">登録</a>
 	</div>
 </div>

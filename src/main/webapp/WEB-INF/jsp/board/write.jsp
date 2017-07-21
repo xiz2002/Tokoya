@@ -20,6 +20,17 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#write").on("click", function(){
+		// 簡単なバリデーションチェック
+		var title = $("#title").val();
+		var body = $("#body").val();
+		
+		if(!title.trim() || !body.trim()){
+			alert("タイトルと内容は必須入力です。");
+			return;
+		}else if(title.length > 100){
+			alert("タイトルは１００桁い以下にしてください。");
+			return;
+		}
 		$("#frm").attr("action", "<c:url value='/board/insertWrite.do'/>");
 		$("#frm").submit();
 	});

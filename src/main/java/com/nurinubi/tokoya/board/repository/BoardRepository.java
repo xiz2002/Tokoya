@@ -10,7 +10,9 @@ import com.nurinubi.tokoya.board.domain.BoardVO;
 @Mapper
 public interface BoardRepository {
 	
-	List<BoardVO> getBoardList();
+	Integer getBoardTotalCount();
+	
+	List<BoardVO> getBoardList(int pageNum);
 	
 	List<BoardVO> getBoardByNoticeId(String id);
 	

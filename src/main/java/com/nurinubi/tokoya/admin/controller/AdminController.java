@@ -18,8 +18,6 @@ import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,15 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.nurinubi.tokoya.admin.domain.ScheduleVO;
 import com.nurinubi.tokoya.admin.domain.StylistVO;
-import com.nurinubi.tokoya.admin.repository.AdminRepository;
-import com.nurinubi.tokoya.board.domain.BoardVO;
-import com.nurinubi.tokoya.common.domain.CommandMap;
-import com.nurinubi.tokoya.reservation.domain.ReservationVO;
-import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
-
-
 
 /**
 * @Class Name : AdminController.java.java
@@ -57,7 +48,7 @@ import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
 public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	public String time[]= {"09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"};
-	public String month[]= {"1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"};
+	public String month[]= {"01月", "02月", "03月", "04月", "05月", "06月", "07月", "08月", "09月", "10月", "11月", "12月"};
 	/** WriteService */
 	
 	@Autowired
@@ -266,6 +257,15 @@ public class AdminController {
 		model.addAttribute("stylist", adminRepository.getStylistList());
 		model.addAttribute("month", month);
 		model.addAttribute("year", yearList);
-		return "/admin/stylist/scheduleList_2";
+		return "/admin/stylist/scheduleList";
+	}
+	
+	@RequestMapping(value="/admin/stylist/schedule.do", method = RequestMethod.POST)
+	public ModelAndView searchSchedule(@RequestParam String date, @RequestParam String stylist) throws Exception{
+		ModelAndView mav = new ModelAndView(); 
+		System.out.println("=========================schedule!!!!!!!!!!");
+		mav.addObject("data", adminRepository.getStylistSchedule(date, stylist));
+		mav.setViewName("jsonView");
+		return mav;
 	}
 }

@@ -79,4 +79,18 @@
 	<![CDATA[DATE(RESERVATIONDATE) > DATE(NOW());]]>
 	</select>
 
+	<select id="getStylistSchedule" resultType="ScheduleVO">
+	<![CDATA[
+		SELECT
+			DATE_FORMAT(OFFDATE, '%d.%m.%Y') AS OFFDATE
+		FROM
+			TRNSTYLISTSCHEDULE
+		WHERE 
+			OFFDATE > DATE_FORMAT(#{date}, '%Y%m%d') 
+		AND
+			OFFDATE < DATE_FORMAT(Date_Add(#{date}, INTERVAL+1 MONTH), '%Y%m%d')	
+		AND
+			STYLISTID = #{stylistId}
+	]]>
+	</select>
 </mapper>
