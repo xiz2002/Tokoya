@@ -69,9 +69,11 @@ public class BoardController {
 	@RequestMapping(value = "/board/view", method = RequestMethod.GET)
 	public ModelAndView boardView(@RequestParam String id) {
 		ModelAndView mav = new ModelAndView(); 
-		System.out.println(id);
+		System.out.println("id" + id);
 		List<BoardVO> result = boardRepository.getBoardByNoticeId(id);
+		System.out.println("result:" + result);
 		mav.setViewName("/board/view");
+		System.out.println("mav:" + mav);
 		mav.addObject("result", result);
 		return mav;
 	}
