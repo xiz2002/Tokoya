@@ -62,15 +62,6 @@ public class AdminApplication implements AdminRepository {
 	}
 	
 	/**
-	 * スタイリスト削除
-	 */
-	/**
-	 * @Override
-	public int delStylist(StylistVO styvo) {
-		return this.sqlSession.delete("delStylist", styvo);
-	}**/
-	
-	/**
 	 * スタイリスト詳細
 	 */
 	@Override
@@ -95,12 +86,7 @@ public class AdminApplication implements AdminRepository {
 	@Override
 	public int upStylistStatus(StylistVO styvo) {
 		return this.sqlSession.update("upStylistStatus", styvo);
-
-	
-	@Override
-	public void insertStylist(Map<String, Object> map) {
-		this.sqlSession.insert("addStylist", map);
-	}
+	}	
 
 	@Override
 	public List<String> getStyBusyDate(Map<String,Object> commandMap) throws Exception {

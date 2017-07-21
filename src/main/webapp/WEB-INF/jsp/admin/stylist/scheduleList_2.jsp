@@ -27,36 +27,26 @@
 <link rel="stylesheet"
 	href="<c:url value="/css/jquery.datetimepicker.css"/>" />
 <script type="text/javascript">
-//Date&Time Picker
-var d = new Date();
-var t = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
-$(function() {
-	$.datetimepicker.setLocale('ja');
-	$('#datetimepicker').datetimepicker({
-		inline : true,
-		value : t,
-		timepickerScrollbar : false,
-		timepicker : false,
-	});
-});
+
 $(function() {
 $("#search").on("click", function() {
-		var date = $("#datetimepicker").val();
-		$.ajax({
-		type : "POST",
-		dataType : "JSON",
-		data : {
-			param : date
-		},
-		url : "<c:url value='/admin/searchSchedule.do'/>",
-		error : function(data) {
-			console.log(data);
-			console.log("Error : " + Fail);
-		},
-		success : function(data) {
-			var data = JSON.stringify(data);
-			var obj = JSON.parse(data);
-		}
+	var stylist=;
+	var date ="";
+	$.ajax({
+	type : "POST",
+	dataType : "JSON",
+	data : {
+		param : date
+	},
+	url : "<c:url value='/admin/searchSchedule.do'/>",
+	error : function(data) {
+		console.log(data);
+		console.log("Error : " + Fail);
+	},
+	success : function(data) {
+		var data = JSON.stringify(data);
+		var obj = JSON.parse(data);
+	}
 	});
 });
 });
@@ -119,9 +109,6 @@ table, th, td {
 			<div style="margin-left: 2px; float: left; width: auto;">
 				<span> : 未定</span>
 			</div>
-		</div>
-		<div>
-			<input type="text" id="datetimepicker" />
 		</div>
 		<div id="button">
 			<input type="button" id="add" value="追加">

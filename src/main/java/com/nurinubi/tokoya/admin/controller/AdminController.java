@@ -30,7 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.nurinubi.tokoya.admin.domain.StylistVO;
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
 import com.nurinubi.tokoya.board.domain.BoardVO;
-import com.nurinubi.tokoya.common.CommandMap;
+import com.nurinubi.tokoya.common.domain.CommandMap;
 import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
 
@@ -71,8 +71,6 @@ public class AdminController {
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("stylist", adminRepository.getStylistList());
 		model.addAttribute("time", time);
-		return "/admin/admin";
-		System.out.println(model);
 		return "admin/admin";
 	}
 	
@@ -149,8 +147,6 @@ public class AdminController {
 	@RequestMapping(value = "/admin/stylist/insertWrite.do", method = RequestMethod.POST)
 	public ModelAndView insertWrite(CommandMap cmdMap) throws Exception {
 		logger.info("スタイリストの追加処理");
-	public ModelAndView insertWrite(CommandMap cmdMap)
-			throws Exception {
 		logger.info("<--- スタイリストの追加処理開始 --->");
 		ModelAndView mv = new ModelAndView("/admin");
 		adminRepository.insertStylist(cmdMap.getMap());
