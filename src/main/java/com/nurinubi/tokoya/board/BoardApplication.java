@@ -17,20 +17,21 @@ public class BoardApplication implements BoardRepository {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Override
 	public List<BoardVO> getBoardList() {
 		return this.sqlSession.selectList("getBoardList");
 	}
+
 	public void insertBoard(Map<String, Object> map) {
 		this.sqlSession.insert("addBoardList", map);
-		}
-	
+	}
+
 	@Override
 	public List<BoardVO> getBoardByNoticeId(String id) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("id", id);
 		return this.sqlSession.selectList("getBoardByNoticeId", id);
 	}
-	
+
 }

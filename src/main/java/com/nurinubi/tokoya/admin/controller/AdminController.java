@@ -5,8 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.nurinubi.tokoya.admin.repository.AdminRepository;
+import com.nurinubi.tokoya.common.domain.CommandMap;
+import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.nurinubi.tokoya.admin.domain.StylistVO;
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
 import com.nurinubi.tokoya.board.domain.BoardVO;
@@ -26,15 +33,17 @@ import com.nurinubi.tokoya.common.CommandMap;
 import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
 
+
+
 /**
 * @Class Name : AdminController.java.java
 * @Description :  BoardController.java Class
 * @Modification Information
 * @ 
-* @	修正日			修正者		修正内容
+* @	修正日			修正者			修正内容
 * @ 	---------		---------		-------------------------------
-* @ 	2017.07.12		Kim		最初作成
-* 
+* @ 	2017.07.12		Kim				最初作成
+* @         17		Lee				getStylistForVacation 追加 
 * @author Kim
 * @since 2017.07.12
 * @version 0.1
@@ -54,14 +63,14 @@ public class AdminController {
 	@Autowired
 	private ReservationRepository reservationRepository;
 	
-	@RequestMapping(value = "/admin", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adminHome(Model model) throws Exception {
 		List<Map<String, Object>> reservation = reservationRepository.getReservationListByToday();
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("stylist", adminRepository.getStylistList());
 		model.addAttribute("time", time);
 		System.out.println(model);
-		return "/admin/admin";
+		return "admin/admin";
 	}
 	
 	@RequestMapping(value = "/searchReservation.do", method = RequestMethod.POST)
@@ -87,7 +96,7 @@ public class AdminController {
 	public String addStylist() {
 		//表示するページ設定
 		System.out.println("=====================");
-		return "/admin/stylist/addStylist";
+		return "admin/stylist/addStylist";
 	}
 	
 	/**
@@ -101,7 +110,7 @@ public class AdminController {
 		
         model.addAttribute("result", adminRepository.getStylistList());
 		//表示するページ設定
-		return "/admin/stylist/management";
+		return "admin/stylist/management";
 	}
 	
 	/**
@@ -113,7 +122,7 @@ public class AdminController {
 		logger.info("addStylist");
 		
 		//表示するページ設定
-		return "/admin/stylist/addStylist";
+		return "admin/stylist/addStylist";
 	}
 	
 	/**
@@ -125,7 +134,7 @@ public class AdminController {
 		logger.info("addStylist");
 		
 		//表示するページ設定
-		return "/admin/stylist/management";
+		return "admin/stylist/management";
 	}
 	
 	/**
@@ -209,5 +218,35 @@ public class AdminController {
 		mv.addObject("result", result);
 		logger.info("<--- スタイリスト詳細処理終了 --->");
 		return mv;
+	}
+	
+	/**
+	 * スタイリスト休暇追加
+	 * @return ModelAndView mav
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/admin/stylist/addSchedule", method = RequestMethod.GET)
+	public ModelAndView getVacationSetStylist() throws Exception {
+		logger.info("====================================getStylistForVacationStart======================================");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result", adminRepository.getStylistList());
+		mav.setViewName("admin/stylist/addSchedule");
+		logger.info("====================================getStylistForVacationEnd--======================================");
+		return mav;
+	}
+	
+	/**
+	 * スタイリスト休暇追加
+	 * @return ModelAndView mav
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/admin/stylist/getStyBusyDate", method = RequestMethod.POST)
+	public ModelAndView getStyBusyDate(@RequestParam Map<String, Object> commandMap) throws Exception {
+		logger.info("====================================getStyBusyDateStart======================================");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result", adminRepository.getStyBusyDate(commandMap));
+		mav.setViewName("jsonView");
+		logger.info("====================================getStyBusyDateEnd--======================================");
+		return mav;
 	}
 }
