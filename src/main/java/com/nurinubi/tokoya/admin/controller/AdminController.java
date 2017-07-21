@@ -18,10 +18,23 @@ import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+
+import com.nurinubi.tokoya.admin.domain.StylistVO;
+import com.nurinubi.tokoya.admin.repository.AdminRepository;
+import com.nurinubi.tokoya.board.domain.BoardVO;
+import com.nurinubi.tokoya.common.CommandMap;
+import com.nurinubi.tokoya.reservation.domain.ReservationVO;
+import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
+
+
 
 /**
 * @Class Name : AdminController.java.java
@@ -45,6 +58,7 @@ public class AdminController {
 	public String time[]= {"09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"};
 	public String month[]= {"1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"};
 	/** WriteService */
+	
 	@Autowired
 	private AdminRepository adminRepository;
 	
@@ -57,12 +71,9 @@ public class AdminController {
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("stylist", adminRepository.getStylistList());
 		model.addAttribute("time", time);
-<<<<<<< HEAD
 		return "/admin/admin";
-=======
 		System.out.println(model);
 		return "admin/admin";
->>>>>>> origin/master
 	}
 	
 	@RequestMapping(value = "/searchReservation.do", method = RequestMethod.POST)
@@ -129,13 +140,78 @@ public class AdminController {
 		return "admin/stylist/management";
 	}
 	
-	// スタイリストの追加処理
+	/**
+	 *　スタイリスト追加
+	 * @param cmdMap
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/admin/stylist/insertWrite.do", method = RequestMethod.POST)
 	public ModelAndView insertWrite(CommandMap cmdMap) throws Exception {
 		logger.info("スタイリストの追加処理");
+	public ModelAndView insertWrite(CommandMap cmdMap)
+			throws Exception {
+		logger.info("<--- スタイリストの追加処理開始 --->");
 		ModelAndView mv = new ModelAndView("/admin");
 		adminRepository.insertStylist(cmdMap.getMap());
+		//System.out.println("///// cmdMap.getMap() ：" + cmdMap.getMap() + " /////");
 		mv.setViewName("redirect:/admin");
+		logger.info("<--- スタイリストの追加処理終了 --->");
+		return mv;
+	}
+	
+	// スタイリストの削除処理
+	@RequestMapping(value = "/admin/stylist/delete.do", method = RequestMethod.POST)
+	public ModelAndView delStylist(@ModelAttribute("StylistVO") StylistVO styvo)
+			throws Exception {
+		logger.info("<--- スタイリストの削除処理開始 --->");
+		//System.out.println("///// styvo ：" + styvo + " /////");
+		ModelAndView mv = new ModelAndView();
+		//System.out.println("///// mv:" + mv + " /////");
+		String ans = adminRepository.judgeStylist(styvo).toString();
+		System.out.println(ans);
+		if(ans != ""){
+			mv.addObject("rtn",adminRepository.upStylistStatus(styvo));
+		}
+		mv.setViewName("redirect:/admin/stylist/management");
+		logger.info("<--- スタイリストの削除処理終了 --->");
+		return mv;
+	}
+	
+	/**
+	 * 
+	 * @param styvo スタイリスト更新情報
+	 * @return　
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/admin/stylist/update.do", method = RequestMethod.POST)
+	public ModelAndView upStylist(@ModelAttribute("StylistVO") StylistVO styvo)
+			throws Exception {
+		logger.info("<--- スタイリストの更新処理開始 --->");
+		//System.out.println("///// styvo ：" + styvo + " /////");
+		ModelAndView mv = new ModelAndView();
+		//System.out.println("///// mv:" + mv + " /////");
+		mv.addObject("rtn",adminRepository.upStylist(styvo));
+		mv.setViewName("redirect:/admin/stylist/management");
+		logger.info("<--- スタイリストの更新処理終了 --->");
+		return mv;
+	}
+
+	/**
+	 * スタイリスト詳細
+	 * @param id スタイリストID
+	 * @return　対象となるスタイリストの詳細画面
+	 */
+	@RequestMapping(value = "/admin/stylist/edit", method = RequestMethod.GET)
+	public ModelAndView stylistdetail(@RequestParam String id) {
+		ModelAndView mv = new ModelAndView(); 
+		logger.info("<--- スタイリスト詳細処理開始 --->");
+		//System.out.println("///// id ：" + id + " /////");
+		List<StylistVO> result = adminRepository.getStylistDetail(id);
+		//System.out.println("///// result ：" + result + " /////");
+		mv.setViewName("/admin/stylist/edit");
+		mv.addObject("result", result);
+		logger.info("<--- スタイリスト詳細処理終了 --->");
 		return mv;
 	}
 	

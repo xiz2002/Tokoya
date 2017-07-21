@@ -24,8 +24,9 @@
 		$("#stylistinsert").on("click", function() {
 			$("#admin_body").load("/admin/stylist/add");
 		});
-		$("#delete").on("click", function() {
-			
+		$("#edit").on("click", function() {
+			$("#admin_body").attr("action", "<c:url value='/admin/stylist/detail?id=${item.stylistId }'/>");
+			$("#admin_body").submit();
 		});
 	});
 </script>
@@ -42,29 +43,23 @@
 					<th>備考</th>
 				</tr>
 				<!-- 該当する値 -->
-				<c:set var="no" value="${1 }" />
+				<c:set var="no" value="${1}" />
 				<tr>
 					<c:forEach var="item" items="${result}">
 						<tr>
-							<td>${no }</td>
+							<td>${no}</td>
 							<td>${item.stylistId}</td>
 							<td>${item.stylistName}</td>
-							<td><input id="delete" type="button" value="削除" /></td>
+							<td>
+							<a href="<c:url value='/admin/stylist/edit?id=${item.stylistId}'/>">編集</a>
+							</td>
 						</tr>
-						<c:set var="no" value="${no+1 }" />
+						<c:set var="no" value="${no+1}" />
 					</c:forEach>
 				</tr>
 			</table>
 			<!-- 各種ボタン -->
 			<button type="button" id="stylistinsert">追加</button>
-			<!-- /page content -->
-			<!-- footer 
-			< %@include file="../sample/inc/foot.jsp"%>
-			 /footer -->
 		</form>
 	</div>
 </div>
-<!-- 
-	< %@include file="../sample/inc/scripts.jsp"%>
-	 -->
-
