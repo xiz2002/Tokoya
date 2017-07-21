@@ -56,7 +56,7 @@ public class AdminCheckInterceptor extends HandlerInterceptorAdapter {
 		}
 
 		//接近者が管理者がない場合
-		if (userInfo.getUserIsAdmin().equals("1")) {
+		if (!userInfo.getUserIsAdmin().equals("1")) {
 			response.sendRedirect(request.getContextPath() + "/");
 			logger.debug("====================================NotAdmin================================");
 			return false;

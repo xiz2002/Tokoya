@@ -19,10 +19,16 @@ public class BoardApplication implements BoardRepository {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<BoardVO> getBoardList() {
-		return this.sqlSession.selectList("getBoardList");
+	public List<BoardVO> getBoardList(int pageNum) {
+		int startBoardCountingNumber = (pageNum - 1) * 10;
+		return sqlSession.selectList("getBoardListByPageNum", startBoardCountingNumber);
 	}
-
+	
+	@Override
+	public Integer getBoardTotalCount() {
+		return sqlSession.selectOne("getBoardTotalCount");
+	}
+	
 	public void insertBoard(Map<String, Object> map) {
 		this.sqlSession.insert("addBoardList", map);
 	}
@@ -33,5 +39,4 @@ public class BoardApplication implements BoardRepository {
 		param.put("id", id);
 		return this.sqlSession.selectList("getBoardByNoticeId", id);
 	}
-
 }

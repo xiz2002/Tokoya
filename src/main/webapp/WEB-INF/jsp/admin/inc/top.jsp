@@ -5,7 +5,7 @@
 	<a href="/admin">管理者ホーム  </a>
 	</div>
 	<div style="text-align: center;">
-	<a href="/home">ユーザーホーム</a>
+	<a href="/">ユーザーホーム</a>
 	</div>
 	<div style="text-align: right;">
 		<a href="#">Log Out</a>

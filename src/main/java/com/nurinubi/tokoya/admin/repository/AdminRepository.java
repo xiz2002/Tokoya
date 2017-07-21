@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.nurinubi.tokoya.admin.domain.ScheduleVO;
 import com.nurinubi.tokoya.admin.domain.StylistVO;
 
 import com.nurinubi.tokoya.reservation.domain.ReservationVO;
@@ -53,5 +54,7 @@ public interface AdminRepository {
 
 	List<String> getStyBusyDate(Map<String,Object> commandMap) throws Exception;
 	
+	//スタイリストスケジュール
+	List<ScheduleVO> getStylistSchedule(String date, String stylist) throws Exception;
 
 }

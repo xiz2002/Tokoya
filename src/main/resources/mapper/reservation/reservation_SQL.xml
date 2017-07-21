@@ -178,4 +178,5 @@
 			RESERVATIONID = #{reservationId}
 	]]>
 	</update>
+	
 </mapper>

@@ -41,14 +41,20 @@ public class BoardController {
 	private BoardRepository boardRepository;
 
 	// お知らせのホーム画面(ユーザー)
-	@RequestMapping(value = "/admin/board", method = RequestMethod.GET)
-	public String listBoard(Model model) throws Exception {
-		logger.info("お知らせのホーム画面(ユーザー)");
-		model.addAttribute("result", boardRepository.getBoardList());
-		model.addAttribute("total", boardRepository.getBoardList().size());
-		return "/board/board";
-	}
-
+		@RequestMapping(value = "/admin/board", method = RequestMethod.GET)
+		public String listBoard(
+				Model model, 
+				@RequestParam(value="selectedPageNum", defaultValue = "1") int pageNum
+				) throws Exception {
+			
+			logger.info("お知らせのホーム画面(ユーザー)");
+			System.out.println("pageNum : " + pageNum);
+			model.addAttribute("result", boardRepository.getBoardList(pageNum));
+			model.addAttribute("total", boardRepository.getBoardTotalCount());
+			model.addAttribute("curPage", pageNum);
+			
+			return "/board/board";
+		}
 	// お知らせの作成画面
 	@RequestMapping(value = "/admin/board/write", method = RequestMethod.GET)
 	public String formWrite(CommandMap cmdMap) throws Exception {

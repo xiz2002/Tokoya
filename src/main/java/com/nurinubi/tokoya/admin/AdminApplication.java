@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.nurinubi.tokoya.admin.domain.ScheduleVO;
 import com.nurinubi.tokoya.admin.domain.StylistVO;
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
 import com.nurinubi.tokoya.board.domain.BoardVO;
@@ -100,5 +101,15 @@ public class AdminApplication implements AdminRepository {
 		logger.info("======================================getCourseListApplicationEnd=====================================");
 		return null;
 
+	}
+
+	@Override
+	public List<ScheduleVO> getStylistSchedule(String date, String stylist) throws Exception {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("date", date+"01");
+		param.put("stylistId", stylist);
+		System.out.println(date);
+		List<ScheduleVO> result = this.sqlSession.selectList("getStylistSchedule", param);
+		return result;
 	}
 }

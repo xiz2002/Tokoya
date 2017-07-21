@@ -4,7 +4,7 @@ package com.nurinubi.tokoya.admin.domain;
  * @ClassName : AdminVO.java
  * @Description : 
  * @
- * @		修正日			修正者			修正内容
+ * @		修正日			修正者?			修正内容
  * @ 	---------		---------		-------------------------------
  * @ 	2017. 7. 13.		Kim				最初作成
  * @		

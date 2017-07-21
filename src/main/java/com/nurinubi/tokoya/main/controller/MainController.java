@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @ClassName	: MainController.java
@@ -42,8 +43,10 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
-		model.addAttribute("result", boardRepository.getBoardList());
+	public String home(Model model, @RequestParam(value="selectedPageNum", defaultValue = "1") int pageNum) {
+		model.addAttribute("result", boardRepository.getBoardList(pageNum));
+		model.addAttribute("total", boardRepository.getBoardTotalCount());
+		model.addAttribute("curPage", pageNum);
 		System.out.println(model);
 		return "main/home";
 	}
