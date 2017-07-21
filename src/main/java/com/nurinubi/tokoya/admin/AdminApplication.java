@@ -113,7 +113,6 @@ public class AdminApplication implements AdminRepository {
 		return null;
 
 	}
-<<<<<<< HEAD
 
 	@Override
 	public List<ScheduleVO> getStylistSchedule(String date, String stylist) throws Exception {
@@ -124,8 +123,5 @@ public class AdminApplication implements AdminRepository {
 		List<ScheduleVO> result = this.sqlSession.selectList("getStylistSchedule", param);
 		return result;
 	}
-=======
 	
-	
->>>>>>> 009d24d841c75019557ea609a847631e8cc0fe38
 }
