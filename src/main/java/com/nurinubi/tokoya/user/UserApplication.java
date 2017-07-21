@@ -11,11 +11,36 @@ import com.nurinubi.tokoya.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+<!--
+ * 
+ * @ClassName : UserApplication.java
+ * @Description : UserApplication Class
+ * @
+ * @		修正日			修正者			修正内容
+ * @ 	---------		---------		-------------------------------
+ * @ 	2017. 7. 12.		Kim				最初作成
+ * 
+ * @author Kim
+ * @since 2017
+ * @version 0.1
+ *
+ *  Copyright (C) by NuriNubi All right reserved.
+ * -->
+ */
+
 @Repository
 public class UserApplication implements UserRepository {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@Override
+	public String checkId(String id){
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		return this.sqlSession.selectOne("checkId", param);
+	}
 	
 	@Override
 	public void insertUser(Map<String, Object> map) throws Exception {
@@ -36,12 +61,4 @@ public class UserApplication implements UserRepository {
 		param.put("id", id);
 		return this.sqlSession.selectOne("loginUserInfo", param);
 	}
-
-	@Override
-	public String checkId(String id){
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("id", id);
-		return this.sqlSession.selectOne("checkId", param);
-	}
-	
 }

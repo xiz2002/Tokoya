@@ -115,7 +115,7 @@
 				});	
 			
 				function back() {
-					window.location.href="<c:url value='/home'/>";
+					window.location.href="<c:url value='/'/>";
 				};
 			</script>
 			<!-- /footer -->

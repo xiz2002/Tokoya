@@ -2,11 +2,14 @@ package com.nurinubi.tokoya.reservation.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
+import com.nurinubi.tokoya.user.domain.UserVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,18 +44,7 @@ public class ReservationController {
 	private ReservationRepository ReservationRepository;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
-	 /**
-//	@RequestMapping(value = "/reservation/course", method = RequestMethod.POST)
-//	public ModelAndView revCourseView(@ModelAttribute("CommonVO")CommonVO cDomain) throws Exception {
-//		logger.debug("======================================courseControllerStart===================================");
-//		ModelAndView mav = new ModelAnView();
-//		mav.setViewName("reservation/course");
-//		mav.addObject("result",list", ReservationRepository.getCourseList());
-//		mav.addObject("uInfo", cDomain);
-//		logger.debug("======================================courseControllerEnd=====================================");
-//		return "/reservation/course";
-//	}
-	*/
+	
 	/** コース選択*/
 	@RequestMapping(value = "/reservation/course", method = RequestMethod.GET)
 	public String revCourseView(Model model) throws Exception {
@@ -64,13 +56,20 @@ public class ReservationController {
 	
 	/** 予約画面 */
 	@RequestMapping(value = "/reservation/date", method = RequestMethod.POST)
-	public ModelAndView revDateView(@ModelAttribute("ReservationVO") ReservationVO rDomain) throws Exception {
+	public ModelAndView revDateView(@ModelAttribute("ReservationVO") ReservationVO rDomain, UserVO userInfo, HttpSession session) throws Exception {
 		logger.debug("======================================dateControllerStart===================================");
-		logger.debug("cid : " + rDomain);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("reservation/date");
-		mav.addObject("result",rDomain);
-		logger.debug("======================================dateControllerEnd=====================================");
+		userInfo = (UserVO) session.getAttribute("userInfo");
+		String returnUrl = "reservation/date";
+		
+		if(userInfo.getUserId().equals(rDomain.getUserId())) {
+			mav.addObject("result",rDomain);
+		} else {
+			rDomain.setUserId(userInfo.getUserId());
+		}
+		
+		mav.setViewName(returnUrl);
+		logger.debug("======================================dateControllerEnd=====================================");			
 		return mav; 
 	}
 	
@@ -80,37 +79,39 @@ public class ReservationController {
 		logger.debug("====================================getStaffListControllerStart====================================");
 		ModelAndView mav = new ModelAndView(); 
 		mav.addObject("list", ReservationRepository.getStaffList(commandMap));
-		mav.setViewName("jsonView");
+		mav.setViewName("jsonView"); // setViewNameに入るパラメーターは JsonView bean にあるアイディと同一
 		logger.debug("======================================getStaffListControllerEnd=====================================");
-//		List<String> list = new ArrayList<String>();
-//		list.add("OBJECT");
-//		Map<String, String> map = new HashMap<String, String>();
-//		map.put("job", "developer");
-//		mv.addObject("obj1", list); 
-//		mv.addObject("obj2", map);
-//		Keypoint ! setViewName에 들어갈 String 파라미터는 JsonView bean 설정해줬던 id와 같아야 한다.
-//		mav.setViewName("jsonView");
 		return mav;
 	}
 	
 	/** 確認画面 */
 	@RequestMapping(value = "/reservation/check", method = RequestMethod.POST)
-	public ModelAndView revCheckView(@ModelAttribute("ReservationVO") ReservationVO rDomain) throws Exception {
+	public ModelAndView revCheckView(@ModelAttribute("ReservationVO") ReservationVO rDomain, UserVO userInfo, HttpSession session) throws Exception {
 		logger.debug("======================================revCheckViewControllerStart===================================");
-		logger.debug(rDomain.toString());
+		userInfo = (UserVO) session.getAttribute("userInfo");
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("result", ReservationRepository.getCheckInfo(rDomain));
+		
+		if(!userInfo.getUserId().equals(rDomain.getUserId())) {
+			rDomain.setUserId(userInfo.getUserId());
+		}
+		
 		mav.setViewName("reservation/check");
+		mav.addObject("result", ReservationRepository.getCheckInfo(rDomain));
 		logger.debug("======================================revCheckViewControllerEnd=====================================");
 		return mav;
 	}
 	
 	/** 予約確定 */
 	@RequestMapping(value = "/reservation/checkout", method = RequestMethod.POST)
-	public ModelAndView revCheckOutView(@ModelAttribute("ReservationVO") ReservationVO rDomain) throws Exception {
+	public ModelAndView revCheckOutView(@ModelAttribute("ReservationVO") ReservationVO rDomain, UserVO userInfo, HttpSession session) throws Exception {
 		logger.debug("==================================revCheckOutViewControllerStart===================================");
-		logger.debug(rDomain.toString());
-		ModelAndView mav = new ModelAndView(); 
+		ModelAndView mav = new ModelAndView();
+		userInfo = (UserVO) session.getAttribute("userInfo");
+
+		if(!userInfo.getUserId().equals(rDomain.getUserId())) {
+			rDomain.setUserId(userInfo.getUserId());
+		}
+		
 		mav.addObject("rtn", ReservationRepository.setReserve(rDomain));
 		mav.setViewName("jsonView");
 		logger.debug("===================================revCheckOutViewControllerEnd====================================");
@@ -118,12 +119,16 @@ public class ReservationController {
 	}
 	
 	/** 予約履歴　*/
-	//　臨時ログイン処理し
-	//public ModelAndView revHistoryView(@ModelAttribute("CommonVO") CommonVO cDomain) throws Exception {
 	@RequestMapping(value = "/reservation/userHistory", method = RequestMethod.GET)
-	public ModelAndView revHistoryView(@ModelAttribute("ReservationVO") ReservationVO rDomain) throws Exception {	
+	public ModelAndView revHistoryView(@ModelAttribute("ReservationVO") ReservationVO rDomain, UserVO userInfo, HttpSession session) throws Exception {	
 		logger.debug("======================================revHistoryViewStart===================================");
 		ModelAndView mav = new ModelAndView();
+		userInfo = (UserVO) session.getAttribute("userInfo");
+		
+		if(!userInfo.getUserId().equals(rDomain.getUserId())) {
+			rDomain.setUserId(userInfo.getUserId());
+		}
+		
 		mav.addObject("rtn", ReservationRepository.getReserveHistory(rDomain));
 		mav.setViewName("reservation/userHistory");
 		logger.debug("======================================revHistoryViewEnd=====================================");
@@ -131,9 +136,15 @@ public class ReservationController {
 	}
 	
 	@RequestMapping(value = "/reservation/userCancel", method = RequestMethod.POST)
-	public ModelAndView revCancel(@ModelAttribute("ReservationVO") ReservationVO rDomain) throws Exception {	
+	public ModelAndView revCancel(@ModelAttribute("ReservationVO") ReservationVO rDomain,UserVO userInfo, HttpSession session) throws Exception {	
 		logger.debug("======================================revCancelStart===================================");
 		ModelAndView mav = new ModelAndView();
+		userInfo = (UserVO) session.getAttribute("userInfo");
+		
+		if(!userInfo.getUserId().equals(rDomain.getUserId())) {
+			rDomain.setUserId(userInfo.getUserId());
+		}
+		
 		mav.addObject("rtn", ReservationRepository.setReserveCancel(rDomain));
 		mav.setViewName("redirect:/reservation/userHistory");
 		logger.debug("======================================revCancelEnd=====================================");
