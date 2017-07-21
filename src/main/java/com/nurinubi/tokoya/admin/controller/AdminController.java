@@ -18,23 +18,13 @@ import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.nurinubi.tokoya.admin.domain.StylistVO;
-import com.nurinubi.tokoya.admin.repository.AdminRepository;
-import com.nurinubi.tokoya.board.domain.BoardVO;
-import com.nurinubi.tokoya.common.domain.CommandMap;
-import com.nurinubi.tokoya.reservation.domain.ReservationVO;
-import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
-
-
 
 /**
 * @Class Name : AdminController.java.java

@@ -30,7 +30,8 @@
 
 $(function() {
 $("#search").on("click", function() {
-	var stylist=;
+	var stylist=document.getElementById("stylist").options.value;
+	console.log(stylist);
 	var date ="";
 	$.ajax({
 	type : "POST",
