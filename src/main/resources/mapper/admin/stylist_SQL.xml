@@ -26,7 +26,11 @@
     
     <!-- スタイリスト削除確認 -->
     <select id="judgeStylist" resultType="StylistVO">
-    	select * from MSTSTYLIST where STYLISTSTATUS=0 and exists (select STYLISTID from TRNRESERVATION where MSTSTYLIST.STYLISTID=#{stylistId})
+    	select * from MSTSTYLIST inner join TRNRESERVATION
+		on MSTSTYLIST.STYLISTID = TRNRESERVATION.STYLISTID
+		where MSTSTYLIST.STYLISTSTATUS=0 
+		and MSTSTYLIST.STYLISTID=#{id}
+		and TRNRESERVATION.RESERVATIONDATE > NOW()
     </select>
     
     <!-- スタイリスト更新 -->

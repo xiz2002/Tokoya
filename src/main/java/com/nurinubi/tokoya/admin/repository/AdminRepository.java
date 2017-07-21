@@ -18,6 +18,9 @@ public interface AdminRepository {
 	//スタイリスト詳細処理
 	List<StylistVO> getStylistDetail(String id);
 	
+	//スタイリスト削除確認（詳細画面にて判定）
+	List<StylistVO> judgeStylist(String id);
+	
 	//スタイリスト追加処理
 	void insertStylist(Map<String, Object> map) throws Exception;
 	
@@ -27,8 +30,8 @@ public interface AdminRepository {
 	//スタイリストステータス削除
 	int upStylistStatus(StylistVO styvo);
 	
-	//スタイリスト削除確認
-	List<StylistVO> judgeStylist(StylistVO styvo);
+	//スタイリスト削除確認（削除前に確認）
+	//List<StylistVO> judgeStylist(StylistVO styvo);
 	
 	//スタイリスト更新処理
 	int upStylist(StylistVO styvo);
