@@ -213,36 +213,6 @@ public class AdminController {
 		return mv;
 	}
 	
-	/**
-	 * スタイリスト休暇追加
-	 * @return ModelAndView mav
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/admin/stylist/addSchedule", method = RequestMethod.GET)
-	public ModelAndView getVacationSetStylist() throws Exception {
-		logger.info("====================================getStylistForVacationStart======================================");
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("result", adminRepository.getStylistList());
-		mav.setViewName("admin/stylist/addSchedule");
-		logger.info("====================================getStylistForVacationEnd--======================================");
-		return mav;
-	}
-	
-	/**
-	 * スタイリスト休暇追加
-	 * @return ModelAndView mav
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/admin/stylist/getStyBusyDate", method = RequestMethod.POST)
-	public ModelAndView getStyBusyDate(@RequestParam Map<String, Object> commandMap) throws Exception {
-		logger.info("====================================getStyBusyDateStart======================================");
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("result", adminRepository.getStyBusyDate(commandMap));
-		mav.setViewName("jsonView");
-		logger.info("====================================getStyBusyDateEnd--======================================");
-		return mav;
-	}
-	
 	@RequestMapping(value = "/admin/stylist/schedule", method = RequestMethod.GET)
 	public String stylistSchedule(Model model) throws Exception {
 		List<Map<String, Object>> reservation = reservationRepository.getReservationListByToday();
@@ -252,7 +222,6 @@ public class AdminController {
 		for(int i=2015; i<=thisYear+1; i++) {
 			yearList.add(String.valueOf(i));
 		}
-		System.out.println(yearList.get(0));
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("stylist", adminRepository.getStylistList());
 		model.addAttribute("month", month);
@@ -263,9 +232,20 @@ public class AdminController {
 	@RequestMapping(value="/admin/stylist/schedule.do", method = RequestMethod.POST)
 	public ModelAndView searchSchedule(@RequestParam String date, @RequestParam String stylist) throws Exception{
 		ModelAndView mav = new ModelAndView(); 
-		System.out.println("=========================schedule!!!!!!!!!!");
 		mav.addObject("data", adminRepository.getStylistSchedule(date, stylist));
 		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/admin/addSchedule.do", method = RequestMethod.POST)
+	public ModelAndView addSchedule(@RequestParam String off, @RequestParam String StylistId) throws Exception {
+		ModelAndView mav = new ModelAndView(); 
+		ScheduleVO vo = new ScheduleVO();
+		vo.setOffDate(off);
+		vo.setStylistId(StylistId);
+		mav.addObject("result", adminRepository.addSchedule(vo));
+		mav.setViewName("jsonView");
+		System.out.println("================!!!!!!!"+mav);
 		return mav;
 	}
 }

@@ -47,4 +47,5 @@ public interface ReservationRepository {
 	List<ReservationVO> getReserveHistory(ReservationVO rDomain);
 	
 	int setReserveCancel(ReservationVO rDomain);
+	
 }

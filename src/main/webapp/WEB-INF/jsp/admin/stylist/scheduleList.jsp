@@ -30,9 +30,11 @@
 
 $(function() {
 $("#search").on("click", function() {
+	$.datetimepicker.setLocale('ja');
 	var year = document.getElementById("year").value;
 	var month = document.getElementById("month").value;
-	var lastDay = setLastDay(year, month)
+	var lastDay = setLastDay(year, month);
+	var firstDay = setFirstDay(year, month);
 	var t = new Date(year+"-"+month);
 	var paramDate = year+month;
 	var paramStylist=document.getElementById("stylist").value;
@@ -57,9 +59,9 @@ $("#search").on("click", function() {
 			}
 			$('#DatePicker').datetimepicker({
 				value: t,
-				//minDate: t, 
+				minDate: firstDay, 
 				maxDate: lastDay,
-				format:'Ymd',
+				format:'Y/m/d',
 				todayButton: false,
 				timepicker:false,
 				inline: true,
@@ -72,12 +74,41 @@ $("#search").on("click", function() {
 		}
 	});
 });
+
+$("#add").on("click", function() {
+	var date = $("#DatePicker").val();
+	var stylist = $("#stylist").val();
+	if(confirm(stylist+"の休みを追加しますか？")){
+	$.ajax({
+		type : "POST",
+		dataType : "JSON",
+		data : {
+			off : date,
+			StylistId : stylist
+		},
+		url : "/admin/addSchedule.do",
+		error : function(data) {
+			console.log(data);
+			console.log("Error : ");
+		},
+		success : function(data) {
+			document.getElementById("search").click();
+		}
+		});
+	}
+});
 });
 
 function setLastDay(year, month){
-	var lastday = new Date( (new Date(year, month, 1))-1 );
+	var lastday = new Date((new Date(year, month, 1))-1);
 	return lastday;
 }
+
+function setFirstDay(year, month){
+	var firstday = new Date((new Date(year, month-1, 1)));
+	return firstday;
+}
+
 </script>
 <style>
 table, th, td {
@@ -144,7 +175,7 @@ table, th, td {
 		</div>
 		<div id="button">
 			<input type="button" id="add" value="追加">
-			<input type="button" id="add" value="修正">
+			<input type="button" id="modify" value="修正">
 		</div>
 	</div>
 </body>

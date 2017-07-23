@@ -1,5 +1,6 @@
 package com.nurinubi.tokoya.admin.repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -59,5 +60,7 @@ public interface AdminRepository {
 	
 	//スタイリストスケジュール
 	Map<String, Object> getStylistSchedule(String date, String stylist) throws Exception;
+	
+	String addSchedule(ScheduleVO vo) throws Exception;
 
 }

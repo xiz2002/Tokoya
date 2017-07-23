@@ -1,5 +1,6 @@
 package com.nurinubi.tokoya.admin;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -127,6 +128,19 @@ public class AdminApplication implements AdminRepository {
 		result.put("offDate", offDate);
 		result.put("reservation", reservation);
 		return result;
+	}
+
+	@Override
+	public String addSchedule(ScheduleVO vo) throws Exception {
+		Map<String, Object> param = new HashMap<String, Object>();
+		Integer i = sqlSession.selectOne("getScheduleCount");
+		i = new Integer(i.intValue() + 1);
+		vo.setScheduleId(i.toString());
+		param.put("scheduleId", vo.getScheduleId());
+		param.put("stylistId", vo.getStylistId());
+		param.put("offDate", vo.getOffDate());
+		this.sqlSession.insert("addSchedule", param);
+		return "true";
 	}
 	
 }
