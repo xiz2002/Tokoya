@@ -124,8 +124,6 @@ table, th, td {
 		        $('#board_list').html(result);
 		    }
 		});
-		
-		
 	}
 </script>
 <div id="board_list">

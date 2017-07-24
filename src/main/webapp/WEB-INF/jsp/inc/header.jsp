@@ -16,5 +16,5 @@
 	<link href="<c:url value="/css/main/custom.css"/>" rel="stylesheet">
 	<%@ include file="script.jsp" %>
 </head>
-	<%@ include file="top.jsp" %>
+	<%@ include file="top2.jsp" %>
 
