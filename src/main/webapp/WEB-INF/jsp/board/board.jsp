@@ -126,17 +126,25 @@ table, th, td {
 		});
 	}
 </script>
-<div id="board_list">
+<style>
+
+
+</style>
+<div class="col-md-12 col-sm-12 col-xs-12">
+<div id="x_content">
 	<div>
-		<table style="border: 1px solid;">
-			<tr>
-				<th>No</th>
-				<th>Title</th>
-				<th>登録日</th>
-				<th>備考</th>
+		<table id="datatable" class="table table-striped table-bordered dataTable no-footer">
+			<thead>
+			<tr role="row">
+				<th class="sorting_asc">No</th>
+				<th class="sorting">Title</th>
+				<th class="sorting">登録日</th>
+				<th class="sorting">備考</th>
 			</tr>
+			</thead>
+			<tbody>
 			<c:forEach var="item" items="${result}">
-				<tr>
+				<tr role="row" class="even">
 					<td>${item.noticeId }</td>
 					<td><a href="<c:url value='/board/view?id=${item.noticeId }'/>">${item.noticeTitle }</a></td>
 					<td><fmt:formatDate value="${item.registerDate }" type="time"
@@ -144,6 +152,7 @@ table, th, td {
 					<td></td>
 				</tr>
 			</c:forEach>
+			</tbody>
 		</table>
 	</div>
 	<!-- paging -->
@@ -162,4 +171,5 @@ table, th, td {
 	</div>
 	</c:when>
 	</c:choose>
+</div>
 </div>

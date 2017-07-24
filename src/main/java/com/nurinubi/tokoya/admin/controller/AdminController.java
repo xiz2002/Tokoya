@@ -55,6 +55,12 @@ public class AdminController {
 	@Autowired
 	private ReservationRepository reservationRepository;
 	
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adminHome(Model model) throws Exception {
 		List<Map<String, Object>> reservation = reservationRepository.getReservationListByToday();
@@ -64,6 +70,7 @@ public class AdminController {
 		return "admin/admin";
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value = "/adminTest", method = RequestMethod.GET)
 	public String adminTest(Model model) throws Exception {
 		List<Map<String, Object>> reservation = reservationRepository.getReservationListByToday();
@@ -74,6 +81,14 @@ public class AdminController {
 	}
 	
 	
+=======
+	/**
+	 * 
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+>>>>>>> 5917df724bc6ff39cc560d8207804f009c17fd31
 	@RequestMapping(value = "/searchReservation.do", method = RequestMethod.POST)
 	public ModelAndView serchReservation(@RequestParam String param) throws Exception {
 		System.out.println("------------------test----------------");
@@ -96,7 +111,7 @@ public class AdminController {
 	@RequestMapping(value = "/admin/stylist/add", method = RequestMethod.GET)
 	public String addStylist() {
 		//表示するページ設定
-		System.out.println("=====================");
+		//System.out.println("=====================");
 		return "admin/stylist/addStylist";
 	}
 	
@@ -140,8 +155,8 @@ public class AdminController {
 	
 	/**
 	 *　スタイリスト追加
-	 * @param cmdMap
-	 * @return
+	 * @param cmdMap 追加するスタイリストの情報
+	 * @return　対象のスタイリストの追加
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/admin/stylist/insertWrite.do", method = RequestMethod.POST)
@@ -156,7 +171,12 @@ public class AdminController {
 		return mv;
 	}
 	
-	// スタイリストの削除処理
+	/**
+	 * スタイリスト削除処理
+	 * @param styvo 削除するスタイリスト情報
+	 * @return 対象のスタイリスト削除
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/admin/stylist/delete.do", method = RequestMethod.POST)
 	public ModelAndView delStylist(@ModelAttribute("StylistVO") StylistVO styvo)
 			throws Exception {
@@ -167,10 +187,10 @@ public class AdminController {
 		//String ans = adminRepository.judgeStylist(styvo).toString();
 		//System.out.println("///// ans:" + ans + " /////");
 		//if(ans == ""){
-			mv.addObject("rtn",adminRepository.upStylistStatus(styvo));
+		mv.addObject("rtn",adminRepository.upStylistStatus(styvo));
 		//}
 		mv.setViewName("redirect:/admin/stylist/management");
-		System.out.println("///// mv:" + mv + " /////");
+		//System.out.println("///// mv:" + mv + " /////");
 		logger.info("<--- スタイリストの削除処理終了 --->");
 		return mv;
 	}
@@ -253,6 +273,28 @@ public class AdminController {
 		vo.setStylistId(StylistId);
 		mav.addObject("result", adminRepository.addSchedule(vo));
 		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	/**
+	 * スタイリスト登録ＩＤ重複チェック
+	 * @param id　入力したのＩＤ
+	 * @return　mav
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/admin/checkId.do", method = RequestMethod.POST)
+	public ModelAndView checkStyId(@RequestParam String id) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String result = "error";
+		result = adminRepository.checkStyId(id);
+		System.out.println("result："+result);
+			if (result.equals("0")) {
+				result = "true";
+			} else if (result.equals("1")) {
+				result = "false";
+			}
+			mav.addObject("result", result);
+			mav.setViewName("jsonView");
 		return mav;
 	}
 }

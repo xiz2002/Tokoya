@@ -33,7 +33,8 @@ NoticeId : ${item.noticeId } <br/>
 <a href="/">ホーム</a>
 <c:choose>
 	<c:when test="${sessionScope.userInfo.userIsAdmin == 1}">
-		<a href="javascript:deleteBoard(${item.noticeId })"> // 削除</a>
+		//
+		<a href="javascript:deleteBoard(${item.noticeId })"> 削除</a>
 	</c:when>
 </c:choose>
 </div>
@@ -43,6 +44,9 @@ NoticeId : ${item.noticeId } <br/>
 </body>
 <script type="text/javascript">
 function deleteBoard(boardId){
+	if(confirm("削除しますか？")){
+		location.assign("/admin/deleteBoard.do?boardId="+boardId);	
+	}
 }
 </script>
 </html>
