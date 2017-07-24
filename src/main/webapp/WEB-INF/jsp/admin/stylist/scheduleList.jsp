@@ -29,45 +29,104 @@
 <script type="text/javascript">
 
 $(function() {
-	var d = new Date();
-	var t = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
-	$('#DatePicker').datetimepicker({
-		value: t,
-		format:'Ymd',
-		todayButton: false,
-		timepicker:false,
-		inline: true,
-		yearStart: 2015,
-		yearEnd: d.getFullYear()+1,
-		
+	var f_date = new Date();
+	var f_year = f_date.getFullYear();
+	var f_month = f_date.getMonth()+1;
+	$("#year").val(f_year);
+	if(f_month<10){
+	$("#month").val("0"+f_month);
+	}else{
+	$("#month").val(f_month);
+	}
+	
+	$("#search").on("click", function() {
+		$.datetimepicker.setLocale('ja');
+		var year = document.getElementById("year").value;
+		var month = document.getElementById("month").value;
+		var lastDay = setLastDay(year, month);
+		var firstDay = setFirstDay(year, month);
+		var t = new Date(year+"-"+month);
+		var paramDate = year+month;
+		var paramStylist=document.getElementById("stylist").value;
+		$.ajax({
+			type:"POST",
+			dateType:"JSON",
+			data:{date:paramDate, stylist:paramStylist},
+			url:"/admin/stylist/schedule.do",
+			error : function(data) {
+				alert("error");
+			},
+			success : function(data) {
+				var data = JSON.stringify(data);
+				var obj = JSON.parse(data);
+				var date = "";
+				console.log(obj.data);
+				for(i in obj.data.offDate){
+						date += "'"+obj.data.offDate[i].offDate+"',";
+				}
+				for(j in obj.data.reservation){
+						date += "'"+obj.data.reservation[j].reservationDate+"',";
+				}
+				$('#DatePicker').datetimepicker({
+					value: t,
+					minDate: firstDay, 
+					maxDate: lastDay,
+					format:'Y/m/d',
+					todayButton: false,
+					timepicker:false,
+					inline: true,
+					yearStart: t.getFullYear(),
+					yearEnd: t.getFullYear()-1,
+					monthStart:t.getMonth() + 1,
+					monthEnd:t.getMonth(),
+					disabledDates: date, formatDate:'d.m.Y'
+				});
+			}
+		});
 	});
-$("#search").on("click", function() {
-	var year = document.getElementById("year").value;
-	var month = document.getElementById("month").value;
-	var paramDate = year+month.substr(0, month.length-1);
-	var paramStylist=document.getElementById("stylist").value;
+	document.getElementById("search").click();
+});
+
+$("#add").on("click", function() {
+	var date = $("#DatePicker").val();
+	var stylist = $("#stylist").val();
+	if(confirm(stylist+"の休みを追加しますか？")){
 	$.ajax({
-		type:"POST",
-		dateType:"JSON",
-		data:{date:paramDate, stylist:paramStylist},
-		url:"/admin/stylist/schedule.do",
+		type : "POST",
+		dataType : "JSON",
+		data : {
+			off : date,
+			StylistId : stylist
+		},
+		url : "/admin/addSchedule.do",
 		error : function(data) {
+			console.log(data);
+			console.log("Error : ");
 		},
 		success : function(data) {
 			var data = JSON.stringify(data);
 			var obj = JSON.parse(data);
-			var date;
-			console.log(obj);
-			for(i in obj.data){
-				date += obj.data[i].offDate;
+			console.log(obj.result);
+			if(obj.result == 1){
+			document.getElementById("search").click();
+			}else{
+				alert("Error!!");
 			}
-			//disabledDates: ['01.01.2017'], formatDate:'d.m.Y'
-			date = "<input type='text'>"+date+"</input>";
-			$("#test").append(date);
 		}
-	});
+		});
+	}
 });
-});
+
+function setLastDay(year, month){
+	var lastday = new Date((new Date(year, month, 1))-1);
+	return lastday;
+}
+
+function setFirstDay(year, month){
+	var firstday = new Date((new Date(year, month-1, 1)));
+	return firstday;
+}
+
 </script>
 <style>
 table, th, td {
@@ -75,7 +134,7 @@ table, th, td {
 	border-collapse: collapse;
 }
 
-[data-status="1"] {
+/* [data-status="1"] {
 	background-color: red;
 }
 
@@ -85,7 +144,7 @@ table, th, td {
 
 [data-status="3"] {
 	background-color: yellow;
-}
+} */
 </style>
 </head>
 <body>
@@ -104,14 +163,16 @@ table, th, td {
 				<option value="${items }">${items }</option>
 				</c:forEach>
 			</select>
+			<span>年</span>
 			<select id="month">
 			<c:forEach var="items" items="${month }">
 				<option value="${items }">${items }</option>
 				</c:forEach>
 			</select>
+			<span>月</span>
 			 <input type="button" id="search" value="検索">
 		</div>
-		<div>
+		<!-- <div>
 			<div
 				style="margin-left: 2px; float: left; background-color: red; width: 10%;">&nbsp</div>
 			<div style="margin-left: 2px; float: left; width: auto;">
@@ -127,13 +188,11 @@ table, th, td {
 			<div style="margin-left: 2px; float: left; width: auto;">
 				<span> : 未定</span>
 			</div>
-		</div>
+		</div> -->
 		<div id="DatePicker">
 		</div>
-		<div id="test"></div>
 		<div id="button">
 			<input type="button" id="add" value="追加">
-			<input type="button" id="add" value="修正">
 		</div>
 	</div>
 </body>

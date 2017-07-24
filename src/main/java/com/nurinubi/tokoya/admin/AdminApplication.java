@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.nurinubi.tokoya.admin.domain.ScheduleVO;
 import com.nurinubi.tokoya.admin.domain.StylistVO;
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
-import com.nurinubi.tokoya.board.domain.BoardVO;
+import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -115,12 +115,29 @@ public class AdminApplication implements AdminRepository {
 	}
 
 	@Override
-	public List<ScheduleVO> getStylistSchedule(String date, String stylist) throws Exception {
+	public Map<String, Object> getStylistSchedule(String date, String stylist) throws Exception {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("date", date+"01");
 		param.put("stylistId", stylist);
 		System.out.println(date);
-		List<ScheduleVO> result = this.sqlSession.selectList("getStylistSchedule", param);
+		List<ScheduleVO> offDate = this.sqlSession.selectList("getStylistSchedule", param);
+		List<ReservationVO> reservation = this.sqlSession.selectList("getReservationByStylist", param);
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("offDate", offDate);
+		result.put("reservation", reservation);
+		return result;
+	}
+
+	@Override
+	public int addSchedule(ScheduleVO vo) throws Exception {
+		Map<String, Object> param = new HashMap<String, Object>();
+		Integer i = sqlSession.selectOne("getScheduleCount");
+		i = new Integer(i.intValue() + 1);
+		vo.setScheduleId(i.toString());
+		param.put("scheduleId", vo.getScheduleId());
+		param.put("stylistId", vo.getStylistId());
+		param.put("offDate", vo.getOffDate());
+		int result = this.sqlSession.insert("addSchedule", param);
 		return result;
 	}
 	
