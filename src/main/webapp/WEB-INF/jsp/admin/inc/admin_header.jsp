@@ -12,12 +12,13 @@
 	<link href="<c:url value="/css/font-awesome/font-awesome.css"/>" rel="stylesheet">
 	<link href="<c:url value="/css/nprogress/nprogress.css"/>" rel="stylesheet">
 	<link href="<c:url value="/css/admin/custom.css"/>" rel="stylesheet">
+	<link href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" rel="stylesheet">
+	<link href="<c:url value="/css/jquery.datetimepicker.css"/>" rel="stylesheet"/>
 	
 	<%@ include file="admin_script_header.jsp" %>
 	
 	<title>ToKoYa! | Admin</title>
 
 </head>
-
 	<%@ include file="admin_top.jsp" %>
 	<%@ include file="admin_navi.jsp" %>

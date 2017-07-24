@@ -146,18 +146,15 @@ table, th, td {
 				id="search" value="Search">
 		</div>
 		<div>
-			<div
-				style="margin-left: 2px; float: left; background-color: red; width: 10%;">&nbsp</div>
+			<div style="margin-left: 2px; float: left; background-color: red; width: 10%;">&nbsp</div>
 			<div style="margin-left: 2px; float: left; width: auto;">
 				<span> : 予約</span>
 			</div>
-			<div
-				style="margin-left: 2px; float: left; background-color: skyblue; width: 10%;">&nbsp</div>
+			<div style="margin-left: 2px; float: left; background-color: skyblue; width: 10%;">&nbsp</div>
 			<div style="margin-left: 2px; float: left; width: auto;">
 				<span> : 予約キャンセル</span>
 			</div>
-			<div
-				style="margin-left: 2px; float: left; background-color: yellow; width: 10%;">&nbsp</div>
+			<div style="margin-left: 2px; float: left; background-color: yellow; width: 10%;">&nbsp</div>
 			<div style="margin-left: 2px; float: left; width: auto;">
 				<span> : 予約終了</span>
 			</div>

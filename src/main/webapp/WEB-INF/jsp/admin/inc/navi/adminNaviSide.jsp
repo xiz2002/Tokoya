@@ -3,8 +3,7 @@
 <!-- menu profile quick info -->
 <div class="profile clearfix">
 	<div class="profile_info" align="center">
-		<span>ようこそ、</span>
-		<h2>管理者様</h2>
+		<h2>ようこそ、管理者様</h2>
 	</div>
 </div>
 <!-- /menu profile quick info -->
