@@ -69,8 +69,7 @@ public class AdminController {
 		model.addAttribute("time", time);
 		return "admin/admin";
 	}
-	
-<<<<<<< HEAD
+
 	@RequestMapping(value = "/adminTest", method = RequestMethod.GET)
 	public String adminTest(Model model) throws Exception {
 		List<Map<String, Object>> reservation = reservationRepository.getReservationListByToday();
@@ -80,15 +79,6 @@ public class AdminController {
 		return "admin/admin_contents";
 	}
 	
-	
-=======
-	/**
-	 * 
-	 * @param param
-	 * @return
-	 * @throws Exception
-	 */
->>>>>>> 5917df724bc6ff39cc560d8207804f009c17fd31
 	@RequestMapping(value = "/searchReservation.do", method = RequestMethod.POST)
 	public ModelAndView serchReservation(@RequestParam String param) throws Exception {
 		System.out.println("------------------test----------------");
