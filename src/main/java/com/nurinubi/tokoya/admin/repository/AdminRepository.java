@@ -1,6 +1,5 @@
 package com.nurinubi.tokoya.admin.repository;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -8,8 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.nurinubi.tokoya.admin.domain.ScheduleVO;
 import com.nurinubi.tokoya.admin.domain.StylistVO;
-
-import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 
 /**
 * @Class Name : AdminController.java.java
@@ -61,6 +58,6 @@ public interface AdminRepository {
 	//スタイリストスケジュール
 	Map<String, Object> getStylistSchedule(String date, String stylist) throws Exception;
 	
-	String addSchedule(ScheduleVO vo) throws Exception;
+	int addSchedule(ScheduleVO vo) throws Exception;
 
 }

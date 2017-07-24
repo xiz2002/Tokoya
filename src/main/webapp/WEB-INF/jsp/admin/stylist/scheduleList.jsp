@@ -29,50 +29,62 @@
 <script type="text/javascript">
 
 $(function() {
-$("#search").on("click", function() {
-	$.datetimepicker.setLocale('ja');
-	var year = document.getElementById("year").value;
-	var month = document.getElementById("month").value;
-	var lastDay = setLastDay(year, month);
-	var firstDay = setFirstDay(year, month);
-	var t = new Date(year+"-"+month);
-	var paramDate = year+month;
-	var paramStylist=document.getElementById("stylist").value;
-	$.ajax({
-		type:"POST",
-		dateType:"JSON",
-		data:{date:paramDate, stylist:paramStylist},
-		url:"/admin/stylist/schedule.do",
-		error : function(data) {
-			alert("error");
-		},
-		success : function(data) {
-			var data = JSON.stringify(data);
-			var obj = JSON.parse(data);
-			var date = "";
-			console.log(obj.data);
-			for(i in obj.data.offDate){
-					date += "'"+obj.data.offDate[i].offDate+"',";
+	var f_date = new Date();
+	var f_year = f_date.getFullYear();
+	var f_month = f_date.getMonth()+1;
+	$("#year").val(f_year);
+	if(f_month<10){
+	$("#month").val("0"+f_month);
+	}else{
+	$("#month").val(f_month);
+	}
+	
+	$("#search").on("click", function() {
+		$.datetimepicker.setLocale('ja');
+		var year = document.getElementById("year").value;
+		var month = document.getElementById("month").value;
+		var lastDay = setLastDay(year, month);
+		var firstDay = setFirstDay(year, month);
+		var t = new Date(year+"-"+month);
+		var paramDate = year+month;
+		var paramStylist=document.getElementById("stylist").value;
+		$.ajax({
+			type:"POST",
+			dateType:"JSON",
+			data:{date:paramDate, stylist:paramStylist},
+			url:"/admin/stylist/schedule.do",
+			error : function(data) {
+				alert("error");
+			},
+			success : function(data) {
+				var data = JSON.stringify(data);
+				var obj = JSON.parse(data);
+				var date = "";
+				console.log(obj.data);
+				for(i in obj.data.offDate){
+						date += "'"+obj.data.offDate[i].offDate+"',";
+				}
+				for(j in obj.data.reservation){
+						date += "'"+obj.data.reservation[j].reservationDate+"',";
+				}
+				$('#DatePicker').datetimepicker({
+					value: t,
+					minDate: firstDay, 
+					maxDate: lastDay,
+					format:'Y/m/d',
+					todayButton: false,
+					timepicker:false,
+					inline: true,
+					yearStart: t.getFullYear(),
+					yearEnd: t.getFullYear()-1,
+					monthStart:t.getMonth() + 1,
+					monthEnd:t.getMonth(),
+					disabledDates: date, formatDate:'d.m.Y'
+				});
 			}
-			for(j in obj.data.reservation){
-					date += "'"+obj.data.reservation[j].reservationDate+"',";
-			}
-			$('#DatePicker').datetimepicker({
-				value: t,
-				minDate: firstDay, 
-				maxDate: lastDay,
-				format:'Y/m/d',
-				todayButton: false,
-				timepicker:false,
-				inline: true,
-				yearStart: t.getFullYear(),
-				yearEnd: t.getFullYear()-1,
-				monthStart:t.getMonth() + 1,
-				monthEnd:t.getMonth(),
-				disabledDates: date, formatDate:'d.m.Y'
-			});
-		}
+		});
 	});
+	document.getElementById("search").click();
 });
 
 $("#add").on("click", function() {
@@ -92,11 +104,17 @@ $("#add").on("click", function() {
 			console.log("Error : ");
 		},
 		success : function(data) {
+			var data = JSON.stringify(data);
+			var obj = JSON.parse(data);
+			console.log(obj.result);
+			if(obj.result == 1){
 			document.getElementById("search").click();
+			}else{
+				alert("Error!!");
+			}
 		}
 		});
 	}
-});
 });
 
 function setLastDay(year, month){
@@ -175,7 +193,6 @@ table, th, td {
 		</div>
 		<div id="button">
 			<input type="button" id="add" value="追加">
-			<input type="button" id="modify" value="修正">
 		</div>
 	</div>
 </body>

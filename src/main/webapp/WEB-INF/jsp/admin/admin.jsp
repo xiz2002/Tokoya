@@ -63,7 +63,7 @@ $("#search").on("click",function() {
 		url : "<c:url value='/searchReservation.do'/>",
 		error : function(data) {
 			console.log(data);
-			console.log("Error : " + Fail);
+			console.log("Error : ");
 		},
 		success : function(data) {
 			console.log(data);
@@ -72,13 +72,16 @@ $("#search").on("click",function() {
 			var data = JSON.stringify(data);
 			var obj = JSON.parse(data);
 			var time = [ "09", "10", "11", "12", "13", "14", "15", "16", "17", "18" ];
+			var x=8;
 			var status = "";
 			for ( var i in time) {
+				x++;
+				console.log(x);
 				for ( var j in obj.stylist) {
 					for ( var k in obj.reservation) {
 						if (obj.stylist[j].stylistName == obj.reservation[k].STYLISTNAME) {
 							var id = time[i] + ":00" + obj.stylist[j].stylistName;
-							if (time[i] == obj.reservation[k].RESERVATIONDATE.hours) {
+							if (time[i] == obj.reservation[k].RESERVATIONDATE.hours||(x > obj.reservation[k].RESERVATIONDATE.hours&&x<obj.reservation[k].RESERVATIONENDDATE.hours)) {
 								if (obj.reservation[k].RESERVATIONSTATUS == 1) {
 									document.getElementById(id).setAttribute("data-status", 1);
 								}
@@ -96,6 +99,7 @@ $("#search").on("click",function() {
 			}
 		});
 	});
+	document.getElementById("search").click();
 });
 function cleanTd(data) {
 	var time = [ "09", "10", "11", "12", "13", "14", "15", "16", "17", "18" ];
@@ -132,7 +136,8 @@ table, th, td {
 	<%@include file="./inc/top.jsp"%>
 	<%@include file="./inc/navi.jsp"%>
 	<div id="scTime"></div>
-	<div id="admin_body" style="float: left; border: 1px solid;">
+	<div id="admin_body">
+	<div id="admin_datepicker" style="float: left; border: 1px solid;">
 		<div>
 			<h3>予約状況</h3>
 		</div>
@@ -157,7 +162,9 @@ table, th, td {
 				<span> : 予約終了</span>
 			</div>
 		</div>
-		<div id="div_rev">
+		</div>
+		<div id = "admin_table" style="float:left; margin-left:20px;">
+		<div id="div_rev" style="float:left;">
 			<table id="tb_rev">
 				<tr>
 					<th><span>時間</span></th>
@@ -169,61 +176,13 @@ table, th, td {
 					<tr>
 						<td>${item}</td>
 						<c:forEach var="stList" items="${stylist}">
-							<c:set var="flag" value="${0}" />
-							<c:set var="count" value="${0}" />
-							<c:set var="total" value="${0}" />
-							<c:set var="ctIn" value="${0}" />
-							<c:forEach var="chek" items="${reservation}">
-								<c:if test="${stList.stylistName==chek.STYLISTNAME }">
-									<c:set var="count" value="${count+1}" />
-								</c:if>
-								<c:set var="total" value="${total+1 }"></c:set>
-							</c:forEach>
-							<c:if test="${count > 0 }">
-								<c:set var="ctIn" value="${0}" />
-								<c:forEach var="reList" items="${reservation}">
-									<c:set var="ctIn" value="${ctIn+1 }" />
-									<c:set var="scTime">
-										<fmt:formatDate value="${reList.RESERVATIONDATE}" type="time"
-											pattern="HH:mm" />
-									</c:set>
-									<c:if test="${flag==0}">
-										<c:if test="${stList.stylistName eq reList.STYLISTNAME }">
-											<c:choose>
-												<c:when test="${item eq scTime}">
-													<td id="${item}${stList.stylistName}"
-														data-status="${reList.RESERVATIONSTATUS}"></td>
-													<c:set var="flag" value="${1}" />
-												</c:when>
-												<c:when test="${item ne scTime}">
-													<c:choose>
-														<c:when test="${total > ctIn}">
-														</c:when>
-														<c:when test="${total eq ctIn}">
-															<td id="${item}${stList.stylistName}" data-status="${0}"></td>
-														</c:when>
-													</c:choose>
-												</c:when>
-											</c:choose>
-										</c:if>
-										<c:if test="${stList.stylistName ne reList.STYLISTNAME }">
-											<c:choose>
-												<c:when test="${total eq ctIn and total eq ctIn}">
-													<td id="${item}${stList.stylistName}" data-status="${0}"></td>
-												</c:when>
-											</c:choose>
-										</c:if>
-									</c:if>
-								</c:forEach>
-							</c:if>
-							<c:if test="${count==0 }">
-								<td id="${item}${stList.stylistName}"></td>
-							</c:if>
+						<td id="${item}${stList.stylistName}" data-status="${0}"></td>
 						</c:forEach>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

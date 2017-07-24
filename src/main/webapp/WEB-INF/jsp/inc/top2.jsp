@@ -9,19 +9,17 @@
 					<nav>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="">
-								<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"aria-expanded="false">
+								<a href= "javascript:void(0);" class="user-profile dropdown-toggle" data-toggle="dropdown"aria-expanded="false"></a>
 								<c:choose>
 								<c:when test="${not empty sessionScope.userInfo.userId}">
 									${sessionScope.userInfo.userId}
 									<span class=" fa fa-angle-down"></span>
-								</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
-									<li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+									<li><a href="/logout.do"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
 								</ul>
 								</c:when>
 								<c:otherwise>
 								Guest
-								</a>
 								</c:otherwise>
 								</c:choose>
 							</li>
@@ -30,3 +28,5 @@
 				</div>
 			</div>
 			<!-- /top navigation -->
+			</div>
+			</div>

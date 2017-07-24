@@ -245,7 +245,6 @@ public class AdminController {
 		vo.setStylistId(StylistId);
 		mav.addObject("result", adminRepository.addSchedule(vo));
 		mav.setViewName("jsonView");
-		System.out.println("================!!!!!!!"+mav);
 		return mav;
 	}
 }

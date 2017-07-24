@@ -1,6 +1,5 @@
 package com.nurinubi.tokoya.admin;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import com.nurinubi.tokoya.admin.domain.ScheduleVO;
 import com.nurinubi.tokoya.admin.domain.StylistVO;
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
-import com.nurinubi.tokoya.board.domain.BoardVO;
 import com.nurinubi.tokoya.reservation.domain.ReservationVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,7 +129,7 @@ public class AdminApplication implements AdminRepository {
 	}
 
 	@Override
-	public String addSchedule(ScheduleVO vo) throws Exception {
+	public int addSchedule(ScheduleVO vo) throws Exception {
 		Map<String, Object> param = new HashMap<String, Object>();
 		Integer i = sqlSession.selectOne("getScheduleCount");
 		i = new Integer(i.intValue() + 1);
@@ -139,8 +137,8 @@ public class AdminApplication implements AdminRepository {
 		param.put("scheduleId", vo.getScheduleId());
 		param.put("stylistId", vo.getStylistId());
 		param.put("offDate", vo.getOffDate());
-		this.sqlSession.insert("addSchedule", param);
-		return "true";
+		int result = this.sqlSession.insert("addSchedule", param);
+		return result;
 	}
 	
 }
