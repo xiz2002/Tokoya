@@ -125,7 +125,7 @@ function checkValidation(){
 	var blank_pattern = /[\s]/g;
 	var email_pattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
 	var phone_pattern = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
-	var pass_pattern = /^[a-z0-9]{6,20}$/
+	var pass_pattern = /^[a-z0-9]{4,20}$/
 	
 	//name check
 	if((name.length==0||name.length>20)||name==null||!checkCode(name)||name_pattern.test(name)){
@@ -233,10 +233,10 @@ function checkCode(param){
 						<td><span>パスワード</span></td>
 						<td><input type="password" id="pass" class="pass"
 							name="USERPASS"></td>
-						<td><span style="color: red;">＊6文字以上半角英数字</span></td>
+						<td><span style="color: red;">＊4文字以上半角英数字</span></td>
 					</tr>
 					<tr id="pass_error">
-					<td colspan="3"><span style="color:red">*パスワードは6文字以上半角英数字を入力してください。</span></td>
+					<td colspan="3"><span style="color:red">*パスワードは4文字以上半角英数字を入力してください。</span></td>
 					</tr>
 					<tr>
 						<td><span>パスワードチェック</span></td>

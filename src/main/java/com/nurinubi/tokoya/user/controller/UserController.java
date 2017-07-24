@@ -1,8 +1,6 @@
 package com.nurinubi.tokoya.user.controller;
 
-import java.util.Collection;
 import java.util.Map;
-import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import com.nurinubi.tokoya.common.domain.CommandMap;
 import com.nurinubi.tokoya.user.domain.UserVO;
 import com.nurinubi.tokoya.user.repository.UserRepository;
-import com.nurinubi.tokoya.main.controller.MainController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

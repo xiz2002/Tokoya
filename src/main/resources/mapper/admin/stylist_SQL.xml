@@ -14,10 +14,6 @@
 		VALUES (#{STYLISTID}, #{STYLISTNAME},0)
 	</insert>
 
-
-	<!-- スタイリスト削除 <delete id="delStylist" parameterType="StylistVO"> DELETE 
-		FROM MSTSTYLIST WHERE STYLISTID=#{stylistId} AND STYLISTSTATUS=0 </delete> -->
-
 	<!-- スタイリスト削除 -->
 	<update id="upStylistStatus" parameterType="StylistVO">
 		UPDATE MSTSTYLIST SET STYLISTSTATUS=1 WHERE STYLISTID=#{stylistId}
@@ -44,20 +40,7 @@
 		SELECT * FROM MSTSTYLIST WHERE STYLISTID=#{id}
 	</select>
 
-
-	<!-- スタイリスト追加 -->
-	<!-- 휴가정보 -->
-	<select id="getStyVaList" resultType="Map">
-		SELECT
-		OFFDATE
-		FROM
-		TRNSTYLISTSCHEDULE
-		<!--WHERE STYLISTID = #{stylistId} -->
-		<!-- SELECT DISTINCT(DATE(OFFDATE)) AS OFFDATE FROM TRNSTYLISTSCHEDULE 
-			WHERE <![CDATA[DATE(OFFDATE) > DATE(NOW());]]> AND STYLISTID = #{stylistId} -->
-	</select>
-
-	<!-- 예약정보 -->
+	<!-- 予約情報 -->
 	<select id="getStyReList" resultType="Map">
 		SELECT
 		DISTINCT(DATE(RESERVATIONDATE)) AS REVDATE

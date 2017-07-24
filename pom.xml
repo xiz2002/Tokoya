@@ -219,8 +219,10 @@
 			    <version>2.2</version>
 			    <configuration>
 					<url>http://192.168.1.58:8080/manager/text</url>
-					<server>Tokoya</server>
+					<!-- <server>Tokoya</server> -->
 					<path>/tokoya</path>
+					<username>tomcat</username>
+					<password>tomcat</password>
 					<charset>UTF-8</charset>
 					<uriEncoding>UTF-8</uriEncoding>
 				</configuration>

@@ -101,20 +101,6 @@ public class AdminApplication implements AdminRepository {
 	}	
 
 	@Override
-	public List<String> getStyBusyDate(Map<String,Object> commandMap) throws Exception {
-		logger.info("======================================getCourseListApplicationStart===================================");
-		logger.info(commandMap.toString());
-		List<String> styVa = this.sqlSession.selectList("getStyVaList", commandMap);
-		logger.info(styVa.toString());
-		List<String> styRe = this.sqlSession.selectList("getStyReList", commandMap);
-		logger.info(styRe.toString());
-		
-		logger.info("======================================getCourseListApplicationEnd=====================================");
-		return null;
-
-	}
-
-	@Override
 	public Map<String, Object> getStylistSchedule(String date, String stylist) throws Exception {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("date", date+"01");

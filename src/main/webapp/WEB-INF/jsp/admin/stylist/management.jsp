@@ -30,6 +30,7 @@
 		});
 	});
 </script>
+<body>
 <div class="container">
 	<div class="stylistmanagementform">
 		<form action="stylistmanagement" method="GET">
@@ -63,3 +64,4 @@
 		</form>
 	</div>
 </div>
+</body>

@@ -32,7 +32,14 @@ NoticeId : ${item.noticeId } <br/>
 登録日　：　<fmt:formatDate value="${item.registerDate }" type="time" pattern="yyyy-MM-dd" /> <br/>
 </c:forEach>
 <div>
-<a href="/home">ホーム</a>
+<a href="/">ホーム</a>
+<c:choose>
+	<c:when test="${sessionScope.userInfo.userIsAdmin == 1}">
+	<div>
+		<a href="/admin/delete.do">削除</a>
+	</div>
+	</c:when>
+</c:choose>
 </div>
 </div>
 </div>
