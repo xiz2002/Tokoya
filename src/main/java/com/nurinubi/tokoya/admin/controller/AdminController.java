@@ -69,15 +69,6 @@ public class AdminController {
 		model.addAttribute("time", time);
 		return "admin/admin";
 	}
-
-	@RequestMapping(value = "/adminTest", method = RequestMethod.GET)
-	public String adminTest(Model model) throws Exception {
-		List<Map<String, Object>> reservation = reservationRepository.getReservationListByToday();
-		model.addAttribute("reservation", reservation);
-		model.addAttribute("stylist", adminRepository.getStylistList());
-		model.addAttribute("time", time);
-		return "admin/admin_contents";
-	}
 	
 	@RequestMapping(value = "/searchReservation.do", method = RequestMethod.POST)
 	public ModelAndView serchReservation(@RequestParam String param) throws Exception {

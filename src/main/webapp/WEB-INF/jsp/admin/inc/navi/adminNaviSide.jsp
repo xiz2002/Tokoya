@@ -18,7 +18,7 @@
 			<li><a><i class="fa fa-edit"></i> お知らせ <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
 					<li><a href="<c:url value="/admin/board"/>">リスト</a></li>
-					<li><a href="index2.html">お知らせ作成</a></li>
+					<li><a href="<c:url value="/admin/board/write"/>">お知らせ作成</a></li>
 				</ul></li>
 			<li><a><i class="fa fa-group"></i> スタイリスト <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
