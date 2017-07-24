@@ -199,6 +199,32 @@
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
 			</plugin>
+<!-- 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+				<path>/tokoya</path>
+					<url>http://192.168.1.58:8080/manager/text</url>
+					<server>Tokoya</server>
+					<username>tomcat</username>
+					<password>tomcat</password>
+					<charset>UTF-8</charset>
+					<uriEncoding>UTF-8</uriEncoding>
+				</configuration>
+			</plugin> -->
+			<plugin>
+			    <groupId>org.apache.tomcat.maven</groupId>
+			    <artifactId>tomcat7-maven-plugin</artifactId>
+			    <version>2.2</version>
+			    <configuration>
+					<url>http://192.168.1.58:8080/manager/text</url>
+					<server>Tokoya</server>
+					<path>/tokoya</path>
+					<charset>UTF-8</charset>
+					<uriEncoding>UTF-8</uriEncoding>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>

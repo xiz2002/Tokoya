@@ -12,7 +12,7 @@
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://toybox.iptime.org:18336/tokoya?useUnicode=true&amp;characterEncoding=utf8" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/tokoya?useUnicode=true&amp;characterEncoding=utf8" />
 		<property name="username" value="root" />
 		<property name="password" value="password" />
 	</bean>
