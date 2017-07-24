@@ -22,18 +22,20 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#stylistinsert").on("click", function() {
-			$("#admin_body").load("/admin/stylist/add");
+			$("#styman").attr("action", "<c:url value='/admin/stylist/add'/>");
+			$("#styman").submit();
+			//$("#styman").load("/admin/stylist/add");
 		});
 		$("#edit").on("click", function() {
-			$("#admin_body").attr("action", "<c:url value='/admin/stylist/detail?id=${item.stylistId }'/>");
-			$("#admin_body").submit();
+			$("#styman").attr("action", "<c:url value='/admin/stylist/detail?id=${item.stylistId }'/>");
+			$("#styman").submit();
 		});
 	});
 </script>
 <body>
 <div class="container">
 	<div class="stylistmanagementform">
-		<form action="stylistmanagement" method="GET">
+		<form id="styman" action="stylistmanagement" method="GET">
 			<h2>スタイリスト一覧</h2>
 			<table>
 				<!-- 表示項目 -->
