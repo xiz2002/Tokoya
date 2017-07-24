@@ -15,17 +15,14 @@
 -->
 <html>
 <head>
-<%@ page contentType="text/html; charset=UTF-8" language="java"
-	errorPage=""%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="<c:url value="/js/jquery-1.10.2.js" />"></script>
 <script src="<c:url value="/js/jquery-ui-1.10.4.custom.js" />"></script>
 <script src="<c:url value="/js/jquery.datetimepicker.full.js" />"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-<link rel="stylesheet"
-	href="<c:url value="/css/jquery.datetimepicker.css"/>" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>" />
 <script type="text/javascript">
 	//Date&Time Picker
 	var d = new Date();
@@ -57,7 +54,8 @@
 						"click",
 						function() {
 							var date = $("#datetimepicker").val();
-							$.ajax({
+							$
+									.ajax({
 										type : "POST",
 										dataType : "JSON",
 										data : {
@@ -159,22 +157,18 @@ table, th, td {
 			<h3>予約状況</h3>
 		</div>
 		<div>
-			<input type="text" id="datetimepicker" /> <input type="button"
-				id="search" value="Search">
+			<input type="text" id="datetimepicker" /> <input type="button" id="search" value="Search">
 		</div>
 		<div>
-			<div
-				style="margin-left: 2px; float: left; background-color: red; width: 10%;">&nbsp</div>
+			<div style="margin-left: 2px; float: left; background-color: red; width: 10%;">&nbsp</div>
 			<div style="margin-left: 2px; float: left; width: auto;">
 				<span> : 予約</span>
 			</div>
-			<div
-				style="margin-left: 2px; float: left; background-color: skyblue; width: 10%;">&nbsp</div>
+			<div style="margin-left: 2px; float: left; background-color: skyblue; width: 10%;">&nbsp</div>
 			<div style="margin-left: 2px; float: left; width: auto;">
 				<span> : 予約キャンセル</span>
 			</div>
-			<div
-				style="margin-left: 2px; float: left; background-color: yellow; width: 10%;">&nbsp</div>
+			<div style="margin-left: 2px; float: left; background-color: yellow; width: 10%;">&nbsp</div>
 			<div style="margin-left: 2px; float: left; width: auto;">
 				<span> : 予約終了</span>
 			</div>
@@ -206,15 +200,13 @@ table, th, td {
 								<c:forEach var="reList" items="${reservation}">
 									<c:set var="ctIn" value="${ctIn+1 }" />
 									<c:set var="scTime">
-										<fmt:formatDate value="${reList.RESERVATIONDATE}" type="time"
-											pattern="HH:mm" />
+										<fmt:formatDate value="${reList.RESERVATIONDATE}" type="time" pattern="HH:mm" />
 									</c:set>
 									<c:if test="${flag==0}">
 										<c:if test="${stList.stylistName eq reList.STYLISTNAME }">
 											<c:choose>
 												<c:when test="${item eq scTime}">
-													<td id="${item}${stList.stylistName}"
-														data-status="${reList.RESERVATIONSTATUS}"></td>
+													<td id="${item}${stList.stylistName}" data-status="${reList.RESERVATIONSTATUS}"></td>
 													<c:set var="flag" value="${1}" />
 												</c:when>
 												<c:when test="${item ne scTime}">
