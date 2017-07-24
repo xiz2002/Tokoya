@@ -1,7 +1,5 @@
 package com.nurinubi.tokoya.admin.domain;
 
-import java.util.Date;
-
 /**
  * @ClassName : AdminVO.java
  * @Description : 

@@ -1,80 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--  -->
+<!-- -->
 
 <mapper namespace="com.nurinubi.tokoya.admin.repository.AdminRepository">
 	<!-- スタイリスト一覧 -->
-    <select id="getStylistList" resultType="StylistVO">
-        SELECT * FROM MSTSTYLIST where STYLISTSTATUS=0
-    </select>
-    
-    <!-- スタイリスト追加 -->
-    <insert id="addStylist" parameterType="String">
-        INSERT INTO MSTSTYLIST (STYLISTID, STYLISTNAME, STYLISTSTATUS) 
-        VALUES (#{STYLISTID}, #{STYLISTNAME},0)
-    </insert>
-    
+	<select id="getStylistList" resultType="StylistVO">
+		SELECT * FROM MSTSTYLIST where STYLISTSTATUS=0
+	</select>
 
-    <!-- スタイリスト削除
-    <delete id="delStylist" parameterType="StylistVO">
-    	DELETE FROM MSTSTYLIST WHERE STYLISTID=#{stylistId} AND STYLISTSTATUS=0
-    </delete>
-     -->
-     
-    <!-- スタイリスト削除 -->
-    <update id="upStylistStatus" parameterType="StylistVO">
-    	UPDATE MSTSTYLIST SET STYLISTSTATUS=1 WHERE STYLISTID=#{stylistId}
-    </update>
-    
-    <!-- スタイリスト削除確認 -->
-    <select id="judgeStylist" resultType="StylistVO">
-    	select * from MSTSTYLIST inner join TRNRESERVATION
-		on MSTSTYLIST.STYLISTID = TRNRESERVATION.STYLISTID
-		where MSTSTYLIST.STYLISTSTATUS=0 
+	<!-- スタイリスト追加 -->
+	<insert id="addStylist" parameterType="String">
+		INSERT INTO MSTSTYLIST (STYLISTID, STYLISTNAME, STYLISTSTATUS)
+		VALUES (#{STYLISTID}, #{STYLISTNAME},0)
+	</insert>
+
+	<!-- スタイリスト削除 -->
+	<update id="upStylistStatus" parameterType="StylistVO">
+		UPDATE MSTSTYLIST SET STYLISTSTATUS=1 WHERE STYLISTID=#{stylistId}
+	</update>
+
+	<!-- スタイリスト削除確認 -->
+	<select id="judgeStylist" resultType="StylistVO">
+		select * from MSTSTYLIST inner join TRNRESERVATION
+		on MSTSTYLIST.STYLISTID =
+		TRNRESERVATION.STYLISTID
+		where MSTSTYLIST.STYLISTSTATUS=0
 		and MSTSTYLIST.STYLISTID=#{id}
 		and TRNRESERVATION.RESERVATIONDATE > NOW()
-    </select>
-    
-    <!-- スタイリスト更新 -->
-    <update id="upStylist" parameterType="StylistVO">
-    	UPDATE MSTSTYLIST SET STYLISTNAME=#{stylistName} WHERE STYLISTID=#{stylistId}
-    </update>
-    
-    <!-- スタイリスト詳細 -->
-    <select id="getStylistDetail" resultType="StylistVO">
-    	SELECT * FROM MSTSTYLIST WHERE STYLISTID=#{id}
-    </select>
-    
-
-    <!-- スタイリスト追加 -->
-    <!-- 휴가정보 -->
-    <select id="getStyVaList" resultType="Map">
-    		SELECT 
-			OFFDATE 
-		FROM 
-			TRNSTYLISTSCHEDULE 
-		<!--WHERE 
-			STYLISTID = #{stylistId}
-		-->
-    <!-- 
-		SELECT 
-			DISTINCT(DATE(OFFDATE)) AS OFFDATE 
-		FROM 
-			TRNSTYLISTSCHEDULE 
-		WHERE 
- 	<![CDATA[DATE(OFFDATE) > DATE(NOW());]]>
-		AND   
-			STYLISTID = #{stylistId}-->
 	</select>
-	
-	<!-- 예약정보 -->
+
+	<!-- スタイリスト更新 -->
+	<update id="upStylist" parameterType="StylistVO">
+		UPDATE MSTSTYLIST SET STYLISTNAME=#{stylistName} WHERE
+		STYLISTID=#{stylistId}
+	</update>
+
+	<!-- スタイリスト詳細 -->
+	<select id="getStylistDetail" resultType="StylistVO">
+		SELECT * FROM MSTSTYLIST WHERE STYLISTID=#{id}
+	</select>
+
+	<!-- 予約情報 -->
 	<select id="getStyReList" resultType="Map">
-		SELECT 
-			DISTINCT(DATE(RESERVATIONDATE)) AS REVDATE
-		FROM 
-			TRNRESERVATION 
-		WHERE 
-			STYLISTID = #{stylistId}
+		SELECT
+		DISTINCT(DATE(RESERVATIONDATE)) AS REVDATE
+		FROM
+		TRNRESERVATION
+		WHERE
+		STYLISTID = #{stylistId}
 		AND
 	<![CDATA[DATE(RESERVATIONDATE) > DATE(NOW());]]>
 	</select>
@@ -92,5 +65,18 @@
 		AND
 			STYLISTID = #{stylistId}
 	]]>
+	</select>
+
+	<insert id="addSchedule">
+		INSERT
+		INTO
+		TRNSTYLISTSCHEDULE (SCHEDULEID, STYLISTID, OFFDATE)
+		VALUES
+		(#{scheduleId}, #{stylistId}, #{offDate})
+	</insert>
+
+	<select id="getScheduleCount" resultType="java.lang.Integer">
+		SELECT
+		MAX(LPAD(SCHEDULEID,6,0)) as SCHEDULEID FROM TRNSTYLISTSCHEDULE;
 	</select>
 </mapper>

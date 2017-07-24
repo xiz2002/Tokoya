@@ -8,8 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 import com.nurinubi.tokoya.admin.domain.ScheduleVO;
 import com.nurinubi.tokoya.admin.domain.StylistVO;
 
-import com.nurinubi.tokoya.reservation.domain.ReservationVO;
-
 /**
 * @Class Name : AdminController.java.java
 * @Description :  BoardController.java Class
@@ -55,9 +53,9 @@ public interface AdminRepository {
 	//スタイリスト更新処理
 	int upStylist(StylistVO styvo);
 
-	List<String> getStyBusyDate(Map<String,Object> commandMap) throws Exception;
-	
 	//スタイリストスケジュール
-	List<ScheduleVO> getStylistSchedule(String date, String stylist) throws Exception;
-
+	Map<String, Object> getStylistSchedule(String date, String stylist) throws Exception;
+	
+	int addSchedule(ScheduleVO vo) throws Exception;
+	
 }

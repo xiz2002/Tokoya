@@ -24,4 +24,9 @@
         INSERT INTO MSTNOTICE (NOTICETITLE, NOTICEBODY, REGISTERDATE) 
         VALUES (#{NOTICETITLE}, #{NOTICEBODY}, #{REGISTERDATE})
     </insert>
+    
+    <delete id="deleteBoard" parameterType="String">
+    	DELETE FROM MSTNOTICE WHERE NOTICEID = #{boardId}
+    </delete>
+    
 </mapper>

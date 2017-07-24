@@ -44,12 +44,12 @@
 	<select id="getReservationByDate" resultType="Map">
     <![CDATA[  
 	    SELECT 
-	    		a.RESERVATIONID, a.RESERVATIONDATE, a.RESERVATIONSTATUS, 
+	    		a.RESERVATIONID, a.RESERVATIONDATE, a.RESERVATIONSTATUS, a.RESERVATIONENDDATE,
 	    		b.COURSETIME,  
 	    		c.STYLISTID, c.STYLISTNAME
 	    FROM 
 			TRNRESERVATION a
-	    	LEFT JOIN 
+	    LEFT JOIN 
 	    		MSTCOURSE b ON b.COURSEID = a.COURSEID
 		LEFT JOIN 
 			MSTSTYLIST c ON a.STYLISTID = c.STYLISTID
@@ -190,5 +190,20 @@
 			RESERVATIONID = #{reservationId}
 	]]>
 	</update>
+	
+	<select id="getReservationByStylist" resultType="ReservationVO">
+	<![CDATA[
+		SELECT
+			DATE_FORMAT(RESERVATIONDATE, '%d.%m.%Y') AS RESERVATIONDATE
+		FROM
+			TRNRESERVATION
+		WHERE 
+			RESERVATIONDATE > DATE_FORMAT(#{date}, '%Y%m%d') 
+		AND
+			RESERVATIONDATE < DATE_FORMAT(Date_Add(#{date}, INTERVAL+1 MONTH), '%Y%m%d')	
+		AND
+			STYLISTID = #{stylistId}
+	]]>
+	</select>
 	
 </mapper>

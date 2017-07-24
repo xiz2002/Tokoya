@@ -155,7 +155,11 @@ table, th, td {
 		type="hidden" name="totalPage" id="totalPage" value="" /> <span
 		id="paging"></span>
 	<!-- paging -->
+	<c:choose>
+	<c:when test="${sessionScope.userInfo.userIsAdmin == 1}">
 	<div>
 		<a href="javascript:void(0);" onclick="writeForm()" id="write">登録</a>
 	</div>
+	</c:when>
+	</c:choose>
 </div>

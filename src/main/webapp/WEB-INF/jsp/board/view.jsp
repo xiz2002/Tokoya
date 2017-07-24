@@ -15,7 +15,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false" %>
 <html>
 <head>
 	<title>Home</title>
@@ -30,12 +29,20 @@ NoticeId : ${item.noticeId } <br/>
 タイトル : ${item.noticeTitle } <br/>
 内容 : ${item.noticeBody } <br/>
 登録日　：　<fmt:formatDate value="${item.registerDate }" type="time" pattern="yyyy-MM-dd" /> <br/>
-</c:forEach>
 <div>
-<a href="/home">ホーム</a>
+<a href="/">ホーム</a>
+<c:choose>
+	<c:when test="${sessionScope.userInfo.userIsAdmin == 1}">
+		<a href="javascript:deleteBoard(${item.noticeId })"> // 削除</a>
+	</c:when>
+</c:choose>
 </div>
+</c:forEach>
 </div>
 </div>
 </body>
-
+<script type="text/javascript">
+function deleteBoard(boardId){
+}
+</script>
 </html>
