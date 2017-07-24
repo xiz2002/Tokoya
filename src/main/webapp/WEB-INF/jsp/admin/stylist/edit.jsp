@@ -20,9 +20,21 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	$("#name_error").hide();
+	
 	$("#upsty").on("click", function(){
-		$("#editfrm").attr("action", "<c:url value='/admin/stylist/update.do'/>");
-		$("#editfrm").submit();
+		
+		var ck = false;
+		
+		//validation check
+		ck = checkValidation();
+		console.log(ck);
+		setParam();
+		if (ck) {
+			$("#editfrm").attr("action", "<c:url value='/admin/stylist/update.do'/>");
+			$("#editfrm").submit();
+		}
 	});
 	$("#delsty").on("click", function(){
 		if(!confirm('本当に削除しますか？')){
@@ -33,6 +45,40 @@ $(document).ready(function(){
 		}
 	});
 });
+function checkValidation(){
+	var flag = true;
+	var name = $("#stylistName").val();
+
+	var name_pattern = /[\s^-_.a-z0-9]/g;
+	
+	//氏名チェック
+	if((name.length==0||name.length>20)||name==null||!checkCode(name)||name_pattern.test(name)){
+		$("#name_error").show();
+		flag = false;
+	}else{
+		$("#name_error").hide();
+	}
+	return flag;
+}
+
+function setParam() {
+	var name;
+
+	name = $("#stylistName").val();
+	$("#name").val(name);
+
+	return true;
+}
+
+function checkCode(param){
+	for(var i = 0; i <param.length; i++){
+		var st = param.charCodeAt(i);
+		if((st < 256) || (st >= 0xff61 && st <= 0xff9f)) {
+			return false;
+		} 
+   }
+   return true;
+}
 </script>
 
 <head>
@@ -50,7 +96,8 @@ $(document).ready(function(){
 					<label id="stylistId">${item.stylistId}</label>
 				</p>
 				<p>
-					<span>スタイリスト名</span>
+					<span>スタイリスト名</span><br>
+					<span id="name_error" style="color:red">*氏名を再入力して下さい。</span><br>
 					<input type="text" id="stylistName" name="stylistName" value="${item.stylistName}">
 				</p>
 				<!-- 各種ボタン -->
