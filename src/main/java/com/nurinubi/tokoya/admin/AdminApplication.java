@@ -126,5 +126,6 @@ public class AdminApplication implements AdminRepository {
 		int result = this.sqlSession.insert("addSchedule", param);
 		return result;
 	}
+
 	
 }

@@ -57,7 +57,7 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		String result = "error";
 		result = userRepository.checkId(id);
-		if (result.equals("0")) {
+		System.out.println("=================="+result+"!!!!!!!!!!!!!!!");
 			if (result.equals("0")) {
 				result = "true";
 			} else if (result.equals("1")) {
@@ -65,7 +65,6 @@ public class UserController {
 			}
 			mav.addObject("result", result);
 			mav.setViewName("jsonView");
-		}
 		return mav;
 	}
 	

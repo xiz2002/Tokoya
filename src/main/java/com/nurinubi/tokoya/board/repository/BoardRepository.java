@@ -18,4 +18,5 @@ public interface BoardRepository {
 	
 	void insertBoard(Map<String, Object> map) throws Exception;
 	
+	int deleteBoard(String boardId) throws Exception;
 }

@@ -15,14 +15,17 @@
 -->
 <html>
 <head>
-<%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
+<%@ page contentType="text/html; charset=UTF-8" language="java"
+	errorPage=""%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="<c:url value="/js/jquery-1.10.2.js" />"></script>
 <script src="<c:url value="/js/jquery-ui-1.10.4.custom.js" />"></script>
 <script src="<c:url value="/js/jquery.datetimepicker.full.js" />"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="<c:url value="/css/jquery.datetimepicker.css"/>" />
 <script type="text/javascript">
 //Date&Time Picker
 var d = new Date();
@@ -77,7 +80,7 @@ $("#search").on("click",function() {
 				for ( var j in obj.stylist) {
 					for ( var k in obj.reservation) {
 						if (obj.stylist[j].stylistName == obj.reservation[k].STYLISTNAME) {
-							var id = time[i] + ":00" + obj.stylist[j].stylistName;
+							var id = time[i] + ":00" + obj.stylist[j].stylistId;
 							if (time[i] == obj.reservation[k].RESERVATIONDATE.hours||(x > obj.reservation[k].RESERVATIONDATE.hours&&x<obj.reservation[k].RESERVATIONENDDATE.hours)) {
 								if (obj.reservation[k].RESERVATIONSTATUS == 1) {
 									document.getElementById(id).setAttribute("data-status", 1);
@@ -104,7 +107,7 @@ function cleanTd(data) {
 	var obj = JSON.parse(data);
 	for ( var i in time) {
 		for ( var j in obj.stylist) {
-			var id = time[i] + ":00" + obj.stylist[j].stylistName;
+			var id = time[i] + ":00" + obj.stylist[j].stylistId;
 			document.getElementById(id).setAttribute("data-status", 0);
 		}
 	}
@@ -130,8 +133,8 @@ table, th, td {
 </style>
 </head>
 <body>
-	<%@include file="./inc/top.jsp"%>
-	<%@include file="./inc/navi.jsp"%>
+	<%@include file="./inc/admin_Top.jsp"%>
+	<%@include file="./inc/admin_navi_side.jsp"%>
 	<div id="scTime"></div>
 	<div id="admin_body">
 	<div id="admin_datepicker" style="float: left; border: 1px solid;">
@@ -139,18 +142,22 @@ table, th, td {
 			<h3>予約状況</h3>
 		</div>
 		<div>
-			<input type="text" id="datetimepicker" /> <input type="button" id="search" value="Search">
+			<input type="text" id="datetimepicker" /> <input type="button"
+				id="search" value="Search">
 		</div>
 		<div>
-			<div style="margin-left: 2px; float: left; background-color: red; width: 10%;">&nbsp</div>
+			<div
+				style="margin-left: 2px; float: left; background-color: red; width: 10%;">&nbsp</div>
 			<div style="margin-left: 2px; float: left; width: auto;">
 				<span> : 予約</span>
 			</div>
-			<div style="margin-left: 2px; float: left; background-color: skyblue; width: 10%;">&nbsp</div>
+			<div
+				style="margin-left: 2px; float: left; background-color: skyblue; width: 10%;">&nbsp</div>
 			<div style="margin-left: 2px; float: left; width: auto;">
 				<span> : 予約キャンセル</span>
 			</div>
-			<div style="margin-left: 2px; float: left; background-color: yellow; width: 10%;">&nbsp</div>
+			<div
+				style="margin-left: 2px; float: left; background-color: yellow; width: 10%;">&nbsp</div>
 			<div style="margin-left: 2px; float: left; width: auto;">
 				<span> : 予約終了</span>
 			</div>
@@ -169,7 +176,7 @@ table, th, td {
 					<tr>
 						<td>${item}</td>
 						<c:forEach var="stList" items="${stylist}">
-						<td id="${item}${stList.stylistName}" data-status="${0}"></td>
+						<td id="${item}${stList.stylistId}" data-status="${0}"></td>
 						</c:forEach>
 					</tr>
 				</c:forEach>

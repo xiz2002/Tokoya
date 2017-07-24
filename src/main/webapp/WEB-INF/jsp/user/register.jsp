@@ -90,7 +90,7 @@ function checkId() {
 		url : "<c:url value='/checkId.do'/>",
 		error : function(data) {
 			console.log(data);
-			console.log("Error : " + Fail);
+			console.log("Error : ");
 		},
 		success : function(data) {
 			var data = JSON.stringify(data);
@@ -98,7 +98,6 @@ function checkId() {
 			if (obj.result == "true") {
 				alert("このIDが使えます。");
 				$("#id_error").hide();
-				
 			}
 			else if (obj.result == "false") {
 				alert("このIDはもう存在しています。他のIDを入力してください。");

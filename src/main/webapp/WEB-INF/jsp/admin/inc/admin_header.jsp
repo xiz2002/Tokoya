@@ -9,6 +9,6 @@
 	<%@ include file="admin_script_header.jsp" %>
 	<title>ToKoYa! | Admin</title>
 </head>
-	<%@ include file="admin_top.jsp" %>
+	<%@ include file="admin_Top.jsp" %>
 	<%@ include file="admin_navi.jsp" %>
 

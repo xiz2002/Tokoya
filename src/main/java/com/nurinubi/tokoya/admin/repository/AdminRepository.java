@@ -57,5 +57,5 @@ public interface AdminRepository {
 	Map<String, Object> getStylistSchedule(String date, String stylist) throws Exception;
 	
 	int addSchedule(ScheduleVO vo) throws Exception;
-
+	
 }

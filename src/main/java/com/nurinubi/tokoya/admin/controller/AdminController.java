@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
+import com.nurinubi.tokoya.board.repository.BoardRepository;
 import com.nurinubi.tokoya.common.domain.CommandMap;
 import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
 
@@ -246,6 +247,4 @@ public class AdminController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
-	@RequestMapping (value = "/admin/delete.do", method = RequestMethod.POST)
 }

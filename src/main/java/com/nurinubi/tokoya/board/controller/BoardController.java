@@ -83,4 +83,15 @@ public class BoardController {
 		mav.addObject("result", result);
 		return mav;
 	}
+	
+	@RequestMapping (value = "/admin/deleteBoard.do", method = RequestMethod.GET)
+	public String deleteBoard(@RequestParam String boardId) throws Exception{
+		int result = 0;
+		result = boardRepository.deleteBoard(boardId);
+		if(result==1) {
+			return "redirect:/admin/board";
+		}else {
+			return "";
+		}
+	}
 }

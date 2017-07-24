@@ -39,4 +39,11 @@ public class BoardApplication implements BoardRepository {
 		param.put("id", id);
 		return this.sqlSession.selectList("getBoardByNoticeId", id);
 	}
+	
+
+	@Override
+	public int deleteBoard(String boardId) throws Exception {
+		int result = this.sqlSession.delete("deleteBoard", boardId);
+		return result;
+	}
 }
