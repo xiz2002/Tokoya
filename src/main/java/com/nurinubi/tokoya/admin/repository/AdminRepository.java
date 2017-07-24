@@ -40,7 +40,6 @@ public interface AdminRepository {
 	//スタイリスト追加処理
 	void insertStylist(Map<String, Object> map) throws Exception;
 	
-
 	//スタイリスト削除処理
 	//int delStylist(StylistVO styvo);
 	
@@ -57,5 +56,8 @@ public interface AdminRepository {
 	Map<String, Object> getStylistSchedule(String date, String stylist) throws Exception;
 	
 	int addSchedule(ScheduleVO vo) throws Exception;
+	
+	//スタイリストID重複チェック
+	String checkStyId(String id) throws Exception;
 	
 }

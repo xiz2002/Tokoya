@@ -133,8 +133,6 @@ table, th, td {
 </style>
 </head>
 <body>
-	<%@include file="./inc/admin_Top.jsp"%>
-	<%@include file="./inc/admin_navi_side.jsp"%>
 	<div id="scTime"></div>
 	<div id="admin_body">
 	<div id="admin_datepicker" style="float: left; border: 1px solid;">

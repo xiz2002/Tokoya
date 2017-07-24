@@ -127,5 +127,10 @@ public class AdminApplication implements AdminRepository {
 		return result;
 	}
 
-	
+	@Override
+	public String checkStyId(String id){
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		return this.sqlSession.selectOne("checkStyId", param);
+	}
 }
