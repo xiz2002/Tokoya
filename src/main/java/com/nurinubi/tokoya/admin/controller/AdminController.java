@@ -11,8 +11,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.nurinubi.tokoya.admin.domain.ScheduleVO;
+import com.nurinubi.tokoya.admin.domain.StylistVO;
 import com.nurinubi.tokoya.admin.repository.AdminRepository;
-import com.nurinubi.tokoya.board.repository.BoardRepository;
 import com.nurinubi.tokoya.common.domain.CommandMap;
 import com.nurinubi.tokoya.reservation.repository.ReservationRepository;
 
@@ -24,9 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.nurinubi.tokoya.admin.domain.ScheduleVO;
-import com.nurinubi.tokoya.admin.domain.StylistVO;
 
 /**
 * @Class Name : AdminController.java.java
@@ -71,13 +69,16 @@ public class AdminController {
 		model.addAttribute("time", time);
 		return "admin/admin";
 	}
+
+	@RequestMapping(value = "/adminTest", method = RequestMethod.GET)
+	public String adminTest(Model model) throws Exception {
+		List<Map<String, Object>> reservation = reservationRepository.getReservationListByToday();
+		model.addAttribute("reservation", reservation);
+		model.addAttribute("stylist", adminRepository.getStylistList());
+		model.addAttribute("time", time);
+		return "admin/admin_contents";
+	}
 	
-	/**
-	 * 
-	 * @param param
-	 * @return
-	 * @throws Exception
-	 */
 	@RequestMapping(value = "/searchReservation.do", method = RequestMethod.POST)
 	public ModelAndView serchReservation(@RequestParam String param) throws Exception {
 		System.out.println("------------------test----------------");
