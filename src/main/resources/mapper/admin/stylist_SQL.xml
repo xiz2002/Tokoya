@@ -11,7 +11,7 @@
 	<!-- スタイリスト追加 -->
 	<insert id="addStylist" parameterType="String">
 		INSERT INTO MSTSTYLIST (STYLISTID, STYLISTNAME, STYLISTSTATUS)
-		VALUES (#{STYLISTID}, #{STYLISTNAME},0)
+		VALUES (#{stylistId}, #{stylistName},0)
 	</insert>
 
 	<!-- スタイリスト削除 -->
@@ -78,5 +78,15 @@
 	<select id="getScheduleCount" resultType="java.lang.Integer">
 		SELECT
 		MAX(LPAD(SCHEDULEID,6,0)) as SCHEDULEID FROM TRNSTYLISTSCHEDULE;
+	</select>
+	
+	<!-- スタイリスト重複チェック -->
+	<select id="checkStyId" resultType="String">
+		SELECT 
+			COUNT(STYLISTID) 
+		FROM 
+			MSTSTYLIST 
+		WHERE 
+			STYLISTID = #{id}
 	</select>
 </mapper>
