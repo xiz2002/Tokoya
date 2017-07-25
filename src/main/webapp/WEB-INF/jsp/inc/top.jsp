@@ -67,7 +67,7 @@
 					<div class="toptitlehyper">
 						<div class="fa-hover animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
 							<div class="hyper-tile-stats">
-							<div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
+							<div class="icon"><i class="fa fa-pencil-square-o"></i></div>
 								<div class="count">
 									<a href="<c:url value="/reservation/course"/>"><span class="text-muted">予約</span></a>
 								</div>
@@ -79,7 +79,7 @@
 						<c:if test="${not empty sessionScope.userInfo.userId}">
 						<c:if test="${sessionScope.userInfo.userIsAdmin eq '1' }">
 							<div class="hyper-tile-stats">
-							<div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
+							<div class="icon"><i class="fa fa-gears"></i></div>
 								<div class="count">
 									<a href="<c:url value="/admin"/>"><span class="text-muted">管理者</span></a>
 								</div>
@@ -92,7 +92,7 @@
 						<div class="fa-hover animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<c:if test="${empty sessionScope.userInfo.userId }">
 							<div class="hyper-tile-stats">
-							<div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
+							<div class="icon"><i class="fa fa-check-circle"></i></div>
 								<div class="count">
 									<a href="<c:url value="/login"/>"><span class="text-muted">ログイン</span></a>
 								</div>
