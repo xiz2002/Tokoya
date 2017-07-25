@@ -13,23 +13,28 @@
  *  Copyright (C) by NuriNubi All right reserved.
  * -->
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<html>
-<head>
-	<title>Home</title>
-</head>
-
+<%@ include file="../admin/inc/admin_header.jsp"%>
 <body>
-<%@include file="../inc/top.jsp"%>
-<div id="body" style="margin-left:500px;">
+<div class="right_col" role="main">
+	<div class="">
+		<div class="col-md-10 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>お知らせ</h2>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
 <div>
 <c:forEach var="item" items="${result }">
 NoticeId : ${item.noticeId } <br/>
 タイトル : ${item.noticeTitle } <br/>
 内容 : ${item.noticeBody } <br/>
 登録日　：　<fmt:formatDate value="${item.registerDate }" type="time" pattern="yyyy-MM-dd" /> <br/>
-<div>
+<div class="x_title">
+			<div class="clearfix"></div>
+				</div>	
+				<div>
 <a href="/">ホーム</a>
 <c:choose>
 	<c:when test="${sessionScope.userInfo.userIsAdmin == 1}">
@@ -41,6 +46,10 @@ NoticeId : ${item.noticeId } <br/>
 </c:forEach>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
 </body>
 <script type="text/javascript">
 function deleteBoard(boardId){
@@ -49,4 +58,4 @@ function deleteBoard(boardId){
 	}
 }
 </script>
-</html>
+<%@ include file="../admin/inc/admin_foot.jsp"%>

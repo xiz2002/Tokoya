@@ -13,23 +13,18 @@
 *  Copyright (C) by NuriNubi All right reserved.
 *
 -->
-<%@ page contentType="text/html; charset=UTF-8" language="java"
-	errorPage=""%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="<c:url value="/js/jquery-1.10.2.js"/>"></script>
-<style>
-table, th, td {
-	border: 1px solid black;
-	border-collapse: collapse;
-}
-</style>
+<%@ include file="../admin/inc/admin_header.jsp"%>
 <script type="text/javascript">
 	function writeForm() {
 		$("#admin_body").load("/admin/board/write");
 		history.pushState(null, null, "/admin/board/write");
 	}
-	$(function() {
+	/* $(function(){
+	$("#boardList").DataTable();
+	}); */
+ 	$(function() {
 		paging();
 	});
 	function paging() {
@@ -47,12 +42,9 @@ table, th, td {
 
 		var pre = (curPage * 1) - 1;
 		var next = (curPage * 1) + 1;
-		paging = '<div class="uoss_paginate_complex">';
-		paging += "<a href='javascript:movePage("
-				+ totalpage
-				+ ",1);'  class='direction prev'><span></span><span></span>prev end</a>";
-		paging += "'<a href='javascript:movePage(" + totalpage + "," + pre
-				+ ");' class='direction prev'><span></span> prev</a>&nbsp;";
+		paging = '<div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate"><ul class="pagination">';
+		paging += "<li class='paginate_button previous disabled' id='datatable_previous'><a href='javascript:movePage(" + totalpage + "," + pre
+				+ ");'aria-controls='datatable'>prev</a>";
 		var loopCnt = 10;
 		var i = 1;
 		if (totalpage > 10) {
@@ -71,20 +63,15 @@ table, th, td {
 			}
 		}
 		for (i; i < loopCnt + 1; i++) {
-			if (curPage == i) {
-				paging = paging + '<strong>' + i + '</strong>&nbsp;';
-			} else {
-				paging = paging + '<a href="javascript:movePage(' + totalpage
-						+ "," + i + ');" >' + i + '</a>&nbsp;';
-			}
+			/* if (curPage == i) {
+				paging = paging + '<li class="paginate_button active">' + i;
+			} else { */
+				paging = paging + '<li class="paginate_button active"><a href="javascript:movePage(' + totalpage
+						+ "," + i + ');"' + 'aria-controls="datatable-buttons" tabindex="0" data-dt-idx="'+i+'">' + i + '</a></li>';
+			//}
 		}
-		paging += "<a href='javascript:movePage(" + totalpage + "," + next
-				+ ");' class='direction next'>next <span></span></a>&nbsp;";
-		paging += "<a href='javascript:movePage("
-				+ totalpage
-				+ ","
-				+ totalpage
-				+ ");' class='direction next'>next end <span></span><span></span> </a>&nbsp;";
+		paging += "<li class='paginate_button previous disabled' id='datatable_previous'><a href='javascript:movePage(" + totalpage + "," + next
+				+ ");' aria-controls='datatable'>next<span></span></a>";
 		paging += "</div>";
 		document.getElementById('paging').innerHTML = paging;
 	}
@@ -124,31 +111,37 @@ table, th, td {
 		        $('#board_list').html(result);
 		    }
 		});
-	}
+	} 
 </script>
 <style>
 
 
 </style>
-<div class="col-md-12 col-sm-12 col-xs-12">
-<div id="x_content">
-	<div>
-		<table id="datatable" class="table table-striped table-bordered dataTable no-footer">
-			<thead>
-			<tr role="row">
-				<th class="sorting_asc">No</th>
-				<th class="sorting">Title</th>
-				<th class="sorting">登録日</th>
-				<th class="sorting">備考</th>
+<div class="right_col" role="main">
+	<div class="">
+		<div class="col-md-10 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>お知らせ</h2>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+	<div class="table-responsive">
+		<table class="table table-striped jambo_table bulk_action" id="boardList">
+			<thead class="headings">
+			<tr>
+				<th>No</th>
+				<th>Title</th>
+				<th>登録日</th>
+				<th>備考</th>
 			</tr>
 			</thead>
 			<tbody>
 			<c:forEach var="item" items="${result}">
-				<tr role="row" class="even">
+				<tr>
 					<td>${item.noticeId }</td>
 					<td><a href="<c:url value='/board/view?id=${item.noticeId }'/>">${item.noticeTitle }</a></td>
-					<td><fmt:formatDate value="${item.registerDate }" type="time"
-							pattern="yyyy/MM/dd" /></td>
+					<td><fmt:formatDate value="${item.registerDate }" type="time" pattern="yyyy/MM/dd" /></td>
 					<td></td>
 				</tr>
 			</c:forEach>
@@ -164,12 +157,9 @@ table, th, td {
 		type="hidden" name="totalPage" id="totalPage" value="" /> <span
 		id="paging"></span>
 	<!-- paging -->
-	<c:choose>
-	<c:when test="${sessionScope.userInfo.userIsAdmin == 1}">
-	<div>
-		<a href="javascript:void(0);" onclick="writeForm()" id="write">登録</a>
-	</div>
-	</c:when>
-	</c:choose>
 </div>
 </div>
+</div>
+</div>
+</div>
+<%@ include file="../admin/inc/admin_foot.jsp"%>

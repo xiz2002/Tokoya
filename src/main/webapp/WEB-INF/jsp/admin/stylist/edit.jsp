@@ -13,11 +13,7 @@
  *  Copyright (C) by NuriNubi All right reserved.
  * -->
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<%@ include file="../inc/admin_header.jsp"%>
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -85,10 +81,16 @@ function checkCode(param){
 </head>
 
 <body>
-	<div class="container">
-		<div class="editstylistform">
+<div class="right_col" role="main">
+	<div class="">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>スタイリスト編集</h2>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
 			<form id="editfrm" method="POST">
-				<h2>スタイリスト編集</h2>
 				<c:forEach var="item" items="${result}">
 				<p>
 					<span>スタイリストID</span>
@@ -107,13 +109,10 @@ function checkCode(param){
 			<button type="button" id="return" OnClick="history.back()">戻る</button>
 			</c:forEach>
 			</form>
-			<!-- /page content -->
-			<!-- footer -->
-			<!-- /footer -->
 		</div>
 	</div>
-	<!-- 
-	< %@include file="../sample/inc/scripts.jsp"%>
-	 -->
+	</div>
+	</div>
+	</div>
 </body>
-</html>
+<%@ include file="../inc/admin_foot.jsp"%>

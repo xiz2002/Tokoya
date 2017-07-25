@@ -49,7 +49,7 @@
 							<tr>
 								<th>時間</th>
 								<c:forEach var="item" items="${stylist}">
-								<th><span>${item.stylistName}</span></th>
+								<th style="width:90px; text-align:center;"><span>${item.stylistName}</span></th>
 								</c:forEach>
 							</tr>
 						</thead>
@@ -67,31 +67,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- /StaffTable -->
-		<!-- <div class="row">
-			<div class="col-md-12">
-				<div class="x_panel">
-					<div class="x_content">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<div></div>
-
-							<br>
-							<div class="demo-container" style="height: 280px">
-								<div id="chart_plot_02" class="demo-placeholder"></div>
-							</div>
-							<div class="tiles">
-								<div class="col-md-4 tile">
-								</div>
-								<div class="col-md-4 tile">
-								</div>
-								<div class="col-md-4 tile">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
 	</div>
 </div>
 <!-- /page content -->

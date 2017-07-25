@@ -13,21 +13,9 @@
 *  Copyright (C) by NuriNubi All right reserved.
 *
 -->
-<html>
-<head>
-<%@ page contentType="text/html; charset=UTF-8" language="java"
-	errorPage=""%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="<c:url value="/js/jquery-1.10.2.js" />"></script>
-<script src="<c:url value="/js/jquery-ui-1.10.4.custom.js" />"></script>
-<script src="<c:url value="/js/jquery.datetimepicker.full.js" />"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-<link rel="stylesheet"
-	href="<c:url value="/css/jquery.datetimepicker.css"/>" />
+<%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
+<%@ include file="../inc/admin_header.jsp"%>
 <script type="text/javascript">
-
 $(function() {
 	var f_date = new Date();
 	var f_year = f_date.getFullYear();
@@ -126,33 +114,19 @@ function setFirstDay(year, month){
 	var firstday = new Date((new Date(year, month-1, 1)));
 	return firstday;
 }
-
 </script>
-<style>
-table, th, td {
-	border: 1px solid black;
-	border-collapse: collapse;
-}
-
-/* [data-status="1"] {
-	background-color: red;
-}
-
-[data-status="2"] {
-	background-color: skyblue;
-}
-
-[data-status="3"] {
-	background-color: yellow;
-} */
-</style>
-</head>
 <body>
-	<div id="sc_body" style="float: left; border: 1px solid;">
-		<div>
-			<h3>スケジュール状況</h3>
-		</div>
-		<div>
+<div class="right_col" role="main">
+	<div class="">
+		<!-- DateSelector -->
+		<div class="col-md-5 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>スケジュール状況</h2>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+		<div class="x_panel">
 			<select id="stylist">
 			<c:forEach var="items" items="${stylist }">
 				<option value="${items.stylistId }">${items.stylistName }</option>
@@ -195,5 +169,9 @@ table, th, td {
 			<input type="button" id="add" value="追加">
 		</div>
 	</div>
+	</div>
+	</div>
+	</div>
+	</div>
 </body>
-</html>
+<%@ include file="../inc/admin_foot.jsp"%>
