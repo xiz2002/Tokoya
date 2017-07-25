@@ -21,104 +21,17 @@
 		$("#admin_body").load("/admin/board/write");
 		history.pushState(null, null, "/admin/board/write");
 	}
-	/* $(function(){
+	$(function(){
 	$("#boardList").DataTable();
-	}); */
- 	$(function() {
-		paging();
-	});
-	function paging() {
-		var paging = '';
-		var totalCnt = document.getElementById("totalCnt").value
-		if (1 > totalCnt || totalCnt == null || totalCnt == '') {
-			document.getElementById('paging').innerHTML = "";
-			return;
-		}
-		var pageCnt = document.getElementById("pageCnt").value;
-		var totalpage = Math.ceil(totalCnt / pageCnt);
-		var curPage = document.getElementById("curPage").value;
-		document.getElementById("totalCnt").value = totalCnt;
-		document.getElementById("totalPage").value = totalpage;
-
-		var pre = (curPage * 1) - 1;
-		var next = (curPage * 1) + 1;
-		paging = '<div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate"><ul class="pagination">';
-		paging += "<li class='paginate_button previous disabled' id='datatable_previous'><a href='javascript:movePage(" + totalpage + "," + pre
-				+ ");'aria-controls='datatable'>prev</a>";
-		var loopCnt = 10;
-		var i = 1;
-		if (totalpage > 10) {
-			loopCnt = 10;
-		} else {
-			loopCnt = totalpage;
-		}
-		if (curPage > 10) {
-			var v1 = Math.ceil(curPage / 10);
-			var v2 = Math.ceil(totalpage / 10);
-			i = ((Math.ceil(curPage / 10) - 1) * 10) + 1;
-			if (v1 == v2) {
-				loopCnt = totalpage;
-			} else {
-				loopCnt = i + 9;
-			}
-		}
-		for (i; i < loopCnt + 1; i++) {
-			/* if (curPage == i) {
-				paging = paging + '<li class="paginate_button active">' + i;
-			} else { */
-				paging = paging + '<li class="paginate_button active"><a href="javascript:movePage(' + totalpage
-						+ "," + i + ');"' + 'aria-controls="datatable-buttons" tabindex="0" data-dt-idx="'+i+'">' + i + '</a></li>';
-			//}
-		}
-		paging += "<li class='paginate_button previous disabled' id='datatable_previous'><a href='javascript:movePage(" + totalpage + "," + next
-				+ ");' aria-controls='datatable'>next<span></span></a>";
-		paging += "</div>";
-		document.getElementById('paging').innerHTML = paging;
-	}
-	function setPageInfo(currentPage) {
-		var stNum;
-		var endNum;
-		var pageCnt = document.getElementById("pageCnt").value;
-		var currentCnt = currentPage;
-
-		if (currentCnt == 1) {
-			stNum = "1";
-			endNum = pageCnt;
-		} else {
-			stNum = (1 * currentCnt - 1) * pageCnt + 1;
-			endNum = (1 * stNum) + (1 * pageCnt) - 1;
-		}
-		document.getElementById("curPage").value = currentCnt;
-		document.getElementById('stNum').value = stNum;
-		document.getElementById('endNum').value = endNum;
-	}
-	function movePage(totalpage, pageNum) {
-		if (pageNum < 1) {
-			return;
-		}
-		if (pageNum > totalpage) {
-			return;
-		}
-		document.getElementById('curPage').value = pageNum;
-		
-		var param = {"selectedPageNum": pageNum};
-		$.ajax({
-		    url: '/admin/board',
-		    type: 'GET',
-		    contentType: 'application/json; charset=utf-8',
-		    data: param,
-		    success: function(result) {
-		        $('#board_list').html(result);
-		    }
-		});
-	} 
+	}); 
+ 	
 </script>
 <style>
 
 </style>
 <div class="right_col" role="main">
 	<div class="">
-		<div class="col-md-10 col-sm-12 col-xs-12">
+		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
 					<h2>お知らせ</h2>
@@ -162,3 +75,19 @@
 </div>
 </div>
 <%@ include file="../admin/inc/admin_foot.jsp"%>
+ <!-- Datatables -->
+    <script src="../vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../vendor/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../vendor/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="../vendor/jszip/dist/jszip.min.js"></script>
+    <script src="../vendor/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../vendor/pdfmake/build/vfs_fonts.js"></script>

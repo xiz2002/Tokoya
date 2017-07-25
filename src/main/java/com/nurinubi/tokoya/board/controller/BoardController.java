@@ -42,17 +42,9 @@ public class BoardController {
 
 	// お知らせのホーム画面(ユーザー)
 		@RequestMapping(value = "/admin/board", method = RequestMethod.GET)
-		public String listBoard(
-				Model model, 
-				@RequestParam(value="selectedPageNum", defaultValue = "1") int pageNum
-				) throws Exception {
-			
+		public String listBoard(Model model) throws Exception {
 			logger.info("お知らせのホーム画面(ユーザー)");
-			System.out.println("pageNum : " + pageNum);
-			model.addAttribute("result", boardRepository.getBoardList(pageNum));
-			model.addAttribute("total", boardRepository.getBoardTotalCount());
-			model.addAttribute("curPage", pageNum);
-			
+			model.addAttribute("result", boardRepository.getBoardList());
 			return "/board/board";
 		}
 	// お知らせの作成画面

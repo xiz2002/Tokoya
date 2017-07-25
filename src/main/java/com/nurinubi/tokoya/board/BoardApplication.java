@@ -19,14 +19,8 @@ public class BoardApplication implements BoardRepository {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<BoardVO> getBoardList(int pageNum) {
-		int startBoardCountingNumber = (pageNum - 1) * 10;
-		return sqlSession.selectList("getBoardListByPageNum", startBoardCountingNumber);
-	}
-	
-	@Override
-	public Integer getBoardTotalCount() {
-		return sqlSession.selectOne("getBoardTotalCount");
+	public List<BoardVO> getBoardList() {
+		return sqlSession.selectList("getBoardList");
 	}
 	
 	public void insertBoard(Map<String, Object> map) {

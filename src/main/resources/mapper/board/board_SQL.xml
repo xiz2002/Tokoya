@@ -3,23 +3,14 @@
 
 <mapper namespace="com.nurinubi.tokoya.board.repository.BoardRepository">
     
-    <select id="getBoardList" resultType="BoardVO">
-        SELECT * FROM MSTNOTICE
-    </select>
-    
     <select id="getBoardByNoticeId" resultType="BoardVO">
         SELECT * FROM MSTNOTICE WHERE NOTICEID = #{id}
     </select>
     
-    <select id="getBoardListByPageNum" parameterType="int" resultType="BoardVO">
+    <select id="getBoardList" parameterType="int" resultType="BoardVO">
         SELECT * FROM MSTNOTICE 
         ORDER BY REGISTERDATE DESC
-        LIMIT #{startBoardCountingNumber},10
     </select>
-    <select id="getBoardTotalCount" resultType="Integer">
-        SELECT count(*) FROM MSTNOTICE 
-    </select>
-    
     <insert id="addBoardList" useGeneratedKeys="true" keyProperty="NOTICEID">
         INSERT INTO MSTNOTICE (NOTICETITLE, NOTICEBODY, REGISTERDATE) 
         VALUES (#{NOTICETITLE}, #{NOTICEBODY}, #{REGISTERDATE})

@@ -56,6 +56,7 @@
 			// 簡単なバリデーションチェック
 			var title = $("#title").val();
 			var body = $("#editor-one").html();
+			$("#body").val(body);
 			if (!title.trim() || !body.trim()) {
 				alert("タイトルと内容は必須入力です。");
 				return;
