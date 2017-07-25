@@ -15,9 +15,7 @@
 -->
 <%@ page contentType="text/html; charset=UTF-8" language="java"
 	errorPage="" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="<c:url value="/js/jquery-1.10.2.js"/>"></script>
-<script src="<c:url value="/js/jquery-ui-1.10.4.custom.js"/>"></script>
+<%@ include file="../inc/header.jsp"%>
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#id_error").hide();
@@ -45,7 +43,7 @@ $(document).ready(function() {
 	
 	//取り消し
 	$("#cancle").on("click", function() {
-		location.assign("/home");
+		location.assign("/");
 	});
 	
 	//
@@ -121,6 +119,7 @@ function checkValidation(){
 	
 
 	var name_pattern = /[\s^-_.a-z0-9]/g;
+	var id_pattern = /^[a-z0-9]{4,10}$/;
 	var blank_pattern = /[\s]/g;
 	var email_pattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
 	var phone_pattern = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
@@ -171,6 +170,13 @@ function checkValidation(){
 	}else{
 		$("#pass2_error").hide();
 	}
+	
+	if(id==null||!id_pattern.test(id)){
+		flag = false;
+		$("#id_error").show();
+	}else{
+		$("#id_error").hide();
+	}
 	return flag;
 }
 	
@@ -185,94 +191,139 @@ function checkCode(param){
 }	
 </script>
 <style>
-.phone {
-	width: 50px;
-}
-
-.userName, .email, #userId, .pass {
-	width: 100px;
-}
+.regi_alert{
+float: left;
+    margin: 0 0 0 20px;
+    padding: 3px 10px;
+    color: #FFF;
+    border-radius: 3px 4px 4px 3px;
+    background-color: #CE5454;
+    }
 </style>
 
 <body>
-	<div id="body" style="margin-left: 450px;">
-		<div>
-			<form id="frm" method="POST">
-				<table class="ta_register" style="border: 1px solid;">
-					<tr>
-						<td><span>氏名</span></td>
-						<td><input type="text" placeholder="姓" class="userName"
-							id="last_name"><input type="text" placeholder="名"
-							class="userName" id="first_name"></td>
-						<td></td>
-					</tr>
-					<tr id="name_error">
-						<td colspan="3"><span style="color:red">*氏名を再確認してください。</span></td>
-					</tr>
-					<tr>
-						<td><span>氏名(フリガナ)</span></td>
-						<td><input type="text" placeholder="姓" class="userName"
-							id="huri_last_name"><input type="text" placeholder="名"
-							class="userName" id="huri_first_name"></td>
-						<td></td>
-					</tr>
-					<tr id="huri_name_error">
-						<td colspan="3"><span style="color:red">*氏名を再確認してください。</span></td>
-					</tr>
-					<tr>
-						<td><span>ユーザID</span></td>
-						<td><input type="text" name="USERID" id="userId"><input
-							type="button" value="check" id="id_check" /></td>
-						<td></td>
-					</tr>
-					<tr id="id_error">
-					<td colspan="3"><span style="color:red">*IDは半角英数字で4字以上10字以下で入力してください。</span></td>
-					</tr>
-					<tr>
-						<td><span>パスワード</span></td>
-						<td><input type="password" id="pass" class="pass"
-							name="USERPASS"></td>
-						<td><span style="color: red;">＊4文字以上半角英数字</span></td>
-					</tr>
-					<tr id="pass_error">
-					<td colspan="3"><span style="color:red">*パスワードは4文字以上半角英数字を入力してください。</span></td>
-					</tr>
-					<tr>
-						<td><span>パスワードチェック</span></td>
-						<td><input type="password" class="pass" id="pass_check"></td>
-						<td></td>
-					</tr>
-					<tr id="pass2_error">
-					<td colspan="3"><span style="color:red">*パスワードが一致しません。</span></td>
-					</tr>
-					<tr>
-						<td><span>Email</span></td>
-						<td colspan="2"><input type="text" id="email2" /></td>
-					</tr>
-					<tr id="email_error">
-					<td colspan="3"><span style="color:red">*Emailを再確認してください。</span></td>
-					</tr>
-					<tr>
-						<td><span>Phone</span></td>
-						<td colspan="2"><input class="phone" type="text" id="phone1"
-							max="3" /><span>-</span> <input class="phone" type="text"
-							id="phone2" max="4" /><span>-</span> <input class="phone"
-							type="text" id="phone3" max="4" /></td>
-					</tr>
-					<tr id="phone_error">
-					<td colspan="3"><span style="color:red">*電話番号を再確認してください。</span></td>
-					</tr>
-				</table>
-				<input type="hidden" id="name" name="USERNAME" /> <input
+<div class="clearfix"></div>
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>
+					会員登録
+				</h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+			 <form id="frm" class="form-horizontal form-label-left" method="POST">
+						<div class="item form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12"
+								for="name">氏名<span class="required">*</span>
+							</label>
+							<div class="col-md-3 col-sm-3 col-xs-12">
+								<input id="last_name" class="form-control col-md-3 col-xs-3"
+									placeholder="姓" type="text">
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-5">
+								<input id="first_name" class="form-control col-md-4 col-xs-3"
+									placeholder="名" type="text">
+							</div>
+							<div id="name_error" class="regi_alert">*氏名を再確認してください。</div>
+						</div>
+						
+						<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="huriName">氏名(フリガナ)<span class="required">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                          <input id="huri_last_name" class="form-control col-md-3 col-xs-5" placeholder="姓" type="text">
+                          </div>
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                          <input id="huri_first_name" class="form-control col-md-4 col-xs-7" placeholder="名" type="text">
+					</div>
+					<div id="huri_name_error" class="regi_alert">
+					*氏名を再確認してください。
+					</div>
+					</div>
+					
+					<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userId">ユーザID<span class="required">*</span>
+                        </label>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                          <input id="userId" class="form-control col-md-3 col-xs-5" name="USERID" type="text">
+                          </div>
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                          <input type="button" value="check" id="id_check" />
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-12">
+					<div id="id_error" class="regi_alert">
+					*IDは半角英数字で4字以上10字以下で入力してください。
+					</div>
+					</div>
+					</div>
+					<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pass">パスワード<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="pass" class="form-control col-md-3 col-xs-5" name="USERPASS" type="password">
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-12">
+					<div id="pass_error" class="regi_alert">
+					*パスワードは4文字以上半角英数字を入力してください。
+					</div>
+					</div>
+					</div>
+					<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pass2">パスワードチェック<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="pass_check" class="form-control col-md-3 col-xs-5" type="password">
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-12">
+					<div id="pass2_error" class="regi_alert">
+					*パスワードが一致しません。
+					</div>
+					</div>
+					</div>
+					<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                         <input id="email2" class="form-control col-md-3 col-xs-5" type="text">
+					</div>
+					<div id="email_error" class="regi_alert">
+					*Emailを再確認してください。
+					</div>
+					</div>
+					<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">Phone<span class="required">*</span>
+                        </label>
+                          <div class="col-md-1 col-sm-1 col-xs-12">
+                          <input id="phone1" class="form-control col-md-3 col-xs-5" type="text">
+                          </div>
+                          <div class="col-md-1 col-sm-1 col-xs-12">
+                          <input id="phone2" class="form-control col-md-3 col-xs-5" type="text">
+                          </div>
+                          <div class="col-md-1 col-sm-1 col-xs-12">
+                          <input id="phone3" class="form-control col-md-3 col-xs-5" type="text">
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-12">
+					<div id="phone_error" class="regi_alert">
+					*電話番号を再確認してください。
+					</div>
+					</div>
+					</div>
+					<input type="hidden" id="name" name="USERNAME" /> <input
 					type="hidden" id="huri" name="USERHURI" /> <input type="hidden"
 					id="email" name="USEREMAIL" /> <input type="hidden" id="phone"
 					name="USERPHONE" />
-			</form>
-			<div class="div_button">
-				<input type="button" value="登録" id="register"> <input
-					type="button" value="取り消し" id="cancle">
-			</div>
+					</form>
+					<div class="item form-group">
+					<div class="col-md-6 col-md-offset-3">
+				<input type="button" class="btn btn-success" value="登録" id="register"> <input
+					type="button" class="btn btn-primary" value="取り消し" id="cancle">
+					</div>
+					</div>
 		</div>
 	</div>
+	</div>
+	</div>
 </body>
-</html>
+<%@ include file="../inc/footer.jsp"%>

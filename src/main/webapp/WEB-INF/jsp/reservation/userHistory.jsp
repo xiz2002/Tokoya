@@ -14,58 +14,41 @@
  *  Copyright (C) by NuriNubi All right reserved.
  * -->
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE>
-<html>
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>" />
-<link rel="stylesheet" href="<c:url value="/css/jquery.dynatable.css"/>" />
-<link rel="stylesheet" href="<c:url value="/css/jquery-ui-1.10.4.custom.css"/>" />
+<%@ include file="../inc/header.jsp"%>
 <style>
-.container {
-	width: 70%;
-	height: 70%;
-	margin: 40px auto;
-	background: #FFFFFF;
-}
-.centered {
-	position: relative;
-	display: inline-block; 
-	width: 50%;
-	padding: 1em;
+th, td{
+text-align:center;
 }
 </style>
-<script src="<c:url value="/js/jquery-1.10.2.js" />"></script>
-<script src="<c:url value="/js/jquery-ui-1.10.4.custom.js" />"></script>
-<script src="<c:url value="/js/jquery.datetimepicker.full.js" />"></script>
-<script src="<c:url value="/js/jquery.dynatable.js" />"></script>
-</head>
 <body>
-	<div class="container">
-		<div class="contents">
-			<h2>予約リスト</h2>
-			<!-- 予約リスト -->
+<div class="clearfix"></div>
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>
+					予約リスト
+				</h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
 			<form id="frm" method="post">
-			<table id="rev-His-Table">
+			<table id="rev-His-Table" class="table">
 				<!-- 表示項目 -->
 				<thead>
 					<tr>
-						<th>#</th>
 						<th>予約時刻</th>
 						<th>総額</th>
 						<th>コース</th>
 	      				<th>スタイリスト</th>
 	      				<th>予約ステータス</th>
-	      				<th>##</th>
+	      				<th>備考</th>
 	      			</tr>
 				</thead>
 	    			<!-- 該当する値 -->
 				<tbody>
 		    			<c:forEach var="item" items="${rtn}">
 		    			<tr>
-						<td>	</td>
 						<td>${item.reservationDate}</td>
 						<td>${item.coursePrice}円</td>
 						<td>${item.courseName}</td>
@@ -86,7 +69,7 @@
 						<td>
 						<c:choose>
 							<c:when test="${item.reservationStatus eq 1}">
-							<button type="button" name="cancel" value="${item.reservationId}">予約キャンセル</button>
+							<button type="button" name="cancel" class="btn btn-danger" value="${item.reservationId}">予約キャンセル</button>
 							</c:when>
 						</c:choose>
 						</td>
@@ -96,7 +79,7 @@
 			</table>
 			</form>
 			<!-- 各種ボタン -->
-			<button type="button" name="back" onClick="back()">戻る</button>
+			<button type="button" name="back" class="btn btn-primary" onClick="back()">戻る</button>
 			<!-- /page content -->
 			<!-- footer -->
 			<script>
@@ -121,5 +104,7 @@
 			<!-- /footer -->
 		</div>
 	</div>
+	</div>
+	</div>
 </body>
-</html>
+<%@ include file="../inc/footer.jsp"%>

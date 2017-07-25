@@ -4,7 +4,7 @@
 <div class="right_col" role="main">
 	<div class="">
 		<!-- DateSelector -->
-		<div class="col-md-4 col-sm-12 col-xs-12">
+		<div class="col-md-5 col-sm-12 col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
 					<h2>予約状況</h2>
@@ -24,7 +24,7 @@
 		</div>
 		<!-- /DateSelector -->
 		<!-- StaffTable -->
-		<div class="col-md-8 col-sm-12 col-xs-12">
+		<div class="col-md-7 col-sm-12 col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
 					<div>

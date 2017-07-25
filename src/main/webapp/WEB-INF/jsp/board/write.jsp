@@ -35,14 +35,13 @@
 							<label>内容</label>
 						</div>
 						<div id="editor-one" class="editor-wrapper placeholderText"
-							contenteditable="true">
+							contenteditable="true"></div>
 							<textarea rows="10" cols="50" id="body" name="NOTICEBODY"
 								style="display: none;"></textarea>
-								</div>
 						<div class="ln_solid"></div>
 						<div>
-							<input type="button" id="write" value="登録"> <input
-								type="button" id="cancle" value="取り消し">
+							<input type="submit" id="write" class="btn btn-success" value="登録"> <input
+								type="button" id="cancle" class="btn btn-warning" value="取り消し">
 						</div>
 					</form>
 				</div>
@@ -56,7 +55,9 @@
 			// 簡単なバリデーションチェック
 			var title = $("#title").val();
 			var body = $("#editor-one").html();
+			console.log(title+"===="+body);
 			$("#body").val(body);
+			console.log($("#body").val());
 			if (!title.trim() || !body.trim()) {
 				alert("タイトルと内容は必須入力です。");
 				return;
@@ -68,7 +69,7 @@
 			$("#frm").submit();
 		});
 		$("#cancle").on("click", function() {
-			location.assign("/admin");
+			location.assign("/admin/board");
 		});
 	});
 </script>

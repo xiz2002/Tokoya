@@ -35,11 +35,17 @@ NoticeId : ${item.noticeId } <br/>
 			<div class="clearfix"></div>
 				</div>	
 				<div>
-<a href="/">ホーム</a>
+<c:choose>
+	<c:when test="${sessionScope.userInfo.userIsAdmin == 0}">
+<input type="button" value="ホーム" class="btn btn-success" id="goHome"/>
+</c:when>
+<c:when test="${sessionScope.userInfo.userIsAdmin == 1}">
+<input type="button" value="リスト" class="btn btn-success" id="goList"/>
+</c:when>
+</c:choose>
 <c:choose>
 	<c:when test="${sessionScope.userInfo.userIsAdmin == 1}">
-		//
-		<a href="javascript:deleteBoard(${item.noticeId })"> 削除</a>
+	<input type="button" value="削除" class="btn btn-warning" id="deleteBoard" onclick="deleteBoard(${item.noticeId })">
 	</c:when>
 </c:choose>
 </div>
@@ -57,5 +63,13 @@ function deleteBoard(boardId){
 		location.assign("/admin/deleteBoard.do?boardId="+boardId);	
 	}
 }
+$(function (){
+	$("#goList").on("click", function(){
+		location.assign("/admin/board");
+	});
+	$("#goHome").on("click", function(){
+		location.assign("/");
+	});
+});
 </script>
 <%@ include file="../admin/inc/admin_foot.jsp"%>

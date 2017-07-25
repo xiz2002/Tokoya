@@ -25,6 +25,9 @@ $(document).ready(function() {
 		$("#styman").submit();
 		});
 	});
+function modify(id){
+	location.assign("/admin/stylist/edit?id="+id);
+}
 </script>
 <body>
 	<div class="right_col" role="main">
@@ -52,11 +55,10 @@ $(document).ready(function() {
 							<tr>
 								<c:forEach var="item" items="${result}">
 									<tr>
-										<td>${no}</td>
-										<td>${item.stylistId}</td>
-										<td>${item.stylistName}</td>
-										<td><a
-											href="<c:url value='/admin/stylist/edit?id=${item.stylistId}'/>"><span style="color:green;">編集</span></a>
+										<td style="vertical-align: middle;">${no}</td>
+										<td style="vertical-align: middle;">${item.stylistId}</td>
+										<td style="vertical-align: middle;">${item.stylistName}</td>
+										<td style="vertical-align: middle;"><input type = "button" onclick="modify('${item.stylistId}');" class="btn btn-dark"value="編集"/>
 										</td>
 									</tr>
 									<c:set var="no" value="${no+1}" />
@@ -65,7 +67,7 @@ $(document).ready(function() {
 						</tbody>
 					</table>
 					<!-- 各種ボタン -->
-					<button type="button" id="stylistinsert">追加</button>
+					<button type="button"  class="btn btn-success" id="stylistinsert">追加</button>
 				</div>
 			</div>
 		</div>

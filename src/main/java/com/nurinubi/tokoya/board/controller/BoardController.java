@@ -61,7 +61,7 @@ public class BoardController {
 		Date date = new Date();
 		cmdMap.put("REGISTERDATE", date);
 		boardRepository.insertBoard(cmdMap.getMap());
-		return "redirect:/admin";
+		return "redirect:/admin/board";
 	}
 
 	@RequestMapping(value = "/board/view", method = RequestMethod.GET)
