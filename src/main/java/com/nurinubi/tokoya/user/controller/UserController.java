@@ -71,7 +71,9 @@ public class UserController {
 	/** 会員登録実行 */
 	@RequestMapping(value = "/register.do", method = RequestMethod.POST)
 	public String register(CommandMap cmdMap) throws Exception {
-		logger.debug("会員登録処理");
+		logger.debug("=================会員登録処理==========");
+		System.out.println("=================会員登録処理==========");
+		System.out.println(cmdMap);
 		userRepository.insertUser(cmdMap.getMap());
 		return "redirect:/login";
 	}

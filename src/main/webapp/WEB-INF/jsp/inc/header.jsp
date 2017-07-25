@@ -16,6 +16,14 @@
 	<link href="<c:url value="/vendor/iCheck/skins/flat/green.css"/>" rel="stylesheet"/>
 	<link rel="stylesheet" href="<c:url value="/css/jquery-ui-1.10.4.custom.css"/>" />
 	
+	<!-- Datatables -->
+    <link href="<c:url value="/vendor/datatables.net-bs/css/dataTables.bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/vendor/datatables.net-buttons-bs/css/buttons.bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/vendor/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/vendor/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/vendor/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"/>" rel="stylesheet">
+	
+	
 	<%@ include file="script_header.jsp" %>
 	
 	<title>ToKoYa!</title>

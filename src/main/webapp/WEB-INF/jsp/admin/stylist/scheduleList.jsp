@@ -75,16 +75,19 @@ $(function() {
 	document.getElementById("search").click();
 });
 
-$("#add").on("click", function() {
+$(function(){
+	$("#add").on("click", function() {
 	var date = $("#DatePicker").val();
-	var stylist = $("#stylist").val();
-	if(confirm(stylist+"の休みを追加しますか？")){
+	var stylistId = $("#stylist").val();
+	var stylistName = $("#stylist option:selected").text();
+	console.log(stylistName);
+	if(confirm(stylistName+"の休みを追加しますか？")){
 	$.ajax({
 		type : "POST",
 		dataType : "JSON",
 		data : {
 			off : date,
-			StylistId : stylist
+			StylistId : stylistId
 		},
 		url : "/admin/addSchedule.do",
 		error : function(data) {
@@ -103,6 +106,7 @@ $("#add").on("click", function() {
 		}
 		});
 	}
+});
 });
 
 function setLastDay(year, month){
@@ -144,29 +148,12 @@ function setFirstDay(year, month){
 				</c:forEach>
 			</select>
 			<span>月</span>
-			 <input type="button" id="search" value="検索">
+			 <input type="button" class="btn btn-success btn-xs" id="search" value="検索">
 		</div>
-		<!-- <div>
-			<div
-				style="margin-left: 2px; float: left; background-color: red; width: 10%;">&nbsp</div>
-			<div style="margin-left: 2px; float: left; width: auto;">
-				<span> : 休み</span>
-			</div>
-			<div
-				style="margin-left: 2px; float: left; background-color: skyblue; width: 10%;">&nbsp</div>
-			<div style="margin-left: 2px; float: left; width: auto;">
-				<span> : 勤務</span>
-			</div>
-			<div
-				style="margin-left: 2px; float: left; background-color: yellow; width: 10%;">&nbsp</div>
-			<div style="margin-left: 2px; float: left; width: auto;">
-				<span> : 未定</span>
-			</div>
-		</div> -->
 		<div id="DatePicker">
 		</div>
 		<div id="button">
-			<input type="button" id="add" value="追加">
+			<input type="button" class="btn btn-info btn-sm" id="add" value="追加">
 		</div>
 	</div>
 	</div>

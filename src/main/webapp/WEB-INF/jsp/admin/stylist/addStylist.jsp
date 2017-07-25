@@ -32,7 +32,7 @@
 					<span>スタイリストID</span><br>
 					<span id="id_error" style="color:red">*IDは半角英数字で4字以上10字以下で入力してください。</span><br>
 					<input type="text" id="stylistId" name="stylistId" placeholder="スタイリストＩＤ"><br>
-					<input type="button" value="IDチェック" id="id_check" />
+					<input type="button" class="btn btn-primary" value="IDチェック" id="id_check" />
 				</p>
 				<p>
 					<span>スタイリスト名</span><br>
@@ -40,8 +40,8 @@
 					<input type="text" id="stylistName" name="stylistName" placeholder="スタイリスト名">
 				</p>
 			</form>
-			<input type="button" value="追加" id="stylistadd">
-			<input type="button" value="キャンセル" id="cansel">
+			<input type="submit" value="追加" class="btn btn-success" id="stylistadd">
+			<input type="button" value="戻る" class="btn btn-warning" id="cancle">
 		</div>
 	</div>
 	</div>
@@ -69,8 +69,7 @@ $(document).ready(function() {
 	
 	//取り消し
 	$("#cancle").on("click", function() {
-		$("#styfrm").attr("action", "<c:url value='/admin/stylist/management'/>");
-		$("#styfrm").submit();
+		location.assign("/admin/stylist/management");
 	});
 	
 	//ID重複チェック

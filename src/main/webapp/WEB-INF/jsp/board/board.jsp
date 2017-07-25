@@ -16,18 +16,11 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../admin/inc/admin_header.jsp"%>
-<script type="text/javascript">
-	function writeForm() {
-		$("#admin_body").load("/admin/board/write");
-		history.pushState(null, null, "/admin/board/write");
-	}
-	$(function(){
-	$("#boardList").DataTable();
-	}); 
- 	
-</script>
 <style>
-
+th, td{
+text-align: center;
+vertical-align: middle;
+}
 </style>
 <div class="right_col" role="main">
 	<div class="">
@@ -51,24 +44,18 @@
 			<tbody>
 			<c:forEach var="item" items="${result}">
 				<tr>
-					<td>${item.noticeId }</td>
-					<td><a href="<c:url value='/board/view?id=${item.noticeId }'/>">${item.noticeTitle }</a></td>
-					<td><fmt:formatDate value="${item.registerDate }" type="time" pattern="yyyy/MM/dd" /></td>
-					<td></td>
+					<td style="vertical-align: middle;">${item.noticeId }</td>
+					<td style="vertical-align: middle;"><a href="<c:url value='/board/view?id=${item.noticeId }'/>">${item.noticeTitle }</a></td>
+					<td style="vertical-align: middle;"><fmt:formatDate value="${item.registerDate }" type="time" pattern="yyyy/MM/dd" /></td>
+					<td style="vertical-align: middle;">
+						<!-- <input type="button" value="編集" class="btn btn-success" id="modifyBoard"> -->
+			　　			<input type="button" value="削除" class="btn btn-warning" id="deleteBoard" onclick="deleteBoard(${item.noticeId })">
+					</td>
 				</tr>
 			</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	<!-- paging -->
-	<input type="hidden" name="pageCnt" id="pageCnt" value="10" /> <input
-		type="hidden" name="curPage" id="curPage" value="${curPage}" /> <input
-		type="hidden" name="stNum" id="stNum" value="1" /> <input
-		type="hidden" name="endNum" id="endNum" value="5" /> <input
-		type="hidden" name="totalCnt" id="totalCnt" value="${total}" /> <input
-		type="hidden" name="totalPage" id="totalPage" value="" /> <span
-		id="paging"></span>
-	<!-- paging -->
 </div>
 </div>
 </div>
@@ -76,18 +63,33 @@
 </div>
 <%@ include file="../admin/inc/admin_foot.jsp"%>
  <!-- Datatables -->
-    <script src="../vendor/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="../vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../vendor/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="../vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="../vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="../vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="../vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="../vendor/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="../vendor/jszip/dist/jszip.min.js"></script>
-    <script src="../vendor/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../vendor/pdfmake/build/vfs_fonts.js"></script>
+    <script src="<c:url value="/vendor/datatables.net/js/jquery.dataTables.min.js"/>"></script>
+    <script src="<c:url value="/vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"/>"></script>
+    <script src="<c:url value="/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"/>"></script>
+    <script src="<c:url value="/vendor/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"/>"></script>
+    <script src="<c:url value="/vendor/datatables.net-buttons/js/buttons.flash.min.js"/>"></script>
+    <script src="<c:url value="/vendor/datatables.net-buttons/js/buttons.html5.min.js"/>"></script>
+    <script src="<c:url value="/vendor/datatables.net-buttons/js/buttons.print.min.js"/>"></script>
+    <script src="<c:url value="/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"/>"></script>
+    <script src="<c:url value="/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"/>"></script>
+    <script src="<c:url value="/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"/>"></script>
+    <script src="<c:url value="/vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js"/>"></script>
+    <script src="<c:url value="/vendor/datatables.net-scroller/js/dataTables.scroller.min.js"/>"></script>
+    <script src="<c:url value="/vendor/jszip/dist/jszip.min.js"/>"></script>
+    <script src="<c:url value="/vendor/pdfmake/build/pdfmake.min.js"/>"></script>
+    <script src="<c:url value="/vendor/pdfmake/build/vfs_fonts.js"/>"></script>
+    
+<script type="text/javascript">
+function writeForm() {
+	$("#admin_body").load("/admin/board/write");
+	history.pushState(null, null, "/admin/board/write");
+}
+$(function(){
+	$("#boardList").DataTable({"order": [[3, "desc"]]});
+}); 
+function deleteBoard(boardId){
+	if(confirm("削除しますか？")){
+		location.assign("/admin/deleteBoard.do?boardId="+boardId);	
+	}
+} 	
+</script>

@@ -103,10 +103,9 @@ function checkCode(param){
 					<input type="text" id="stylistName" name="stylistName" value="${item.stylistName}">
 				</p>
 				<!-- 各種ボタン -->
-			<button type="button" id="upsty" name="upsty">更新</button>
-			<!-- <button type="button" id="delsty" name="delsty">削除</button> -->
-			<button type="button" id="delsty" name="delsty" ${deljuge eq 1 ? '' : 'disabled'}>削除</button>
-			<button type="button" id="return" OnClick="history.back()">戻る</button>
+			<button type="button" class="btn btn-success" id="upsty" name="upsty">更新</button>
+			<button type="button" class="btn btn-danger" id="delsty" name="delsty" ${deljuge eq 1 ? '' : 'disabled'}>削除</button>
+			<button type="button" class="btn btn-warning" id="return" OnClick="history.back()">戻る</button>
 			</c:forEach>
 			</form>
 		</div>
