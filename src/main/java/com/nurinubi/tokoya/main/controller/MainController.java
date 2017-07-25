@@ -44,10 +44,8 @@ public class MainController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, @RequestParam(value="selectedPageNum", defaultValue = "1") int pageNum) {
-//		model.addAttribute("result", boardRepository.getBoardList(pageNum));
-//		model.addAttribute("total", boardRepository.getBoardTotalCount());
-//		model.addAttribute("curPage", pageNum);
-//		System.out.println(model);
+		logger.info("お知らせのホーム画面()");
+		model.addAttribute("result", boardRepository.getBoardList());
 		return "main/home";
 	}
 }

@@ -14,24 +14,65 @@
  * -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="utf-8">
-<title></title>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<%@ include file="../inc/header.jsp" %>
+<div class="clearfix"></div>
+<div class="row">
+<form id="frm" method="post">
+<input type="hidden" name="courseId" id="courseId" value="${result.courseId}"/>
+<input type="hidden" name="stylistId" id="stylistId" value=""/>
+<!-- <div class="col-md-1 col-sm-12 col-xs-12 center"></div> -->
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title" style="text-align: center;">
+				<h1>日付及びスタッフ選択</h1>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_contens">
+				<div class="col-md-5 col-sm-12 col-xs-12">
+					<div class="col-md-8 col-sm-12 col-xs-12">
+						<div class="x_title">
+							<h4>Date</h4>
+						</div>
+						<div class="x_contents">
+							<div id="DatePicker"></div>
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-12 col-xs-12">
+						<div class="x_title">
+							<h4>Time</h4>
+						</div>
+						<div id="TimePicker"></div>
+					</div>
+					<div class="col-md-1 col-sm-12 col-xs-12">
+						<input type="button" class="btn btn-default btn-lg" id="ajaxtest" value="検索" style="margin-top:220px;"/>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					<div class="x_title">
+						<h4>Staff</h4>
+					</div>
+					<ol id="selectable"></ol>
+					</div>
+				</div>
+				<div class="col-md-1 col-sm-12 col-xs-12">
+					<input type="button" class="btn btn-round btn-primary btn-lg" name="bntChkOut" id="btnChkOut" value="CheckOut" onclick="checkout()" style="margin-top:220px; padding:10px" />
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+</div>
+<!-- /page content -->
+				
 <link rel="stylesheet" href="<c:url value="/css/jquery.datetimepicker.css"/>" />
-<link rel="stylesheet" href="<c:url value="/css/jquery-ui-1.10.4.custom.css"/>" />
 <style>
 	#feedback { font-size: 1.4em; }
 	#selectable .ui-selecting { background: #FECA40; }
 	#selectable .ui-selected { background: #F39814; color: white; }
 	#selectable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-	#selectable li { margin: 3px; padding: 0.4em; font-size: 1.0em; height: 18px; }
+	#selectable li { margin: 3px; padding: 0.4em; font-size: 1.0em; height: 40px; width: 150px;}
+	ul { display: flex; align-content: flex-start; flex-direction: column; flex-wrap: wap; overflow: auto;}
 </style>
-<script src="<c:url value="/js/jquery-1.10.2.js" />"></script>
-<script src="<c:url value="/js/jquery-ui-1.10.4.custom.js" />"></script>
-<script src="<c:url value="/js/jquery.datetimepicker.full.js" />"></script>
 <script type="text/javascript">
 	//Date&Time Picker
 	Number.prototype.padLeft = function(base,chr){
@@ -86,7 +127,7 @@
 						var str = '';
 						for(var i in obj.list){
 							str += '<li class="ui-widget-content" value=' + obj.list[i].id + '>'+ obj.list[i].name + '</li>';
-						 }//*/
+						 }
 						$('#selectable').html(str);
 					}
 				});
@@ -135,57 +176,5 @@
 		$frm.submit();
 	}
 </script>
-</head>
-<body>
-	<div class="container">
-		<div class="reservationDate">
-			<h2>日付を呼びスタッフ選択</h2>
-			<form id="frm" name="frm" method="post">
-				<!-- 選択テーブル -->
-				<table>
-					<!-- 表示項目 -->
-					<tr>
-						<th>#</th>
-						<th>Date</th>
-						<th>Time</th>
-						<th>Staff</th>
-						<th>Button</th>
-					</tr>
-					<!-- 該当する値 -->
-					<tr>
-						<!-- # -->
-						<td>
-							<input type="hidden" name="courseId" id="courseId" value="${result.courseId}"/>
-							<input type="hidden" name="stylistId" id="stylistId" value=""/>
-						</td>
-						<!-- Date -->
-						<td>
-							<div id="DatePicker"></div>
-						</td>
-						<!-- Time -->
-						<td>
-							<div id="TimePicker"></div>
-						</td>
-						<!-- Staff -->
-						<td>
-							<ol id="selectable"></ol>
-						</td>
-						<!-- 各種ボタン -->
-						<td>
-							<input type="button" name="bntChkOut" id="btnChkOut" value="CheckOut" onclick="checkout()" /><br>
-						</td>
-					</tr>
-					<tr>
-						<!-- # -->
-						<td colspan="5">
-							<input type="button" id="ajaxtest" value="検索" />
-						</td>
-					</tr>
-				</table>
-				
-				<!-- /page content -->
-			</form>
-		</div>
-	</div>
-</body>
-</html>
+<script src="<c:url value="/js/jquery.datetimepicker.full.js"/>"></script>
+<%@ include file="../inc/footer.jsp" %>

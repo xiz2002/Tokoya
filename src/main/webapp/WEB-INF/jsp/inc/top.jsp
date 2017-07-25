@@ -24,7 +24,7 @@
 							<a href="<c:url value="/"/>" class="site_title"><i class="fa fa-paw"></i> <span>ToKoYa</span></a>
 						</div>
 						<c:choose>
-							<c:when test="${sessionScope.userInfo.userId}">
+							<c:when test="${not empty sessionScope.userInfo.userId}">
 								<ul class="nav navbar-nav navbar-right">
 									<li class="">
 										<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> 
