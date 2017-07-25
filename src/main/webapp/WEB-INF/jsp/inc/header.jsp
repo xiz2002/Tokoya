@@ -13,7 +13,7 @@
 	<link href="<c:url value="/css/main/custom.css"/>" rel="stylesheet">
 	<link href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" rel="stylesheet">
 	<link href="<c:url value="/css/jquery.datetimepicker.css"/>" rel="stylesheet"/>	
-	
+	<link href="<c:url value="/vendor/iCheck/skins/flat/green.css"/>" rel="stylesheet"/>
 	<%@ include file="script_header.jsp" %>
 	
 	<title>ToKoYa!</title>
